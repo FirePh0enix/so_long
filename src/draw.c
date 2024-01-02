@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 15:28:49 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:12:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static void _set_pixel_color(t_img *image, int x, int y, int color)
 
 void	draw_sprite(t_game *game, t_sprite *sprite, t_vec2 pos, t_draw draw)
 {
-	const int	width = sprite->width * draw.scale;
-	const int	height = sprite->height * draw.scale;
-	int			x;
-	int			y;
-	int			color;
+	const int		width = sprite->width * draw.scale;
+	const int		height = sprite->height * draw.scale;
+	int				x;
+	int				y;
+	unsigned int	color;
 
 	x = 0;
 	while (x < width)
@@ -58,7 +58,7 @@ void	draw_sprite(t_game *game, t_sprite *sprite, t_vec2 pos, t_draw draw)
 				continue ;
 			}
 			color = _get_pixel_color(sprite->img, x / draw.scale, y / draw.scale);
-			if (color != 0x0)
+			if (color != 0xff000000)
 				_set_pixel_color(game->canvas, pos.x + x, pos.y + y, color);
 			y++;
 		}

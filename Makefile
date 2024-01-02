@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/01/02 21:48:51 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/01/02 23:48:43 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SOURCES = \
 	src/map/load.c \
 	src/map/util.c \
 	src/entities/player.c \
+	src/entities/gem.c \
 	src/math/vec2_calc.c \
 	src/data/vector.c
 

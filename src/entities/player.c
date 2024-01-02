@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 23:01:47 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:00:10 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 
 	player = malloc(sizeof(t_entity));
 	player->game = game;
+	player->type = ETYPE_PLAYER;
 	player->pos = pos;
 	player->update = player_update;
 	player->sprite = game->solid;

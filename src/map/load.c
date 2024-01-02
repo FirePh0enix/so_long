@@ -6,11 +6,13 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 23:29:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:08:21 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+#include "../entity.h"
+#include "../data/vector.h"
 #include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
@@ -84,12 +86,13 @@ static int	_line_count(char *str)
 	return (count);
 }
 
-static t_tile	*_parse_map(char *str, int width, int height)
+static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 {
-	int		x;
-	int		y;
-	char	c;
-	t_tile	*tiles;
+	int			x;
+	int			y;
+	char		c;
+	t_tile		*tiles;
+	t_entity	*entity;
 
 	tiles = malloc(sizeof(t_tile) * width * height);
 	x = 0;
@@ -103,6 +106,12 @@ static t_tile	*_parse_map(char *str, int width, int height)
 				tiles[x + y * width] = TILE_SOLID;
 			else if (c == '0')
 				tiles[x + y * width] = TILE_EMPTY;
+			else if (c == 'C')
+			{
+				tiles[x + y * width] = TILE_EMPTY;
+				entity = gem_new(game, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
+				vector_add((void **) &game->entities, &entity);
+			}
 			else
 			{
 				free(tiles);
@@ -115,7 +124,7 @@ static t_tile	*_parse_map(char *str, int width, int height)
 	return (tiles);
 }
 
-t_map	*map_load(char *filename, bool bypass)
+t_map	*map_load(t_game *game, char *filename, bool bypass)
 {
 	char	*str;
 	int		width;
@@ -130,7 +139,7 @@ t_map	*map_load(char *filename, bool bypass)
 	map = malloc(sizeof(t_map));
 	map->width = width;
 	map->height = height;
-	map->data = _parse_map(str, width, height);
+	map->data = _parse_map(str, width, height, game);
 	if (map->data == NULL && !bypass)
 		return (free(map), map);
 	return (map);

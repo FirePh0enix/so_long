@@ -6,12 +6,14 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:55:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 23:33:52 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:10:23 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 #include "../graph.h"
+#include "../data/vector.h"
+#include "../entity.h"
 #include "libft.h"
 #include <stdio.h>
 
@@ -21,6 +23,8 @@ static void	handle_keypress(t_game *game)
 		game->editor.item = ITEM_EMPTY;
 	else if (game->keys['2'])
 		game->editor.item = ITEM_SOLID;
+	else if (game->keys['3'])
+		game->editor.item = ITEM_COLLECT;
 }
 
 static void _draw_editor_item(t_game *game)
@@ -29,11 +33,15 @@ static void _draw_editor_item(t_game *game)
 		graph_add_sprite(game->graph, game->ground, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 	else if (game->editor.item == ITEM_SOLID)
 		graph_add_sprite(game->graph, game->solid, (t_vec2){16, 480 - 56}, 999, (t_effect){});
+	else if (game->editor.item == ITEM_COLLECT)
+		graph_add_sprite(game->graph, game->gem, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 }
 
 int	edit_update_hook(t_game *game)
 {
 	suseconds_t		time;
+	unsigned int	i;
+	t_entity		*entity;
 
 	time = getms();
 	if (time - game->last_update < UPDATE_INTERVAL)
@@ -41,6 +49,14 @@ int	edit_update_hook(t_game *game)
 	game->last_update = time;
 	handle_keypress(game);
 	_draw_editor_item(game);
+	i = 0;
+	while (i < vector_size(game->entities))
+	{
+		entity = game->entities[i];
+		graph_add_sprite(game->graph, entity->sprite, entity->pos,
+			entity->z_index, (t_effect){NULL, NULL});
+		i++;
+	}
 	map_add_to_graph(game->map, game, game->graph);
 	clear_screen(game, 0x0);
 	graph_draw(game->graph, game);
@@ -51,10 +67,18 @@ int	edit_update_hook(t_game *game)
 
 static void _place_item(int x, int y, t_editor_item item, t_game *game)
 {
+	t_entity	*entity;
+	
 	if (item == ITEM_EMPTY)
 		game->map->data[x + y * game->map->width] = TILE_EMPTY;
 	else if (item == ITEM_SOLID)
 		game->map->data[x + y * game->map->width] = TILE_SOLID;
+	else if (item == ITEM_COLLECT)
+	{
+		game->map->data[x + y * game->map->width] = TILE_EMPTY;
+		entity = gem_new(game, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
+		vector_add((void **) &game->entities, &entity);
+	}
 }
 
 static void	_resize(t_map *map, int tile_x, int tile_y)

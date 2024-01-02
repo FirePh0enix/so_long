@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 23:31:51 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:03:45 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef enum
 {
 	ITEM_EMPTY,
 	ITEM_SOLID,
+	ITEM_COLLECT,
 }	t_editor_item;
 
 typedef struct s_editor
@@ -68,6 +69,7 @@ typedef struct s_game
 
 	t_sprite		*ground;
 	t_sprite		*solid;
+	t_sprite		*gem;
 }	t_game;
 
 # define UPDATE_INTERVAL 16
@@ -98,6 +100,7 @@ typedef enum
 {
 	TILE_EMPTY,
 	TILE_SOLID,
+	TILE_COLLECT,
 }	t_tile;
 
 typedef struct s_map
@@ -107,9 +110,9 @@ typedef struct s_map
 	int		height;
 }	t_map;
 
-t_map	*map_load(char *filename, bool bypass);
+t_map	*map_load(t_game *game, char *filename, bool bypass);
 void	map_deinit(t_map *map);
 void	map_add_to_graph(t_map *map, t_game *game, t_render_graph *graph);
-void	map_save(t_map *map, char *filename);
+void	map_save(t_map *map, t_game *game, char *filename);
 
 #endif

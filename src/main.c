@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 23:29:17 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 00:03:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ static int	_edit_main(int argc, char *argv[])
 	game.graph = new_graph();
 	game.ground = sprite(&game, "textures/gen/ground.xpm");
 	game.solid = sprite(&game, "textures/gen/solid.xpm");
+	game.gem = sprite(&game, "textures/gem.xpm");
 	filename = argv[1];
-	game.map = map_load(filename, true);
+	game.map = map_load(&game, filename, true);
 	if (!game.map)
 		return (ft_printf("Error\nInvalid map\n"), 1);
 	mlx_do_key_autorepeatoff(game.mlx);
@@ -123,7 +124,7 @@ static int	_edit_main(int argc, char *argv[])
 	mlx_mouse_hook(game.win, edit_mouse_hook, &game);
 	mlx_loop_hook(game.mlx, edit_update_hook, &game);
 	mlx_loop(game.mlx);
-	map_save(game.map, filename);
+	map_save(game.map, &game, filename);
 	game_deinit(&game);
 	mlx_do_key_autorepeaton(game.mlx);
 	mlx_destroy_display(game.mlx);
@@ -144,7 +145,8 @@ static int	_normal_main(int argc, char *argv[])
 	game.graph = new_graph();
 	game.ground = sprite(&game, "textures/gen/ground.xpm");
 	game.solid = sprite(&game, "textures/gen/solid.xpm");
-	game.map = map_load(argv[1], false);
+	game.gem = sprite(&game, "textures/gem.xpm");
+	game.map = map_load(&game, argv[1], false);
 	if (!game.map)
 		return (ft_printf("Error\nInvalid map\n"), 1);
 
