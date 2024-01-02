@@ -1,5 +1,8 @@
 *.o
 *.d
+*.a
 so_long
 *.xpm
 libft/*.o
+
+textures/gen

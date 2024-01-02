@@ -6,16 +6,18 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 15:33:36 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/02 23:29:17 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data/vector.h"
 #include "entity.h"
 #include "graph.h"
+#include "libft.h"
 #include "math/vec2.h"
 #include "mlx.h"
 #include "so_long.h"
+#include <string.h>
 #include <sys/time.h>
 
 // TODO The escape key should close the window
@@ -87,6 +89,7 @@ static int	update_hook(t_game *game)
 			entity->z_index, (t_effect){NULL, NULL});
 		i++;
 	}
+	map_add_to_graph(game->map, game, game->graph);
 	clear_screen(game, 0x0);
 	graph_draw(game->graph, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
@@ -94,21 +97,56 @@ static int	update_hook(t_game *game)
 	return (0);
 }
 
-int	main(int argc, char *argv[])
+static int	_edit_main(int argc, char *argv[])
+{
+	t_game	game;
+	char	*filename;
+
+	(void) argc;
+	ft_bzero(&game, sizeof(t_game));
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
+	game.keys = ft_calloc(0xFFFF, sizeof(bool));
+	game.canvas = mlx_new_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
+	game.entities = vector_new(sizeof(t_entity *), 0);
+	game.graph = new_graph();
+	game.ground = sprite(&game, "textures/gen/ground.xpm");
+	game.solid = sprite(&game, "textures/gen/solid.xpm");
+	filename = argv[1];
+	game.map = map_load(filename, true);
+	if (!game.map)
+		return (ft_printf("Error\nInvalid map\n"), 1);
+	mlx_do_key_autorepeatoff(game.mlx);
+	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
+	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_released_hook, &game);
+	mlx_hook(game.win, 17, 0, close_hook, &game);
+	mlx_mouse_hook(game.win, edit_mouse_hook, &game);
+	mlx_loop_hook(game.mlx, edit_update_hook, &game);
+	mlx_loop(game.mlx);
+	map_save(game.map, filename);
+	game_deinit(&game);
+	mlx_do_key_autorepeaton(game.mlx);
+	mlx_destroy_display(game.mlx);
+	return (0);
+}
+
+static int	_normal_main(int argc, char *argv[])
 {
 	t_game	game;
 
 	(void) argc;
-	(void) argv;
 	ft_bzero(&game, sizeof(t_game));
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, 720, 480, "so_long");
+	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
 	game.keys = ft_calloc(0xFFFF, sizeof(bool));
-	game.canvas = mlx_new_image(game.mlx, 720, 480);
+	game.canvas = mlx_new_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
 	game.entities = vector_new(sizeof(t_entity *), 0);
 	game.graph = new_graph();
-
-	game.gem = sprite(&game, "textures/gem.xpm");
+	game.ground = sprite(&game, "textures/gen/ground.xpm");
+	game.solid = sprite(&game, "textures/gen/solid.xpm");
+	game.map = map_load(argv[1], false);
+	if (!game.map)
+		return (ft_printf("Error\nInvalid map\n"), 1);
 
 	t_entity *player = player_new(&game, (t_vec2){0, 0});
 	vector_add((void **)&game.entities, &player);
@@ -122,4 +160,15 @@ int	main(int argc, char *argv[])
 	game_deinit(&game);
 	mlx_do_key_autorepeaton(game.mlx);
 	mlx_destroy_display(game.mlx);
+	return (0);
+}
+
+int	main(int argc, char *argv[])
+{
+	if (argc < 2)
+		return (1);
+	else if (argc == 3 && strcmp(argv[2], "--edit") == 0)
+		return (_edit_main(argc, argv));
+	else
+		return (_normal_main(argc, argv));
 }

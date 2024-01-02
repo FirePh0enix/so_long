@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 15:34:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/02 23:01:47 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 	player->game = game;
 	player->pos = pos;
 	player->update = player_update;
-	player->sprite = game->gem;
+	player->sprite = game->solid;
 	player->z_index = 1;
 	return (player);
 }
