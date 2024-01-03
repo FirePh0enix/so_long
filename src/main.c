@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 17:01:40 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:26:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,103 +20,24 @@
 #include <string.h>
 #include <sys/time.h>
 
-// TODO The escape key should close the window
-static int	key_pressed_hook(int keycode, t_game *game)
-{
-	if (keycode >= 0xFFFF)
-		return (0);
-	game->keys[keycode] = true;
-	return (0);
-}
-
-static int	key_released_hook(int keycode, t_game *game)
-{
-	if (keycode >= 0xFFFF)
-		return (0);
-	game->keys[keycode] = false;
-	return (0);
-}
-
-static int	close_hook(t_game *game)
-{
-	mlx_loop_end(game->mlx);
-	return (0);
-}
-
 void	game_deinit(t_game *game)
 {
 	free(game->keys);
 }
 
-bool	is_key_pressed(t_game *game, int keycode)
+static void	_setup_game(t_game *game)
 {
-	return (game->keys[keycode]);
-}
-
-suseconds_t	getms(void)
-{
-	struct timeval	val;
-
-	gettimeofday(&val, NULL);
-	return ((val.tv_sec * 1000000 + val.tv_usec) / 1000);
-}
-
-t_sprite	*sprite(t_game *game, char *filename)
-{
-	t_sprite	*sprite;
-
-	sprite = malloc(sizeof(t_sprite));
-	sprite->img = mlx_xpm_file_to_image(game->mlx, filename, &sprite->width, &sprite->height);
-	return (sprite);
-}
-
-static void _collect_entities(t_entity ***entities)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (1)
-	{
-		i = 0;
-		while (i < vector_size(*entities))
-		{
-			if ((*entities)[i]->state == STATE_DEAD)
-				break ;
-			i++;
-		}
-		if (i == vector_size(*entities))
-			break ;
-		ft_printf("Entity collected!\n");
-		vector_remove((void **)entities, i);
-	}
-}
-
-static int	update_hook(t_game *game)
-{
-	unsigned int	i;
-	t_entity		*entity;
-	suseconds_t		time;
-
-	time = getms();
-	if (time - game->last_update < UPDATE_INTERVAL)
-		return (0);
-	game->last_update = time;
-	i = 0;
-	while (i < vector_size(game->entities))
-	{
-		entity = game->entities[i];
-		entity->update(game, entity);
-		graph_add_sprite(game->graph, entity->sprite, entity->pos,
-			entity->z_index, (t_effect){NULL, NULL});
-		i++;
-	}
-	_collect_entities(&game->entities);
-	map_add_to_graph(game->map, game, game->graph);
-	clear_screen(game, 0x0);
-	graph_draw(game->graph, game);
-	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
-	graph_reset(game->graph);
-	return (0);
+	ft_bzero(&game, sizeof(t_game));
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
+	game->keys = ft_calloc(0xFFFF, sizeof(bool));
+	game->canvas = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->entities = vector_new(sizeof(t_entity *), 0);
+	game->graph = new_graph();
+	game->ground = sprite(game, "textures/gen/ground.xpm");
+	game->solid = sprite(game, "textures/gen/solid.xpm");
+	game->gem = sprite(game, "textures/gem.xpm");
+	game->door = sprite(game, "textures/door.xpm");
 }
 
 static int	_edit_main(int argc, char *argv[])
@@ -125,17 +46,7 @@ static int	_edit_main(int argc, char *argv[])
 	char	*filename;
 
 	(void) argc;
-	ft_bzero(&game, sizeof(t_game));
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
-	game.keys = ft_calloc(0xFFFF, sizeof(bool));
-	game.canvas = mlx_new_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
-	game.entities = vector_new(sizeof(t_entity *), 0);
-	game.graph = new_graph();
-	game.ground = sprite(&game, "textures/gen/ground.xpm");
-	game.solid = sprite(&game, "textures/gen/solid.xpm");
-	game.gem = sprite(&game, "textures/gem.xpm");
-	game.door = sprite(&game, "textures/door.xpm");
+	_setup_game(&game);
 	filename = argv[1];
 	game.map = map_load(&game, filename, true);
 	if (!game.map)
@@ -159,17 +70,7 @@ static int	_normal_main(int argc, char *argv[])
 	t_game	game;
 
 	(void) argc;
-	ft_bzero(&game, sizeof(t_game));
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
-	game.keys = ft_calloc(0xFFFF, sizeof(bool));
-	game.canvas = mlx_new_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
-	game.entities = vector_new(sizeof(t_entity *), 0);
-	game.graph = new_graph();
-	game.ground = sprite(&game, "textures/gen/ground.xpm");
-	game.solid = sprite(&game, "textures/gen/solid.xpm");
-	game.gem = sprite(&game, "textures/gem.xpm");
-	game.door = sprite(&game, "textures/door.xpm");
+	_setup_game(&game);
 	game.map = map_load(&game, argv[1], false);
 	if (!game.map)
 		return (ft_printf("Error\nInvalid map\n"), 1);

@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/01/03 16:57:36 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/01/03 19:59:00 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,14 @@ SOURCES = \
 	src/main.c \
 	src/graph.c \
 	src/draw.c \
+	src/sprite.c \
+	src/update.c \
+	src/utils.c \
 	src/map/edit.c \
+	src/map/edit_hooks.c \
 	src/map/load.c \
+	src/map/load_utils.c \
+	src/map/save.c \
 	src/map/util.c \
 	src/entities/player.c \
 	src/entities/gem.c \

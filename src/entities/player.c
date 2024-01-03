@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 17:08:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:28:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	_move(t_game *game, t_entity *entity)
 	{
 		if (!box_collide_with_map(box_for_position(
 					entity->box, vec2_add(entity->pos,
-					(t_vec2){entity->vel.x, 0})), game->map))
+						(t_vec2){entity->vel.x, 0})), game->map))
 			break ;
 		if (entity->vel.x > 0)
 			entity->vel.x--;
@@ -48,7 +48,7 @@ static void	_move(t_game *game, t_entity *entity)
 	{
 		if (!box_collide_with_map(box_for_position(
 					entity->box, vec2_add(entity->pos,
-					(t_vec2){0, entity->vel.y})), game->map))
+						(t_vec2){0, entity->vel.y})), game->map))
 			break ;
 		if (entity->vel.y > 0)
 			entity->vel.y--;
@@ -78,7 +78,7 @@ static t_vec2	_map_find_exit(t_map *map)
 	return ((t_vec2){0, 0});
 }
 
-void player_update(t_game *game, t_entity *entity)
+void	player_update(t_game *game, t_entity *entity)
 {
 	t_vec2	exit_pos;
 
@@ -95,8 +95,8 @@ void player_update(t_game *game, t_entity *entity)
 	entity->vel.y = 0;
 	exit_pos = _map_find_exit(game->map);
 	if (box_collide_with_box(box_for_position(entity->box, entity->pos),
-		box_for_position((t_box){{0, 0},
-			{16 * SCALE, 16 * SCALE}}, exit_pos))
+			box_for_position((t_box){{0, 0},
+				{16 * SCALE, 16 * SCALE}}, exit_pos))
 		&& game->collectibles == game->collectibles_count)
 	{
 		printf("YOU WIN!\n");

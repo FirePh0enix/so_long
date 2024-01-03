@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 16:43:03 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:27:21 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ t_entity	*gem_new(t_game *game, t_vec2 pos)
 	return (gem);
 }
 
-void		gem_update(t_game *game, t_entity *entity)
+void	gem_update(t_game *game, t_entity *entity)
 {
 	if (box_collide_with_box(box_for_position(entity->box, entity->pos),
-		box_for_position(game->player->box, game->player->pos)))
+			box_for_position(game->player->box, game->player->pos)))
 	{
 		entity->state = STATE_DEAD;
 		game->collectibles++;
-		printf("Collectibles: %d/%d\n", game->collectibles, game->collectibles_count);
+		printf("Collectibles: %d/%d\n",
+			game->collectibles,
+			game->collectibles_count);
 	}
 }

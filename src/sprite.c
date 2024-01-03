@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   box.h                                              :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 11:46:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:16:35 by ledelbec         ###   ########.fr       */
+/*   Created: 2024/01/03 19:23:35 by ledelbec          #+#    #+#             */
+/*   Updated: 2024/01/03 19:49:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BOX_H
-# define BOX_H
+#include "so_long.h"
 
-# include "vec2.h"
-# include <stdbool.h>
-
-typedef struct s_map	t_map;
-
-typedef struct s_box
+t_sprite	*sprite(t_game *game, char *filename)
 {
-	t_vec2	min;
-	t_vec2	max;
-}	t_box;
+	t_sprite	*sprite;
 
-t_box	box_for_position(t_box box, t_vec2 position);
-bool	box_collide_with_point(t_box box, int x, int y);
-bool	box_collide_with_box(t_box b1, t_box b2);
-bool	box_collide_with_map(t_box box, t_map *map);
-
-#endif
+	sprite = malloc(sizeof(t_sprite));
+	sprite->img = mlx_xpm_file_to_image(game->mlx,
+			filename, &sprite->width, &sprite->height);
+	return (sprite);
+}

@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
+/*   Updated: 2024/01/03 19:49:07 by ledelbec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "graph.h"
+#include "entity.h"
+#include "data/vector.h"
+
+static void	_collect_entities(t_entity ***entities)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (1)
+	{
+		i = 0;
+		while (i < vector_size(*entities))
+		{
+			if ((*entities)[i]->state == STATE_DEAD)
+				break ;
+			i++;
+		}
+		if (i == vector_size(*entities))
+			break ;
+		ft_printf("Entity collected!\n");
+		vector_remove((void **)entities, i);
+	}
+}
+
+int	update_hook(t_game *game)
+{
+	unsigned int	i;
+	t_entity		*entity;
+	suseconds_t		time;
+
+	time = getms();
+	if (time - game->last_update < UPDATE_INTERVAL)
+		return (0);
+	game->last_update = time;
+	i = 0;
+	while (i < vector_size(game->entities))
+	{
+		entity = game->entities[i];
+		entity->update(game, entity);
+		graph_add_sprite(game->graph, entity->sprite, entity->pos,
+			entity->z_index);
+		i++;
+	}
+	_collect_entities(&game->entities);
+	map_add_to_graph(game->map, game, game->graph);
+	clear_screen(game, 0x0);
+	graph_draw(game->graph, game);
+	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
+	graph_reset(game->graph);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 16:41:53 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:07:51 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 
 typedef struct s_entity	t_entity;
 
-typedef void (*t_update)(t_game *, t_entity *);
+typedef void			(*t_update)(t_game *, t_entity *);
 
-typedef enum
+typedef enum etype
 {
 	ETYPE_PLAYER,
 	ETYPE_GEM,
 }	t_etype;
 
-typedef enum
+typedef enum state
 {
 	STATE_ALIVE,
 	STATE_DEAD,

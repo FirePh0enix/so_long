@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:33:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 14:38:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 19:14:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 enum
 {
 	NODE_SPRITE,
-	//NODE_DEBUG_BOX,
 };
 
+// TODO Re-add effects in the render graph
 typedef struct s_effect
 {
 	int		(*apply)(int, int, int, void *);
 	void	*user_data;
-} t_effect;
+}	t_effect;
 
 typedef struct s_node
 {
@@ -35,36 +35,23 @@ typedef struct s_node
 	int				order;
 	union
 	{
-		struct
+		struct s_node_sprite
 		{
-			t_sprite *sprite;
-			t_vec2	  position;
-		} sprite;
-		struct
-		{
-			t_sprite *sprite;
-			t_vec2	  position;
-		} ui;
-		// struct
-		// {
-		// 	t_box box;
-		// 	int	  color;
-		// } debug_box;
+			t_sprite	*sprite;
+			t_vec2		position;
+		}	sprite;
 	};
-	t_effect effect;
-} t_node;
+}	t_node;
 
 typedef struct s_render_graph
 {
-	t_node *root;
-} t_render_graph;
+	t_node	*root;
+}	t_graph;
 
-t_render_graph *new_graph();
-void			graph_reset(t_render_graph *graph);
+t_graph			*new_graph(void);
+void			graph_reset(t_graph *graph);
 
-void graph_add_sprite(t_render_graph *graph, t_sprite *sprite, t_vec2 pos, int order, t_effect effect);
-// void graph_add_debug_box(t_render_graph *graph, t_box box, int color);
-
-void graph_draw(t_render_graph *graph, t_game *game);
+void			graph_add_sprite(t_graph *gr, t_sprite *sp, t_vec2 pos, int zi);
+void			graph_draw(t_graph *graph, t_game *game);
 
 #endif
