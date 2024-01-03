@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 00:08:21 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:23:22 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,31 @@ static int	_line_count(char *str)
 	return (count);
 }
 
+static bool	_check_borders(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map->width)
+	{
+		if (map->data[i] != TILE_SOLID)
+			return (false);
+		else if (map->data[i + (map->height - 1) * map->width] != TILE_SOLID)
+			return (false);
+		i++;
+	}
+	i = 0;
+	while (i < map->height)
+	{
+		if (map->data[i * map->width] != TILE_SOLID)
+			return (false);
+		else if (map->data[(map->width - 1) + i * map->width] != TILE_SOLID)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 {
 	int			x;
@@ -111,6 +136,14 @@ static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 				tiles[x + y * width] = TILE_EMPTY;
 				entity = gem_new(game, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
 				vector_add((void **) &game->entities, &entity);
+				game->collectibles_count++;
+			}
+			else if (c == 'P')
+			{
+				tiles[x + y * width] = TILE_EMPTY;
+				game->start_pos = (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE};
+				entity = player_new(game, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
+				vector_add((void **) &game->entities, &entity);
 			}
 			else
 			{
@@ -134,13 +167,20 @@ t_map	*map_load(t_game *game, char *filename, bool bypass)
 	str = _read_to_string(filename);
 	width = _line_width_and_check(str);
 	height = _line_count(str);
-	if (width == -1 && !bypass)
+	if (width == -1)
 		return (free(str), NULL);
 	map = malloc(sizeof(t_map));
 	map->width = width;
 	map->height = height;
 	map->data = _parse_map(str, width, height, game);
-	if (map->data == NULL && !bypass)
+	if (map->data == NULL)
 		return (free(map), map);
+	if (!_check_borders(map) && !bypass)
+	{
+		free(map->data);
+		free(map);
+		map = NULL;
+	} else if (!_check_borders(map))
+		ft_printf("\nWarning: Map is invalid but will still be loaded by the editor\n\n");
 	return (map);
 }

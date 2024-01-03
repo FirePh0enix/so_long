@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:55:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 00:10:23 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:21:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	handle_keypress(t_game *game)
 		game->editor.item = ITEM_SOLID;
 	else if (game->keys['3'])
 		game->editor.item = ITEM_COLLECT;
+	else if (game->keys['4'])
+		game->editor.item = ITEM_PLAYER;
 }
 
 static void _draw_editor_item(t_game *game)
@@ -35,6 +37,8 @@ static void _draw_editor_item(t_game *game)
 		graph_add_sprite(game->graph, game->solid, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 	else if (game->editor.item == ITEM_COLLECT)
 		graph_add_sprite(game->graph, game->gem, (t_vec2){16, 480 - 56}, 999, (t_effect){});
+	else if (game->editor.item == ITEM_PLAYER)
+		graph_add_sprite(game->graph, game->solid, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 }
 
 int	edit_update_hook(t_game *game)
@@ -65,18 +69,49 @@ int	edit_update_hook(t_game *game)
 	return (0);
 }
 
+static void	_remove_entity(t_game *game, int x, int y)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < vector_size(game->entities))
+	{
+		if (box_collide_with_point(box_for_position(game->entities[i]->box, game->entities[i]->pos), x, y))
+			break;
+		i++;
+	}
+	if (i < vector_size(game->entities))
+	{
+		if (game->entities[i]->type == ETYPE_GEM)
+			game->collectibles_count--;
+		free(game->entities[i]);
+		vector_remove((void **) &game->entities, i);
+	}
+}
+
 static void _place_item(int x, int y, t_editor_item item, t_game *game)
 {
+	const int	tile_x = x / SCALED_SIZE;
+	const int	tile_y = y / SCALED_SIZE;
 	t_entity	*entity;
 	
 	if (item == ITEM_EMPTY)
-		game->map->data[x + y * game->map->width] = TILE_EMPTY;
+		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
 	else if (item == ITEM_SOLID)
-		game->map->data[x + y * game->map->width] = TILE_SOLID;
+		game->map->data[tile_x + tile_y * game->map->width] = TILE_SOLID;
 	else if (item == ITEM_COLLECT)
 	{
-		game->map->data[x + y * game->map->width] = TILE_EMPTY;
-		entity = gem_new(game, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
+		_remove_entity(game, x, y);
+		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
+		entity = gem_new(game,
+			(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE});
+		vector_add((void **) &game->entities, &entity);
+		game->collectibles_count++;
+	} else if (item == ITEM_PLAYER)
+	{
+		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
+		entity = player_new(game,
+			(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE});
 		vector_add((void **) &game->entities, &entity);
 	}
 }
@@ -111,13 +146,14 @@ static void	_resize(t_map *map, int tile_x, int tile_y)
 
 int	edit_mouse_hook(unsigned int button, int x, int y, t_game *game)
 {
-	const int	tile_x = x / SCALED_SIZE;
-	const int	tile_y = y / SCALED_SIZE;
-
 	if (button == 1)
 	{
-		_resize(game->map, tile_x, tile_y);
-		_place_item(tile_x, tile_y, game->editor.item, game);
+		_resize(game->map, x / SCALED_SIZE, y / SCALED_SIZE);
+		_place_item(x, y, game->editor.item, game);
+	}
+	else if (button == 3)
+	{
+		_remove_entity(game, x, y);
 	}
 	return (0);
 }

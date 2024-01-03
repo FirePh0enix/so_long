@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 00:03:45 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:17:50 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum
 	ITEM_EMPTY,
 	ITEM_SOLID,
 	ITEM_COLLECT,
+	ITEM_PLAYER,
 }	t_editor_item;
 
 typedef struct s_editor
@@ -66,6 +67,10 @@ typedef struct s_game
 	t_render_graph	*graph;
 	t_map			*map;
 	t_editor		editor;
+
+	t_vec2			start_pos;
+	int				collectibles_count;
+	int				collectibles;
 
 	t_sprite		*ground;
 	t_sprite		*solid;
@@ -101,6 +106,7 @@ typedef enum
 	TILE_EMPTY,
 	TILE_SOLID,
 	TILE_COLLECT,
+	TILE_PLAYER
 }	t_tile;
 
 typedef struct s_map

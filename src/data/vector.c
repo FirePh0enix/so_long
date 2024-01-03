@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:03:45 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 12:31:02 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:05:22 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	vector_remove(void **vec, unsigned int index)
 	t_vec_data	*vec_data;
 
 	vec_data = (void *)(*vec - sizeof(t_vec_data));
-	ft_memcpy(*vec + index, *vec + index + 1,
+	ft_memcpy(*vec + index * vec_data->el_size,
+		*vec + (index + 1) * vec_data->el_size,
 		(vec_data->size - index) * vec_data->el_size);
 	vec_data->size--;
 }
@@ -59,7 +60,8 @@ void	vector_remove_swap(void **vec, unsigned int index)
 	t_vec_data	*vec_data;
 
 	vec_data = (void *)(*vec - sizeof(t_vec_data));
-	ft_memcpy(*vec + index, *vec + (vec_data->size - 1) * vec_data->el_size,
+	ft_memcpy(*vec + index * vec_data->el_size,
+		*vec + (vec_data->size - 1) * vec_data->el_size,
 		vec_data->el_size);
 	vec_data->size--;
 }

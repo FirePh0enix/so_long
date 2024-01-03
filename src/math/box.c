@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gem.c                                              :+:      :+:    :+:   */
+/*   box.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 11:50:53 by ledelbec         ###   ########.fr       */
+/*   Created: 2024/01/03 11:48:45 by ledelbec          #+#    #+#             */
+/*   Updated: 2024/01/03 11:55:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../entity.h"
+#include "box.h"
 
-t_entity	*gem_new(t_game *game, t_vec2 pos)
+t_box	box_for_position(t_box box, t_vec2 pos)
 {
-	t_entity	*gem;
-
-	gem = malloc(sizeof(t_entity));
-	gem->game = game;
-	gem->type = ETYPE_GEM;
-	gem->pos = pos;
-	gem->box = (t_box){{0, 0}, {16 * SCALE, 16 * SCALE}};
-	gem->update = gem_update;
-	gem->sprite = game->gem;
-	gem->z_index = 1;
-	return (gem);
+	return ((t_box){{box.min.x + pos.x, box.min.y + pos.y},
+		{box.max.x + pos.x, box.max.y + pos.y}});
 }
 
-void		gem_update(t_game *game, t_entity *entity)
+bool	box_collide_with_point(t_box box, int x, int y)
 {
-	(void)game;
-	(void)entity;
+	return (x >= box.min.x && x <= box.max.x && y >= box.min.y && y <= box.max.y);
 }

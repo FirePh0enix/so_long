@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 00:03:18 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:23:28 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,6 @@ static int	_normal_main(int argc, char *argv[])
 	game.map = map_load(&game, argv[1], false);
 	if (!game.map)
 		return (ft_printf("Error\nInvalid map\n"), 1);
-
-	t_entity *player = player_new(&game, (t_vec2){0, 0});
-	vector_add((void **)&game.entities, &player);
-
 	mlx_do_key_autorepeatoff(game.mlx);
 	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
 	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_released_hook, &game);

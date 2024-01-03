@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 00:13:22 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:20:16 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static	t_tile	_etype_to_tile(t_etype etype)
 {
 	if (etype == ETYPE_GEM)
 		return (TILE_COLLECT);
+	else if (etype == ETYPE_PLAYER)
+		return (TILE_PLAYER);
 	return (TILE_EMPTY);
 }
 
@@ -92,6 +94,8 @@ void	map_save(t_map *map, t_game *game, char *filename)
 				write(fd, "0", 1);
 			else if (tile == TILE_COLLECT)
 				write(fd, "C", 1);
+			else if (tile == TILE_PLAYER)
+				write(fd, "P", 1);
 			x++;
 		}
 		write(fd, "\n", 1);

@@ -6,13 +6,14 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/02 23:58:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 11:48:04 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENTITY_H
 # define ENTITY_H
 
+# include "math/box.h"
 # include "math/vec2.h"
 # include "so_long.h"
 
@@ -35,6 +36,7 @@ typedef struct s_entity
 	void		*extension;
 	t_sprite	*sprite;
 	int			z_index;
+	t_box		box;
 }	t_entity;
 
 // ----------------------------------------------
