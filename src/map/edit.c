@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:55:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 14:50:20 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:00:40 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ static void	handle_keypress(t_game *game)
 	else if (game->keys['2'])
 		game->editor.item = ITEM_SOLID;
 	else if (game->keys['3'])
-		game->editor.item = ITEM_COLLECT;
+		game->editor.item = ITEM_DOOR;
 	else if (game->keys['4'])
+		game->editor.item = ITEM_COLLECT;
+	else if (game->keys['5'])
 		game->editor.item = ITEM_PLAYER;
 }
 
@@ -35,6 +37,8 @@ static void _draw_editor_item(t_game *game)
 		graph_add_sprite(game->graph, game->ground, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 	else if (game->editor.item == ITEM_SOLID)
 		graph_add_sprite(game->graph, game->solid, (t_vec2){16, 480 - 56}, 999, (t_effect){});
+	else if (game->editor.item == ITEM_DOOR)
+		graph_add_sprite(game->graph, game->door, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 	else if (game->editor.item == ITEM_COLLECT)
 		graph_add_sprite(game->graph, game->gem, (t_vec2){16, 480 - 56}, 999, (t_effect){});
 	else if (game->editor.item == ITEM_PLAYER)
@@ -99,6 +103,8 @@ static void _place_item(int x, int y, t_editor_item item, t_game *game)
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
 	else if (item == ITEM_SOLID)
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_SOLID;
+	else if (item == ITEM_DOOR)
+		game->map->data[tile_x + tile_y * game->map->width] = TILE_DOOR;
 	else if (item == ITEM_COLLECT)
 	{
 		_remove_entity(game, x, y);

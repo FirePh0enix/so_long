@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 16:48:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:01:40 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ static int	_edit_main(int argc, char *argv[])
 	game.ground = sprite(&game, "textures/gen/ground.xpm");
 	game.solid = sprite(&game, "textures/gen/solid.xpm");
 	game.gem = sprite(&game, "textures/gem.xpm");
+	game.door = sprite(&game, "textures/door.xpm");
 	filename = argv[1];
 	game.map = map_load(&game, filename, true);
 	if (!game.map)
@@ -168,6 +169,7 @@ static int	_normal_main(int argc, char *argv[])
 	game.ground = sprite(&game, "textures/gen/ground.xpm");
 	game.solid = sprite(&game, "textures/gen/solid.xpm");
 	game.gem = sprite(&game, "textures/gem.xpm");
+	game.door = sprite(&game, "textures/door.xpm");
 	game.map = map_load(&game, argv[1], false);
 	if (!game.map)
 		return (ft_printf("Error\nInvalid map\n"), 1);

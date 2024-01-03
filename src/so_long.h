@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 16:37:30 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:59:14 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef enum
 {
 	ITEM_EMPTY,
 	ITEM_SOLID,
+	ITEM_DOOR,
 	ITEM_COLLECT,
 	ITEM_PLAYER,
 }	t_editor_item;
@@ -76,6 +77,7 @@ typedef struct s_game
 	t_sprite		*ground;
 	t_sprite		*solid;
 	t_sprite		*gem;
+	t_sprite		*door;
 }	t_game;
 
 # define UPDATE_INTERVAL 16
@@ -106,6 +108,7 @@ typedef enum
 {
 	TILE_EMPTY,
 	TILE_SOLID,
+	TILE_DOOR,
 	TILE_COLLECT,
 	TILE_PLAYER
 }	t_tile;

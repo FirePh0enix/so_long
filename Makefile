@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/01/03 11:50:08 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/01/03 16:57:36 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SOURCES = \
 	src/data/vector.c
 
 TEXTURES = \
-	textures/gem.png
+	textures/gem.png \
+	textures/door.png
 
 NAME = so_long
 

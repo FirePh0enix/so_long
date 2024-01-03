@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 16:39:09 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:00:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 				tiles[x + y * width] = TILE_SOLID;
 			else if (c == '0')
 				tiles[x + y * width] = TILE_EMPTY;
+			else if (c == 'E')
+				tiles[x + y * width] = TILE_DOOR;
 			else if (c == 'C')
 			{
 				tiles[x + y * width] = TILE_EMPTY;

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 12:20:16 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:02:42 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void	map_add_to_graph(t_map *map, t_game *game, t_render_graph *graph)
 					0, (t_effect){NULL, NULL});
 			else if (map->data[x + y * map->width] == TILE_EMPTY)
 				graph_add_sprite(graph, game->ground, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE},
+					0, (t_effect){NULL, NULL});
+			else if (map->data[x + y * map->width] == TILE_DOOR)
+				graph_add_sprite(graph, game->door, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE},
 					0, (t_effect){NULL, NULL});
 			y++;
 		}
@@ -92,6 +95,8 @@ void	map_save(t_map *map, t_game *game, char *filename)
 				write(fd, "1", 1);
 			else if (tile == TILE_EMPTY)
 				write(fd, "0", 1);
+			else if (tile == TILE_DOOR)
+				write(fd, "E", 1);
 			else if (tile == TILE_COLLECT)
 				write(fd, "C", 1);
 			else if (tile == TILE_PLAYER)
