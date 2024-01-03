@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 12:23:28 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:48:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,27 @@ t_sprite	*sprite(t_game *game, char *filename)
 	return (sprite);
 }
 
+static void _collect_entities(t_entity ***entities)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (1)
+	{
+		i = 0;
+		while (i < vector_size(*entities))
+		{
+			if ((*entities)[i]->state == STATE_DEAD)
+				break ;
+			i++;
+		}
+		if (i == vector_size(*entities))
+			break ;
+		ft_printf("Entity collected!\n");
+		vector_remove((void **)entities, i);
+	}
+}
+
 static int	update_hook(t_game *game)
 {
 	unsigned int	i;
@@ -89,6 +110,7 @@ static int	update_hook(t_game *game)
 			entity->z_index, (t_effect){NULL, NULL});
 		i++;
 	}
+	_collect_entities(&game->entities);
 	map_add_to_graph(game->map, game, game->graph);
 	clear_screen(game, 0x0);
 	graph_draw(game->graph, game);

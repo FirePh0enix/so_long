@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 12:23:22 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:39:09 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 				game->start_pos = (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE};
 				entity = player_new(game, (t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
 				vector_add((void **) &game->entities, &entity);
+				game->player = entity; // FIXME Check if there is only one player
 			}
 			else
 			{

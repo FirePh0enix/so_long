@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 11:48:04 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:41:53 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef enum
 	ETYPE_GEM,
 }	t_etype;
 
+typedef enum
+{
+	STATE_ALIVE,
+	STATE_DEAD,
+	STATE_NOT_ALIVE
+}	t_state;
+
 typedef struct s_entity
 {
 	t_game		*game;
@@ -37,6 +44,8 @@ typedef struct s_entity
 	t_sprite	*sprite;
 	int			z_index;
 	t_box		box;
+	t_vec2		vel;
+	t_state		state;
 }	t_entity;
 
 // ----------------------------------------------

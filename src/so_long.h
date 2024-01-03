@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 12:17:50 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:37:30 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_game
 	t_entity		**entities;
 	long			last_update;
 	t_render_graph	*graph;
+	t_entity		*player;
 	t_map			*map;
 	t_editor		editor;
 

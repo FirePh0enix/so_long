@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:55:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 12:21:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:50:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void _place_item(int x, int y, t_editor_item item, t_game *game)
 	const int	tile_x = x / SCALED_SIZE;
 	const int	tile_y = y / SCALED_SIZE;
 	t_entity	*entity;
-	
+
 	if (item == ITEM_EMPTY)
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
 	else if (item == ITEM_SOLID)
@@ -123,7 +123,7 @@ static void	_resize(t_map *map, int tile_x, int tile_y)
 	int		y;
 
 	if (tile_y >= map->height)
-		map->data = realloc(map->data, sizeof(t_tile) * map->width * (map->height++));
+		map->data = realloc(map->data, sizeof(t_tile) * map->width * (++map->height));
 	else if (tile_x >= map->width)
 	{
 		tile = malloc(sizeof(t_tile) * (map->width + 1) * map->height);
