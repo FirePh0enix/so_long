@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:41:50 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:02:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,4 @@ void	map_add_to_graph(t_map *map, t_game *game, t_graph *graph)
 		}
 		x++;
 	}
-}
-
-void	add_entity(t_entity ***entities, t_entity *entity)
-{
-	vector_add((void **) entities, &entity);
 }

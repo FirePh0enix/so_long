@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:26:15 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:55:25 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:19:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ suseconds_t	getms(void)
 
 t_entity	*add_entity(t_entity ***entities, t_entity *entity)
 {
-	vector_add((void **) entities, entity);
+	vector_add((void **) entities, &entity);
 	return (entity);
 }
 

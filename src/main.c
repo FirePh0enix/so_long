@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:26:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:11:15 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	game_deinit(t_game *game)
 
 static void	_setup_game(t_game *game)
 {
-	ft_bzero(&game, sizeof(t_game));
+	ft_bzero(game, sizeof(t_game));
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
 	game->keys = ft_calloc(0xFFFF, sizeof(bool));

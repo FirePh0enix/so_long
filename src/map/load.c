@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 20:02:10 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:17:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,7 @@ static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 		{
 			if (!_fill_tile(game, str[x + y * (width + 1)],
 					tiles, (t_box){{x, y}, {width, height}}))
-			{
-				free(tiles);
-				return (NULL);
-			}
+				return (free(tiles), NULL);
 			y++;
 		}
 		x++;
@@ -124,12 +121,8 @@ t_map	*map_load(t_game *game, char *filename, bool bypass)
 	if (map->data == NULL)
 		return (free(map), map);
 	if (!check_borders(map) && !bypass)
-	{
-		free(map->data);
-		free(map);
-		map = NULL;
-	}
+		return (free(map->data), free(map), NULL);
 	else if (!check_borders(map))
-		ft_printf(INVALID_LOAD_MSG);
+		ft_printf("\nWarning: Invalid map\n\n");
 	return (map);
 }

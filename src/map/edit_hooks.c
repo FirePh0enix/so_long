@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:51:30 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:52:53 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:19:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../so_long.h"
 #include "../graph.h"
 #include "../data/vector.h"
+#include <stdio.h>
 
 static void	_handle_keypress(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:58:03 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:56:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "math/vec2.h"
 
 // 720x480
+// 1440x960
 # define WIN_WIDTH 1440
 # define WIN_HEIGHT 960
 
@@ -131,8 +132,6 @@ typedef struct s_map
 	int		width;
 	int		height;
 }	t_map;
-
-# define INVALID_LOAD_MSG "\nWarning: Map is invalid but will still be loaded by the editor\n\n"
 
 t_map		*map_load(t_game *game, char *filename, bool bypass);
 void		map_deinit(t_map *map);
