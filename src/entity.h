@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:07:51 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:32:45 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum etype
 {
 	ETYPE_PLAYER,
 	ETYPE_GEM,
+	ETYPE_ENEMY
 }	t_etype;
 
 typedef enum state
@@ -61,5 +62,11 @@ void		player_update(t_game *game, t_entity *entity);
 
 t_entity	*gem_new(t_game *game, t_vec2 pos);
 void		gem_update(t_game *game, t_entity *entity);
+
+// ----------------------------------------------
+// ENEMY
+
+t_entity	*enemy_new(t_game *game, t_vec2 pos);
+void		enemy_update(t_game *game, t_entity *entity);
 
 #endif

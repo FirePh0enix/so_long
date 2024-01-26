@@ -6,12 +6,11 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:38:18 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:18:16 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:02:15 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-#include "libft.h"
 #include <stdlib.h>
 
 t_graph	*new_graph(void)
@@ -81,7 +80,7 @@ void	graph_draw(t_graph *graph, t_game *game)
 	{
 		if (node->type == NODE_SPRITE)
 			draw_sprite(game, node->sprite.sprite, node->sprite.position,
-				(t_draw){.scale = 3});
+				(t_draw){.scale = SCALE});
 		node = node->next;
 	}
 }

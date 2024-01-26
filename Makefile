@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/01/04 11:02:49 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/01/26 13:52:00 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SOURCES = \
 	src/map/load_utils.c \
 	src/map/save.c \
 	src/map/util.c \
+	src/entities/enemy.c \
 	src/entities/player.c \
 	src/entities/gem.c \
 	src/math/box.c \
@@ -31,8 +32,6 @@ SOURCES = \
 	src/data/vector.c
 
 TEXTURES = \
-	textures/gem.png \
-	textures/door.png
 
 NAME = so_long
 

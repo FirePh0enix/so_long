@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/04 16:19:39 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:30:19 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 	player->type = ETYPE_PLAYER;
 	player->state = STATE_ALIVE;
 	player->pos = pos;
-	player->box = (t_box){{2, 2}, {15 * SCALE, 15 * SCALE}};
+	player->box = (t_box){{4, 4}, {30 * SCALE, 30 * SCALE}};
 	player->update = player_update;
-	player->sprite = game->solid;
+	player->sprite = game->player_s;
 	player->z_index = 1;
 	return (player);
 }

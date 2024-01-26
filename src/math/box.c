@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:48:45 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:35:01 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:10:52 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	box_collide_with_map(t_box box, t_map *map)
 			if (map->data[x + y * map->width] == TILE_SOLID)
 			{
 				tile_box = (t_box){{0, 0},
-				{16 * SCALE, 16 * SCALE}};
+				{SCALED_SIZE, SCALED_SIZE}};
 				if (box_collide_with_box(box,
 						box_for_position(tile_box, (t_vec2){x * SCALED_SIZE,
 							y * SCALED_SIZE})))

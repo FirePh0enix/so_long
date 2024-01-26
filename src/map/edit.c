@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:55:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:52:55 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:58:28 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ static void	_place_item(int x, int y, t_editor_item item, t_game *game)
 	{
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
 		add_entity(&game->entities, player_new(game,
+				(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
+	}
+	else if (item == ITEM_ENEMY)
+	{
+		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
+		add_entity(&game->entities, enemy_new(game,
 				(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
 	}
 }

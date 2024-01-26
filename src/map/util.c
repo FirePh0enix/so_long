@@ -6,17 +6,14 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/04 11:02:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:59:16 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 #include "../graph.h"
-#include "../data/vector.h"
-#include "../entity.h"
 #include <X11/Xlib.h>
 #include <fcntl.h>
-#include <stdio.h>
 
 void	map_deinit(t_map *map)
 {

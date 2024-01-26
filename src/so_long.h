@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/04 11:56:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:25:47 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef enum editor_item
 	ITEM_DOOR,
 	ITEM_COLLECT,
 	ITEM_PLAYER,
+	ITEM_ENEMY
 }	t_editor_item;
 
 typedef struct s_editor
@@ -58,6 +59,13 @@ typedef struct s_editor
 
 int			edit_update_hook(t_game *game);
 int			edit_mouse_hook(unsigned int button, int x, int y, t_game *game);
+
+// ----------------------------------------------
+// COMBAT
+
+typedef struct s_combat
+{
+}	t_combat;
 
 // ----------------------------------------------
 // GAME
@@ -83,6 +91,7 @@ typedef struct s_game
 	t_sprite		*solid;
 	t_sprite		*gem;
 	t_sprite		*door;
+	t_sprite		*player_s;
 }	t_game;
 
 # define UPDATE_INTERVAL 16
@@ -113,9 +122,9 @@ void		clear_screen(t_game *game, int color);
 // ----------------------------------------------
 // MAP
 
-# define SCALE       3
-# define TILE_SIZE   16
-# define SCALED_SIZE 48
+# define SCALE       1
+# define TILE_SIZE   32
+# define SCALED_SIZE 32
 
 typedef enum tile
 {
@@ -123,7 +132,8 @@ typedef enum tile
 	TILE_SOLID,
 	TILE_DOOR,
 	TILE_COLLECT,
-	TILE_PLAYER
+	TILE_PLAYER,
+	TILE_ENEMY
 }	t_tile;
 
 typedef struct s_map

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/04 16:11:15 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:26:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static void	_setup_game(t_game *game)
 	game->graph = new_graph();
 	game->ground = sprite(game, "textures/gen/ground.xpm");
 	game->solid = sprite(game, "textures/gen/solid.xpm");
-	game->gem = sprite(game, "textures/gem.xpm");
-	game->door = sprite(game, "textures/door.xpm");
+	game->gem = sprite(game, "textures/gen/chest.xpm");
+	game->door = sprite(game, "textures/gen/solid.xpm");
+	game->player_s = sprite(game, "textures/gen/player.xpm");
 }
 
 static int	_edit_main(int argc, char *argv[])

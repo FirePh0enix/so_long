@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/04 14:17:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:51:59 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ static void	_fill_collectible(t_game *game, t_tile *tiles, t_box dim)
 	game->collectibles_count++;
 }
 
+static void	_fill_enemy(t_game *game, t_tile *tiles, t_box dim)
+{
+	tiles[dim.min.x + dim.min.y * dim.max.x] = TILE_EMPTY;
+	add_entity(&game->entities,
+		enemy_new(game, (t_vec2){dim.min.x * SCALED_SIZE,
+			dim.min.y * SCALED_SIZE}));
+}
+
 static int	_fill_tile(t_game *game, char c, t_tile *tiles, t_box dim)
 {
 	if (c == '1')
@@ -63,6 +71,8 @@ static int	_fill_tile(t_game *game, char c, t_tile *tiles, t_box dim)
 		tiles[dim.min.x + dim.min.y * dim.max.x] = TILE_DOOR;
 	else if (c == 'C')
 		_fill_collectible(game, tiles, dim);
+	else if (c == 'F')
+		_fill_enemy(game, tiles, dim);
 	else if (c == 'P')
 	{
 		tiles[dim.min.x + dim.min.y * dim.max.x] = TILE_EMPTY;

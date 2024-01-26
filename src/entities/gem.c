@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/04 16:19:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:09:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_entity	*gem_new(t_game *game, t_vec2 pos)
 	gem->type = ETYPE_GEM;
 	gem->state = STATE_NOT_ALIVE;
 	gem->pos = pos;
-	gem->box = (t_box){{0, 0}, {16 * SCALE, 16 * SCALE}};
+	gem->box = (t_box){{0, 0}, {32 * SCALE, 32 * SCALE}};
 	gem->update = gem_update;
 	gem->sprite = game->gem;
 	gem->z_index = 1;
