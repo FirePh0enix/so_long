@@ -2,26 +2,42 @@
 
 new-tile()
 {
-	TILE_SIZE=32
+	TILE_SIZE=64
 	X=$(($3*$TILE_SIZE))
 	Y=$(($4*$TILE_SIZE))
 	convert -crop ${TILE_SIZE}x${TILE_SIZE}+$X+$Y "$1" $2
 }
 
-GNAME="textures/TX Tileset Grass.png"
-RNAME="textures/TX Tileset Wall.png"
-PNAME="textures/TX Props.png"
-CNAME="textures/AnimationSheet_Character.png"
+new-anim-frame()
+{
+	TILE_SIZE=192
+	X=$(($3*$TILE_SIZE))
+	Y=$(($4*$TILE_SIZE))
+	convert -crop ${TILE_SIZE}x${TILE_SIZE}+$X+$Y "$1" $2
+}
+
+# Extract an full animation
+# $1 -> Original file
+# $2 -> Animation name
+# $3 -> Tile X
+# $4 -> Tile Y
+# $5 -> Size of the animation
+new-anim()
+{
+	mkdir -p $2
+	for x in $(seq $3 1 $((${5}-1))); do
+		ID=$(($x-$3))
+		NAME="textures/gen/$2/$ID.png"
+		new-anim-frame $1 $NAME $x $4 
+	done
+}
+
+PLAYER_SHEET="textures/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png"
 
 mkdir -p textures/gen
 
-new-tile "$GNAME" "textures/gen/ground.png" 0 0
-
-new-tile "$RNAME" "textures/gen/solid.png" 2 4
-
-new-tile "$PNAME" "textures/gen/chest.png" 3 1
-
-new-tile "$CNAME" "textures/gen/player.png" 0 0
+# Player animation
+new-anim $PLAYER_SHEET "Player_Idle" 0 0 6
 
 for file in textures/gen/*.png
 do

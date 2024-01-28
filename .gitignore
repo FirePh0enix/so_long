@@ -6,3 +6,4 @@ so_long
 libft/*.o
 
 textures/gen
+.DS_Store
