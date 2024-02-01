@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 12:36:09 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:07:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,30 @@
 #include "math/vec2.h"
 #include "mlx.h"
 #include "so_long.h"
+#include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
 
 void	game_deinit(t_game *game)
 {
 	free(game->keys);
+}
+
+static t_sprite	**_load_frames(t_game *game, char *name, int size)
+{
+	char		buf[128];
+	int			i;
+	t_sprite	**sprites;
+
+	i = 0;
+	sprites = malloc(sizeof(t_sprite) * size);
+	while (i < size)
+	{
+		sprintf(buf, name, i);
+		sprites[i] = sprite(game, buf);
+		i++;
+	}
+	return (sprites);
 }
 
 static void	_setup_game(t_game *game)
@@ -39,6 +57,7 @@ static void	_setup_game(t_game *game)
 	game->gem = sprite(game, "textures/gen/Mid.xpm");
 	game->door = sprite(game, "textures/gen/Water.xpm");
 	game->player_s = sprite(game, "textures/gen/Player_Idle/0.xpm");
+	game->player_walk = _load_frames(game, "textures/gen/Player_Walk/%d.xpm", 3);
 }
 
 static int	_edit_main(int argc, char *argv[])

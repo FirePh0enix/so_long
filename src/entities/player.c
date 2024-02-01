@@ -6,16 +6,24 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 12:44:59 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:08:09 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../entity.h"
 #include <stdlib.h>
+#include "../anim/anim.h"
+
+typedef struct s_player
+{
+	t_anim	*current_anim;
+	t_anim	*walk_anim;
+}	t_player;
 
 t_entity	*player_new(t_game *game, t_vec2 pos)
 {
 	t_entity	*player;
+	t_player	*ext;
 
 	player = malloc(sizeof(t_entity));
 	player->game = game;
@@ -24,6 +32,10 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 	player->pos = pos;
 	player->box = (t_box){{0, 0}, {64, 64}};
 	player->update = player_update;
+	ext = malloc(sizeof(t_player));
+	player->extension = ext;
+	ext->walk_anim = anim_new(game->player_walk, 3, 1000 / 6, true);
+	ext->current_anim = ext->walk_anim;
 	player->sprite = game->player_s;
 	player->sprite_offset = (t_vec2){-64, -64};
 	player->z_index = 1;
@@ -83,6 +95,9 @@ void	player_update(t_game *game, t_entity *entity)
 {
 	t_vec2	exit_pos;
 
+	entity->sprite = anim_get_sprite((
+		(t_player *) entity->extension)->current_anim);
+	anim_update(((t_player *) entity->extension)->current_anim);
 	if (game->keys[XK_Right])
 		entity->vel.x += PLAYER_SPEED;
 	if (game->keys[XK_Left])
