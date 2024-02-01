@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 10:54:05 by ledelbec          #+#    #+#              #
-#    Updated: 2023/11/20 11:34:37 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/01 11:43:23 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,10 +51,7 @@ SOURCES=\
 	printf/pad.c \
 	printf/util.c \
 	printf/write_int.c \
-	printf/write_str.c \
-	\
-	gnl/get_next_line.c \
-	gnl/get_next_line_utils.c
+	printf/write_str.c
 
 BONUS_SOURCES=\
 	ft_lstnew.c \

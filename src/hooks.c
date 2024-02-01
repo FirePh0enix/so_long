@@ -6,15 +6,15 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:24:23 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:25:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:12:59 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// TODO The escape key should close the window
 int	key_pressed_hook(int keycode, t_game *game)
 {
+	// TODO The escape key should close the window.
 	if (keycode >= 0xFFFF)
 		return (0);
 	game->keys[keycode] = true;

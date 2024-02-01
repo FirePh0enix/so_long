@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/26 15:25:47 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:40:01 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ void		clear_screen(t_game *game, int color);
 // MAP
 
 # define SCALE       1
-# define TILE_SIZE   32
-# define SCALED_SIZE 32
+# define TILE_SIZE   64
+# define SCALED_SIZE 64
 
 typedef enum tile
 {

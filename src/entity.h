@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/05 11:32:45 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:41:39 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_entity
 	t_update	update;
 	void		*extension;
 	t_sprite	*sprite;
+	t_vec2		sprite_offset;
 	int			z_index;
 	t_box		box;
 	t_vec2		vel;
