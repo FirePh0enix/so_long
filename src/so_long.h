@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 13:34:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:03:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include "math/vec2.h"
+# include "gui.h"
 
 // 720x480
 // 1440x960
@@ -61,13 +62,6 @@ int			edit_update_hook(t_game *game);
 int			edit_mouse_hook(unsigned int button, int x, int y, t_game *game);
 
 // ----------------------------------------------
-// COMBAT
-
-typedef struct s_combat
-{
-}	t_combat;
-
-// ----------------------------------------------
 // GAME
 
 typedef struct s_game
@@ -83,6 +77,9 @@ typedef struct s_game
 	t_map			*map;
 	t_editor		editor;
 
+	t_gamemenu		*menu;
+	bool			menu_opened;
+
 	t_vec2			start_pos;
 	int				collectibles_count;
 	int				collectibles;
@@ -94,6 +91,17 @@ typedef struct s_game
 	t_sprite		*player_s;
 	t_sprite		**player_walk;
 	t_sprite		**player_idle;
+
+	t_sprite		*btn_left;
+	t_sprite		*btn_mid;
+	t_sprite		*btn_right;
+	t_sprite		*btn_left2;
+	t_sprite		*btn_mid2;
+	t_sprite		*btn_right2;
+	t_sprite		*hl_tl;
+	t_sprite		*hl_tr;
+	t_sprite		*hl_bl;
+	t_sprite		*hl_br;
 }	t_game;
 
 # define UPDATE_INTERVAL 16
@@ -109,6 +117,7 @@ int			update_hook(t_game *game);
 int			key_pressed_hook(int keycode, t_game *game);
 int			key_released_hook(int keycode, t_game *game);
 int			close_hook(t_game *game);
+int			mouse_hook(unsigned int btn, int x, int y, t_game *game);
 
 // ----------------------------------------------
 // RENDER

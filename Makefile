@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/01 16:24:44 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/02 14:53:24 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCES = \
 	src/draw.c \
 	src/sprite.c \
 	src/update.c \
+	src/gui.c \
 	src/utils.c \
 	src/anim/anim.c \
 	src/map/edit.c \

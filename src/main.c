@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 11:43:03 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:11:58 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ static void	_setup_game(t_game *game)
 	game->player_s = sprite(game, "textures/gen/Goblin_Idle/0.xpm");
 	game->player_idle = _load_frames(game, "textures/gen/Goblin_Idle/%d.xpm", 6);
 	game->player_walk = _load_frames(game, "textures/gen/Goblin_Walk/%d.xpm", 6);
+	game->btn_left = sprite(game, "textures/gen/Btn_Left.xpm");
+	game->btn_mid = sprite(game, "textures/gen/Btn_Mid.xpm");
+	game->btn_right = sprite(game, "textures/gen/Btn_Right.xpm");
+	game->hl_tl = sprite(game, "textures/gen/hl_tl.xpm");
+	game->hl_tr = sprite(game, "textures/gen/hl_tr.xpm");
+	game->hl_bl = sprite(game, "textures/gen/hl_bl.xpm");
+	game->hl_br = sprite(game, "textures/gen/hl_br.xpm");
 }
 
 static int	_edit_main(int argc, char *argv[])
@@ -95,10 +102,13 @@ static int	_normal_main(int argc, char *argv[])
 	game.map = map_load(&game, argv[1], false);
 	if (!game.map)
 		return (ft_printf("Error\nInvalid map\n"), 1);
+	game.menu = menu_new();
+	game.menu_opened = true;
 	mlx_do_key_autorepeatoff(game.mlx);
 	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
 	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_released_hook, &game);
 	mlx_hook(game.win, 17, 0, close_hook, &game);
+	mlx_mouse_hook(game.win, mouse_hook, &game);
 	mlx_loop_hook(game.mlx, update_hook, &game);
 	mlx_loop(game.mlx);
 	game_deinit(&game);

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 14:27:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:31:29 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static inline void	_set_pixel_color(t_img *image, int x, int y, int color)
 static unsigned int	_get_pixel(t_sprite *sp, int x, int y, t_draw draw)
 {
 	const int		width = sp->width * draw.scale;
-	if (draw.flipped)
-		return (_get_pixel_color(sp->img, x, y));
+	if (!draw.flipped)
+		return (_get_pixel_color(sp->img, x / draw.scale, y / draw.scale));
 	else
 		return (_get_pixel_color(sp->img, width - x / draw.scale, y / draw.scale));
 }
@@ -81,6 +81,7 @@ void	clear_screen(t_game *game, int color)
 	int	y;
 
 	x = 0;
+	color = _get_pixel_color(game->solid->img, 0, 0);
 	while (x < game->canvas->width)
 	{
 		y = 0;

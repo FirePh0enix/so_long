@@ -82,3 +82,14 @@ new-anim $WARRIOR_SHEET "Warrior_Atk_Up2" 3 7 3
 # Goblin animation
 new-anim $GOBLIN_SHEET "Goblin_Idle" 0 0 6
 new-anim $GOBLIN_SHEET "Goblin_Walk" 0 1 6
+
+# GUI
+BTN_RED="textures/UI/Buttons/Button_Red_3Slides.png"
+new-tile $BTN_RED "Btn_Left" 0 0
+new-tile $BTN_RED "Btn_Mid" 1 0
+new-tile $BTN_RED "Btn_Right" 2 0
+
+new-tile "textures/UI/Pointers/03.png" "hl_tl" 0 0
+new-tile "textures/UI/Pointers/04.png" "hl_tr" 0 0
+new-tile "textures/UI/Pointers/05.png" "hl_bl" 0 0
+new-tile "textures/UI/Pointers/06.png" "hl_br" 0 0

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 13:54:16 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:53:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ void	player_update(t_game *game, t_entity *entity)
 	else
 		ext->current_anim = ext->idle_anim;
 	if (game->keys[XK_Right])
-		entity->flipped = true;
-	else if (game->keys[XK_Left])
 		entity->flipped = false;
+	else if (game->keys[XK_Left])
+		entity->flipped = true;
 	_move(game, entity);
 	entity->vel.x = 0;
 	entity->vel.y = 0;
