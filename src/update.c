@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 15:17:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 19:32:44 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	update_hook(t_game *game)
 	game->last_update = time;
 	if (game->menu_opened)
 	{
-		clear_screen(game, 0x0);
+		//clear_screen(game, 0x0);
 		draw_menu(game, game->menu);
 		mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
 		return (0);

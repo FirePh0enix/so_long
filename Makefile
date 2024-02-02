@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/02 14:53:24 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/02 22:49:34 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SOURCES = \
 	src/map/load_utils.c \
 	src/map/save.c \
 	src/map/util.c \
+	src/map/ground_tile.c \
 	src/entities/enemy.c \
 	src/entities/player.c \
 	src/entities/gem.c \
@@ -54,9 +55,6 @@ libft/libft.a:
 
 $(NAME): mlx/libmlx.a libft/libft.a textures/gen $(TEXTURES_XPM) $(OBJECTS)
 	$(CC) -o $(NAME) $(OBJECTS) mlx/libmlx.a libft/libft.a $(LDFLAGS)
-
-%.xpm: %.png
-	convert $< $@
 
 -include $(OBJECTS:.o=.d)
 

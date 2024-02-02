@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 15:53:46 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 00:16:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 	player->type = ETYPE_PLAYER;
 	player->state = STATE_ALIVE;
 	player->pos = pos;
-	player->box = (t_box){{10, 32}, {54, 64}};
+	player->box = (t_box){{5, 43}, {59, 69}};
 	player->update = player_update;
 	ext = malloc(sizeof(t_player));
 	player->extension = ext;

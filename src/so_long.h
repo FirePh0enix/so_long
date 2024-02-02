@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 16:03:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 00:50:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,26 @@ typedef struct s_game
 	t_sprite		**player_walk;
 	t_sprite		**player_idle;
 
+	t_sprite		*ground_mid;
+	t_sprite		*ground_top;
+	t_sprite		*ground_topleft;
+	t_sprite		*ground_topright;
+	t_sprite		*ground_left;
+	t_sprite		*ground_right;
+	t_sprite		*ground_bot;
+	t_sprite		*ground_botleft;
+	t_sprite		*ground_botright;
+	t_sprite		*ground_toplr;
+	t_sprite		*ground_lr;
+	t_sprite		*ground_botlr;
+	t_sprite		*ground_leftbt;
+	t_sprite		*ground_bt;
+	t_sprite		*ground_rightbt;
+	t_sprite		*ground_all;
+
+	t_sprite		*money;
+	t_sprite		**money_spawn;
+
 	t_sprite		*btn_left;
 	t_sprite		*btn_mid;
 	t_sprite		*btn_right;
@@ -159,6 +179,9 @@ t_map		*map_load(t_game *game, char *filename, bool bypass);
 void		map_deinit(t_map *map);
 void		map_add_to_graph(t_map *map, t_game *game, t_graph *graph);
 void		map_save(t_map *map, t_game *game, char *filename);
+
+t_sprite	*get_ground_tile(t_game *game, t_map *map, int x, int y);
+t_sprite	*get_undertile(t_game *game, t_map *map, int x, int y);
 
 int			line_width_and_check(char *str);
 int			line_count(char *str);

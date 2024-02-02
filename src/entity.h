@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 13:50:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 21:34:55 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_entity
 // ----------------------------------------------
 // PLAYER
 
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 3
 
 t_entity	*player_new(t_game *game, t_vec2 pos);
 void		player_update(t_game *game, t_entity *entity);

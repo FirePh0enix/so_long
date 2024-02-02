@@ -6,15 +6,13 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 16:31:29 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 00:39:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "mlx_int.h"
 #include "so_long.h"
 #include "math/vec2.h"
-#include <stdio.h>
 
 static inline int	_get_pixel_color(t_img *image, int x, int y)
 {
@@ -81,7 +79,8 @@ void	clear_screen(t_game *game, int color)
 	int	y;
 
 	x = 0;
-	color = _get_pixel_color(game->solid->img, 0, 0);
+	if (color == 0x0)
+		color = _get_pixel_color(game->solid->img, 0, 0);
 	while (x < game->canvas->width)
 	{
 		y = 0;

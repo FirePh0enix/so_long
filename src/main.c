@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 16:11:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 00:31:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,30 @@ static void	_setup_game(t_game *game)
 	game->player_s = sprite(game, "textures/gen/Goblin_Idle/0.xpm");
 	game->player_idle = _load_frames(game, "textures/gen/Goblin_Idle/%d.xpm", 6);
 	game->player_walk = _load_frames(game, "textures/gen/Goblin_Walk/%d.xpm", 6);
+	game->money = sprite(game, "textures/gen/Gold.xpm");
+	game->money_spawn = _load_frames(game, "textures/gen/Gold_Spawn/%d.xpm", 7);
+
+	game->ground_mid = sprite(game, "textures/gen/Mid.xpm");
+	game->ground_top = sprite(game, "textures/gen/Top.xpm");
+	game->ground_topleft = sprite(game, "textures/gen/TopLeft.xpm");
+	game->ground_topright = sprite(game, "textures/gen/TopRight.xpm");
+	game->ground_left = sprite(game, "textures/gen/Left.xpm");
+	game->ground_right = sprite(game, "textures/gen/Right.xpm");
+	game->ground_bot = sprite(game, "textures/gen/Bot.xpm");
+	game->ground_botleft = sprite(game, "textures/gen/BotLeft.xpm");
+	game->ground_botright = sprite(game, "textures/gen/BotRight.xpm");
+	game->ground_toplr = sprite(game, "textures/gen/TopLR.xpm");
+	game->ground_lr = sprite(game, "textures/gen/LR.xpm");
+	game->ground_botlr = sprite(game, "textures/gen/BotLR.xpm");
+	game->ground_leftbt = sprite(game, "textures/gen/LeftBT.xpm");
+	game->ground_bt = sprite(game, "textures/gen/BT.xpm");
+	game->ground_rightbt = sprite(game, "textures/gen/RightBT.xpm");
+	game->ground_all = sprite(game, "textures/gen/All.xpm");
+
 	game->btn_left = sprite(game, "textures/gen/Btn_Left.xpm");
 	game->btn_mid = sprite(game, "textures/gen/Btn_Mid.xpm");
 	game->btn_right = sprite(game, "textures/gen/Btn_Right.xpm");
+
 	game->hl_tl = sprite(game, "textures/gen/hl_tl.xpm");
 	game->hl_tr = sprite(game, "textures/gen/hl_tr.xpm");
 	game->hl_bl = sprite(game, "textures/gen/hl_bl.xpm");

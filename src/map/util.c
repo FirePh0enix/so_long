@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 13:59:02 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 00:50:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 void	map_deinit(t_map *map)
 {
 	free(map);
+}
+
+/*
+ * Add two tiles: The bottom stone cliff and the top grass ground.
+ */
+static void _add_tile_sprite(t_game *game, int x, int y)
+{
+	graph_add_sprite(game->graph, get_undertile(game, game->map, x, y),
+		(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, -1, false);
+	graph_add_sprite(game->graph, get_ground_tile(game, game->map, x, y),
+		(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
 }
 
 void	map_add_to_graph(t_map *map, t_game *game, t_graph *graph)
@@ -35,8 +46,7 @@ void	map_add_to_graph(t_map *map, t_game *game, t_graph *graph)
 				graph_add_sprite(graph, game->solid,
 					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
 			else if (map->data[x + y * map->width] == TILE_EMPTY)
-				graph_add_sprite(graph, game->ground,
-					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
+				_add_tile_sprite(game, x, y);
 			else if (map->data[x + y * map->width] == TILE_DOOR)
 				graph_add_sprite(graph, game->door,
 					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
