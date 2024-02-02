@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:33:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 19:14:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:57:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_node
 		{
 			t_sprite	*sprite;
 			t_vec2		position;
+			bool		flipped;
 		}	sprite;
 	};
 }	t_node;
@@ -51,7 +52,8 @@ typedef struct s_render_graph
 t_graph			*new_graph(void);
 void			graph_reset(t_graph *graph);
 
-void			graph_add_sprite(t_graph *gr, t_sprite *sp, t_vec2 pos, int zi);
+void			graph_add_sprite(t_graph *gr, t_sprite *sp, t_vec2 pos, int zi,
+	bool flipped);
 void			graph_draw(t_graph *graph, t_game *game);
 
 #endif

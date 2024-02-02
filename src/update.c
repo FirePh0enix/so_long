@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 12:43:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:56:23 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	update_hook(t_game *game)
 		entity = game->entities[i];
 		entity->update(game, entity);
 		graph_add_sprite(game->graph, entity->sprite, vec2_add(entity->pos,
-			entity->sprite_offset), entity->z_index);
+			entity->sprite_offset), entity->z_index, entity->flipped);
 		i++;
 	}
 	_collect_entities(&game->entities);

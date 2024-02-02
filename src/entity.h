@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 12:41:39 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:50:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_entity
 	t_box		box;
 	t_vec2		vel;
 	t_state		state;
+	bool		flipped;
 }	t_entity;
 
 // ----------------------------------------------

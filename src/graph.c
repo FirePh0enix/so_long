@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:38:18 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/26 15:02:15 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:57:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	graph_add_sprite(
 	t_graph *graph,
 	t_sprite *sprite,
 	t_vec2 pos,
-	int order)
+	int order,
+	bool flipped)
 {
 	t_node	*node;
 
@@ -68,6 +69,7 @@ void	graph_add_sprite(
 	node->next = NULL;
 	node->sprite.sprite = sprite;
 	node->sprite.position = pos;
+	node->sprite.flipped = flipped;
 	add_node(graph, node);
 }
 
@@ -80,7 +82,8 @@ void	graph_draw(t_graph *graph, t_game *game)
 	{
 		if (node->type == NODE_SPRITE)
 			draw_sprite(game, node->sprite.sprite, node->sprite.position,
-				(t_draw){.scale = SCALE});
+				(t_draw){.scale = SCALE,
+					.flipped = node->sprite.flipped});
 		node = node->next;
 	}
 }

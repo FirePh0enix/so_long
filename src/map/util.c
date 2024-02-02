@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/26 14:59:16 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:59:02 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	map_add_to_graph(t_map *map, t_game *game, t_graph *graph)
 		{
 			if (map->data[x + y * map->width] == TILE_SOLID)
 				graph_add_sprite(graph, game->solid,
-					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0);
+					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
 			else if (map->data[x + y * map->width] == TILE_EMPTY)
 				graph_add_sprite(graph, game->ground,
-					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0);
+					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
 			else if (map->data[x + y * map->width] == TILE_DOOR)
 				graph_add_sprite(graph, game->door,
-					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0);
+					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, 0, false);
 			y++;
 		}
 		x++;

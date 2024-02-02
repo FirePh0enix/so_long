@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 16:57:21 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:34:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_game
 	t_sprite		*door;
 	t_sprite		*player_s;
 	t_sprite		**player_walk;
+	t_sprite		**player_idle;
 }	t_game;
 
 # define UPDATE_INTERVAL 16
@@ -114,7 +115,8 @@ int			close_hook(t_game *game);
 
 typedef struct s_draw
 {
-	int	scale;
+	int		scale;
+	bool	flipped;
 }	t_draw;
 
 void		draw_sprite(t_game *game, t_sprite *sp, t_vec2 pos, t_draw draw);

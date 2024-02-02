@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 17:07:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:43:03 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ static void	_setup_game(t_game *game)
 	game->solid = sprite(game, "textures/gen/Water.xpm");
 	game->gem = sprite(game, "textures/gen/Mid.xpm");
 	game->door = sprite(game, "textures/gen/Water.xpm");
-	game->player_s = sprite(game, "textures/gen/Player_Idle/0.xpm");
-	game->player_walk = _load_frames(game, "textures/gen/Player_Walk/%d.xpm", 3);
+	game->player_s = sprite(game, "textures/gen/Goblin_Idle/0.xpm");
+	game->player_idle = _load_frames(game, "textures/gen/Goblin_Idle/%d.xpm", 6);
+	game->player_walk = _load_frames(game, "textures/gen/Goblin_Walk/%d.xpm", 6);
 }
 
 static int	_edit_main(int argc, char *argv[])

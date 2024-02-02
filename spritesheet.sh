@@ -5,7 +5,7 @@ new-tile()
 	TILE_SIZE=64
 	X=$(($3*$TILE_SIZE))
 	Y=$(($4*$TILE_SIZE))
-	convert -crop ${TILE_SIZE}x${TILE_SIZE}+$X+$Y "$1" "textures/gen/$2.png"
+	convert -crop ${TILE_SIZE}x${TILE_SIZE}+$X+$Y "$1" "textures/gen/$2.xpm"
 }
 
 new-anim-frame()
@@ -28,14 +28,15 @@ new-anim()
 	mkdir -p textures/gen/$2
 	ID=0
 	for x in $(seq $3 1 $((${3}+${5}-1))); do
-		NAME="textures/gen/$2/$ID.png"
+		NAME="textures/gen/$2/$ID.xpm"
 		new-anim-frame $1 $NAME $x $4 
 		ID=$(($ID+1))
 	done
 }
 
 GROUND_SHEET="textures/Terrain/Ground/Tilemap_Flat.png"
-PLAYER_SHEET="textures/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png"
+WARRIOR_SHEET="textures/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png"
+GOBLIN_SHEET="textures/Factions/Goblins/Troops/Torch/Red/Torch_Red.png"
 
 mkdir -p textures/gen
 
@@ -56,30 +57,28 @@ new-tile $GROUND_SHEET "LR" 3 1
 # Water tiles
 new-tile "textures/Terrain/Water/Water.png" "Water" 0 0
 
-# Player animation
-new-anim $PLAYER_SHEET "Player_Idle" 0 0 6
-new-anim $PLAYER_SHEET "Player_Walk" 0 1 3
-new-anim $PLAYER_SHEET "Player_Fall" 3 1 3
+# Warrior animation
+new-anim $WARRIOR_SHEET "Warrior_Idle" 0 0 6
+new-anim $WARRIOR_SHEET "Warrior_Walk" 0 1 6
 
-new-anim $PLAYER_SHEET "Player_Chrg_Side1" 0 2 3
-new-anim $PLAYER_SHEET "Player_Atk_Side1" 3 2 3
+new-anim $WARRIOR_SHEET "Warrior_Chrg_Side1" 0 2 3
+new-anim $WARRIOR_SHEET "Warrior_Atk_Side1" 3 2 3
 
-new-anim $PLAYER_SHEET "Player_Chrg_Side2" 0 3 3
-new-anim $PLAYER_SHEET "Player_Atk_Side2" 3 3 3
+new-anim $WARRIOR_SHEET "Warrior_Chrg_Side2" 0 3 3
+new-anim $WARRIOR_SHEET "Warrior_Atk_Side2" 3 3 3
 
-new-anim $PLAYER_SHEET "Player_Chrg_Down1" 0 4 3
-new-anim $PLAYER_SHEET "Player_Atk_Down1" 3 4 3
+new-anim $WARRIOR_SHEET "Warrior_Chrg_Down1" 0 4 3
+new-anim $WARRIOR_SHEET "Warrior_Atk_Down1" 3 4 3
 
-new-anim $PLAYER_SHEET "Player_Chrg_Down2" 0 5 3
-new-anim $PLAYER_SHEET "Player_Atk_Down2" 3 5 3
+new-anim $WARRIOR_SHEET "Warrior_Chrg_Down2" 0 5 3
+new-anim $WARRIOR_SHEET "Warrior_Atk_Down2" 3 5 3
 
-new-anim $PLAYER_SHEET "Player_Chrg_Up1" 0 6 3
-new-anim $PLAYER_SHEET "Player_Atk_Up1" 3 6 3
+new-anim $WARRIOR_SHEET "Warrior_Chrg_Up1" 0 6 3
+new-anim $WARRIOR_SHEET "Warrior_Atk_Up1" 3 6 3
 
-new-anim $PLAYER_SHEET "Player_Chrg_Up2" 0 7 3
-new-anim $PLAYER_SHEET "Player_Atk_Up2" 3 7 3
+new-anim $WARRIOR_SHEET "Warrior_Chrg_Up2" 0 7 3
+new-anim $WARRIOR_SHEET "Warrior_Atk_Up2" 3 7 3
 
-for file in textures/gen/**/*.png textures/gen/*.png
-do
-	convert $file "${file%.png}.xpm"
-done
+# Goblin animation
+new-anim $GOBLIN_SHEET "Goblin_Idle" 0 0 6
+new-anim $GOBLIN_SHEET "Goblin_Walk" 0 1 6

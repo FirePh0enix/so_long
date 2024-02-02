@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:51:30 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/05 10:54:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:58:40 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@ static void	_draw_editor_item(t_game *game)
 
 	graph = game->graph;
 	if (game->editor.item == ITEM_EMPTY)
-		graph_add_sprite(graph, game->ground, (t_vec2){16, 480 - 56}, 999);
+		graph_add_sprite(graph, game->ground, (t_vec2){16, 480 - 56}, 999, false);
 	else if (game->editor.item == ITEM_SOLID)
-		graph_add_sprite(graph, game->solid, (t_vec2){16, 480 - 56}, 999);
+		graph_add_sprite(graph, game->solid, (t_vec2){16, 480 - 56}, 999, false);
 	else if (game->editor.item == ITEM_DOOR)
-		graph_add_sprite(graph, game->door, (t_vec2){16, 480 - 56}, 999);
+		graph_add_sprite(graph, game->door, (t_vec2){16, 480 - 56}, 999, false);
 	else if (game->editor.item == ITEM_COLLECT)
-		graph_add_sprite(graph, game->gem, (t_vec2){16, 480 - 56}, 999);
+		graph_add_sprite(graph, game->gem, (t_vec2){16, 480 - 56}, 999, false);
 	else if (game->editor.item == ITEM_PLAYER)
-		graph_add_sprite(graph, game->solid, (t_vec2){16, 480 - 56}, 999);
+		graph_add_sprite(graph, game->solid, (t_vec2){16, 480 - 56}, 999, false);
 	else if (game->editor.item == ITEM_ENEMY)
-		graph_add_sprite(graph, game->door, (t_vec2){16, 480 - 56}, 999);
+		graph_add_sprite(graph, game->door, (t_vec2){16, 480 - 56}, 999, false);
 }
 
 int	edit_update_hook(t_game *game)
@@ -68,7 +68,7 @@ int	edit_update_hook(t_game *game)
 	{
 		entity = game->entities[i];
 		graph_add_sprite(game->graph, entity->sprite, entity->pos,
-			entity->z_index);
+			entity->z_index, false);
 		i++;
 	}
 	map_add_to_graph(game->map, game, game->graph);
