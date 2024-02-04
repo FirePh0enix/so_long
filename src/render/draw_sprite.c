@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 00:39:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:22:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_int.h"
-#include "so_long.h"
-#include "math/vec2.h"
+#include "render.h"
+#include "../so_long.h"
+#include "../math/vec2.h"
 
 static inline int	_get_pixel_color(t_img *image, int x, int y)
 {
@@ -44,7 +45,7 @@ static unsigned int	_get_pixel(t_sprite *sp, int x, int y, t_draw draw)
 		return (_get_pixel_color(sp->img, width - x / draw.scale, y / draw.scale));
 }
 
-void	draw_sprite(t_game *game, t_sprite *sp, t_vec2 pos, t_draw draw)
+void	rdr_draw_sprite(t_game *game, t_sprite *sp, t_vec2 pos, t_draw draw)
 {
 	const int		width = sp->width * draw.scale;
 	const int		height = sp->height * draw.scale;
@@ -73,7 +74,7 @@ void	draw_sprite(t_game *game, t_sprite *sp, t_vec2 pos, t_draw draw)
 	}
 }
 
-void	clear_screen(t_game *game, int color)
+void	rdr_clear_screen(t_game *game, unsigned int color)
 {
 	int	x;
 	int	y;

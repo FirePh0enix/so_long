@@ -4,6 +4,7 @@
 so_long
 *.xpm
 libft/*.o
+compile_flags.txt
 
 textures/gen
 .DS_Store

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 21:34:55 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 13:03:24 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_entity	t_entity;
 
 typedef void			(*t_update)(t_game *, t_entity *);
+typedef void			(*t_free)(t_entity *);
 
 typedef enum etype
 {
@@ -41,6 +42,7 @@ typedef struct s_entity
 	t_etype		type;
 	t_vec2		pos;
 	t_update	update;
+	t_free		free;
 	void		*extension;
 	t_sprite	*sprite;
 	t_vec2		sprite_offset;
@@ -49,6 +51,8 @@ typedef struct s_entity
 	t_vec2		vel;
 	t_state		state;
 	bool		flipped;
+	int			health;
+	int			max_health;
 }	t_entity;
 
 // ----------------------------------------------
@@ -68,7 +72,7 @@ void		gem_update(t_game *game, t_entity *entity);
 // ----------------------------------------------
 // ENEMY
 
-t_entity	*enemy_new(t_game *game, t_vec2 pos);
-void		enemy_update(t_game *game, t_entity *entity);
+t_entity	*knight_new(t_game *game, t_vec2 pos);
+void		knight_update(t_game *game, t_entity *entity);
 
 #endif

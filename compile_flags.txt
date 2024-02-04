@@ -1,4 +1,0 @@
--Wall
--Wextra
--Imlx
--Ilibft

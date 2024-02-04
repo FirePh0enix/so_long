@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   edit.c                                             :+:      :+:    :+:   */
+/*   place.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 19:55:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 16:33:53 by ledelbec         ###   ########.fr       */
+/*   Created: 2024/02/04 17:47:16 by ledelbec          #+#    #+#             */
+/*   Updated: 2024/02/04 17:49:51 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "edit.h"
 #include "../so_long.h"
-#include "../data/vector.h"
 #include "../entity.h"
-#include "libft.h"
-#include <stdio.h>
 
-static void	_place_item(int x, int y, t_editor_item item, t_game *game)
+static void	_place_item(int x, int y, t_item item, t_game *game)
 {
 	const int	tile_x = x / SCALED_SIZE;
 	const int	tile_y = y / SCALED_SIZE;
@@ -78,16 +76,16 @@ static void	_resize(t_map *map, int tile_x, int tile_y)
 	}
 }
 
-int	edit_mouse_hook(unsigned int button, int x, int y, t_game *game)
+void	edit_place(t_game *game, int btn, int x, int y)
 {
-	if (button == 1)
+	if (btn == 1)
 	{
 		_resize(game->map, x / SCALED_SIZE, y / SCALED_SIZE);
 		_place_item(x, y, game->editor.item, game);
 	}
-	else if (button == 3)
+	else if (btn == 3)
 	{
 		remove_entity(game, x, y);
 	}
-	return (0);
+
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:03:45 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/03 12:05:22 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 00:54:58 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,30 @@ unsigned int	vector_size(void *vec)
 
 	vec_data = (void *)(vec - sizeof(t_vec_data));
 	return (vec_data->size);
+}
+
+void	vector_free(void *vec)
+{
+	free(vec - sizeof(t_vec_data));
+}
+
+void	vector_free_with(void *vec, void (*func)(void *))
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < vector_size(vec))
+	{
+		func(*((void**)vec + i));
+		i++;
+	}
+	free(vec - sizeof(t_vec_data));
+}
+
+void	vector_pop(void *vec)
+{
+	t_vec_data	*vec_data;
+
+	vec_data = (void *)(vec - sizeof(t_vec_data));
+	vec_data->size--;
 }

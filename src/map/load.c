@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/05 10:51:59 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 15:07:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*_read_to_string(char *filename)
 	return (str);
 }
 
-static void	_fill_collectible(t_game *game, t_tile *tiles, t_box dim)
+static void	_fill_collectible(t_game *game, t_tile *tiles, t_boxi dim)
 {
 	tiles[dim.min.x + dim.min.y * dim.max.x] = TILE_EMPTY;
 	add_entity(&game->entities,
@@ -53,15 +53,15 @@ static void	_fill_collectible(t_game *game, t_tile *tiles, t_box dim)
 	game->collectibles_count++;
 }
 
-static void	_fill_enemy(t_game *game, t_tile *tiles, t_box dim)
+static void	_fill_enemy(t_game *game, t_tile *tiles, t_boxi dim)
 {
 	tiles[dim.min.x + dim.min.y * dim.max.x] = TILE_EMPTY;
 	add_entity(&game->entities,
-		enemy_new(game, (t_vec2){dim.min.x * SCALED_SIZE,
+		knight_new(game, (t_vec2){dim.min.x * SCALED_SIZE,
 			dim.min.y * SCALED_SIZE}));
 }
 
-static int	_fill_tile(t_game *game, char c, t_tile *tiles, t_box dim)
+static int	_fill_tile(t_game *game, char c, t_tile *tiles, t_boxi dim)
 {
 	if (c == '1')
 		tiles[dim.min.x + dim.min.y * dim.max.x] = TILE_SOLID;
@@ -103,7 +103,7 @@ static t_tile	*_parse_map(char *str, int width, int height, t_game *game)
 		while (y < height)
 		{
 			if (!_fill_tile(game, str[x + y * (width + 1)],
-					tiles, (t_box){{x, y}, {width, height}}))
+					tiles, (t_boxi){{x, y}, {width, height}}))
 				return (free(tiles), NULL);
 			y++;
 		}
@@ -127,7 +127,8 @@ t_map	*map_load(t_game *game, char *filename, bool bypass)
 	map = malloc(sizeof(t_map));
 	map->width = width;
 	map->height = height;
-	map->data = _parse_map(str, width, height, game);
+	map->string = str;
+	map->data = _parse_map(map->string, width, height, game);
 	if (map->data == NULL)
 		return (free(map), map);
 	if (!check_borders(map) && !bypass)
@@ -135,4 +136,15 @@ t_map	*map_load(t_game *game, char *filename, bool bypass)
 	else if (!check_borders(map))
 		ft_printf("\nWarning: Invalid map\n\n");
 	return (map);
+}
+
+/*
+ * This function is called to reload the map.
+ */
+void	map_reload(t_game *game, t_map *map)
+{
+	// Entities must also be free'd alongside their extension.
+	vector_free(game->entities);
+	game->entities = vector_new(sizeof(void *), 0);
+	map->data = _parse_map(map->string, map->width, map->height, game);
 }

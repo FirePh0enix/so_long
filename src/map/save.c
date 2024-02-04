@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:36:59 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/01/05 10:52:45 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:48:44 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	_save_entities(t_map *map, t_entity **entities)
 	while (i < vector_size(entities))
 	{
 		entity = entities[i];
-		map->data[(entity->pos.x / SCALED_SIZE)
-			+ (entity->pos.y / SCALED_SIZE) * map->width]
+		map->data[((int)entity->pos.x / SCALED_SIZE)
+			+ ((int)entity->pos.y / SCALED_SIZE) * map->width]
 			= _etype_to_tile(entity->type);
 		i++;
 	}

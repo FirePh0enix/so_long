@@ -24,7 +24,7 @@ new-tile()
 }
 
 # Extract an full animation.
-# Frames of animations are 192x192, but the image inside is 96x96
+# Frames of animations are 192x192, but the image inside is ~64x64
 # $1 -> Original file
 # $2 -> Animation name
 # $3 -> Tile X
@@ -71,34 +71,34 @@ new-tile $GROUND_SHEET "All" 3 3 $TILE_SIZE
 
 # Water tiles
 new-tile "textures/Terrain/Water/Water.png" "Water" 0 0 $TILE_SIZE
+new-anim "textures/Terrain/Water/Foam/Foam.png" "Foam" 0 0 8 $ENTITY_SIZE
+
+# Bridge tiles
+BRIDGE_SHEET="textures/Terrain/Bridge/Bridge_All.png"
+new-tile $BRIDGE_SHEET "Bridge_Left" 0 0 $TILE_SIZE
+new-tile $BRIDGE_SHEET "Bridge_Mid" 1 0 $TILE_SIZE
+new-tile $BRIDGE_SHEET "Bridge_Right" 2 0 $TILE_SIZE
 
 # Warrior animations
 WARRIOR_SHEET="textures/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png"
 new-anim $WARRIOR_SHEET "Warrior_Idle" 0 0 6 $ENTITY_SIZE
 new-anim $WARRIOR_SHEET "Warrior_Walk" 0 1 6 $ENTITY_SIZE
 
-new-anim $WARRIOR_SHEET "Warrior_Chrg_Side1" 0 2 3 $ENTITY_SIZE
-new-anim $WARRIOR_SHEET "Warrior_Atk_Side1" 3 2 3 $ENTITY_SIZE
-
-new-anim $WARRIOR_SHEET "Warrior_Chrg_Side2" 0 3 3 $ENTITY_SIZE
-new-anim $WARRIOR_SHEET "Warrior_Atk_Side2" 3 3 3 $ENTITY_SIZE
-
-new-anim $WARRIOR_SHEET "Warrior_Chrg_Down1" 0 4 3 $ENTITY_SIZE
-new-anim $WARRIOR_SHEET "Warrior_Atk_Down1" 3 4 3 $ENTITY_SIZE
-
-new-anim $WARRIOR_SHEET "Warrior_Chrg_Down2" 0 5 3 $ENTITY_SIZE
-new-anim $WARRIOR_SHEET "Warrior_Atk_Down2" 3 5 3 $ENTITY_SIZE
-
-new-anim $WARRIOR_SHEET "Warrior_Chrg_Up1" 0 6 3 $ENTITY_SIZE
-new-anim $WARRIOR_SHEET "Warrior_Atk_Up1" 3 6 3 $ENTITY_SIZE
-
-new-anim $WARRIOR_SHEET "Warrior_Chrg_Up2" 0 7 3 $ENTITY_SIZE
-new-anim $WARRIOR_SHEET "Warrior_Atk_Up2" 3 7 3 $ENTITY_SIZE
+new-anim $WARRIOR_SHEET "Warrior_Atk_Side1" 0 2 6 $ENTITY_SIZE
+new-anim $WARRIOR_SHEET "Warrior_Atk_Side2" 0 3 6 $ENTITY_SIZE
+new-anim $WARRIOR_SHEET "Warrior_Atk_Down1" 0 4 6 $ENTITY_SIZE
+new-anim $WARRIOR_SHEET "Warrior_Atk_Down2" 0 5 6 $ENTITY_SIZE
+new-anim $WARRIOR_SHEET "Warrior_Atk_Up1" 0 6 6 $ENTITY_SIZE
+new-anim $WARRIOR_SHEET "Warrior_Atk_Up2" 0 7 6 $ENTITY_SIZE
 
 # Goblin animations
 GOBLIN_SHEET="textures/Factions/Goblins/Troops/Torch/Red/Torch_Red.png"
 new-anim $GOBLIN_SHEET "Goblin_Idle" 0 0 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Walk" 0 1 6 $ENTITY_SIZE
+
+new-anim $GOBLIN_SHEET "Goblin_Atk_Side" 0 2 6 $ENTITY_SIZE
+new-anim $GOBLIN_SHEET "Goblin_Atk_Down" 0 3 6 $ENTITY_SIZE
+new-anim $GOBLIN_SHEET "Goblin_Atk_Up" 0 4 6 $ENTITY_SIZE
 
 # Props sprites
 GOLD_SPAWN="textures/Resources/Resources/G_Spawn.png"
@@ -114,3 +114,16 @@ new-tile "textures/UI/Pointers/03.png" "hl_tl" 0 0 $TILE_SIZE
 new-tile "textures/UI/Pointers/04.png" "hl_tr" 0 0 $TILE_SIZE
 new-tile "textures/UI/Pointers/05.png" "hl_bl" 0 0 $TILE_SIZE
 new-tile "textures/UI/Pointers/06.png" "hl_br" 0 0 $TILE_SIZE
+
+BNR="textures/UI/Banners/Banner_Horizontal.png"
+new-tile $BNR "Bnr_TopLeft" 0 0 $TILE_SIZE
+new-tile $BNR "Bnr_Top" 1 0 $TILE_SIZE
+new-tile $BNR "Bnr_TopRight" 2 0 $TILE_SIZE
+new-tile $BNR "Bnr_Left" 0 1 $TILE_SIZE
+new-tile $BNR "Bnr_Mid" 1 1 $TILE_SIZE
+new-tile $BNR "Bnr_Right" 2 1 $TILE_SIZE 
+new-tile $BNR "Bnr_BotLeft" 0 2 $TILE_SIZE
+new-tile $BNR "Bnr_Bot" 1 2 $TILE_SIZE
+new-tile $BNR "Bnr_BotRight" 2 2 $TILE_SIZE
+
+new-tile "textures/UI/Icons/Regular_08.png" "Plus" 0 0 $TILE_SIZE

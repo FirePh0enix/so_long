@@ -6,33 +6,36 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/02 22:49:34 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/04 17:50:59 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES = \
 	src/main.c \
+	src/game_free.c \
 	src/hooks.c \
-	src/graph.c \
-	src/draw.c \
 	src/sprite.c \
 	src/update.c \
 	src/gui.c \
 	src/utils.c \
 	src/anim/anim.c \
-	src/map/edit.c \
-	src/map/edit_hooks.c \
+	src/edit/edit.c \
+	src/edit/place.c \
 	src/map/load.c \
 	src/map/load_utils.c \
 	src/map/save.c \
 	src/map/util.c \
 	src/map/ground_tile.c \
-	src/entities/enemy.c \
+	src/entities/knight.c \
 	src/entities/player.c \
 	src/entities/gem.c \
 	src/math/box.c \
 	src/math/vec2_calc.c \
-	src/data/vector.c
+	src/math/a_star.c \
+	src/data/vector.c \
+	src/render/renderer.c \
+	src/render/draw_sprite.c \
+	src/render/node.c
 
 TEXTURES = \
 
@@ -62,7 +65,7 @@ textures/gen:
 	bash spritesheet.sh
 
 clean:
-	rm -rf $(OBJECTS) $(TEXTURES_XPM)
+	rm -rf $(OBJECTS) $(OBJECTS:.o=.d)
 	cd mlx && make clean && rm -f libmlx.a
 	cd libft && make fclean
 

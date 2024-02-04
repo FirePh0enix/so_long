@@ -6,25 +6,19 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 00:31:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 18:00:39 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "anim/anim.h"
 #include "data/vector.h"
 #include "entity.h"
-#include "graph.h"
 #include "libft.h"
-#include "math/vec2.h"
 #include "mlx.h"
 #include "so_long.h"
 #include <stdio.h>
-#include <string.h>
 #include <sys/time.h>
-
-void	game_deinit(t_game *game)
-{
-	free(game->keys);
-}
+#include "render/render.h"
 
 static t_sprite	**_load_frames(t_game *game, char *name, int size)
 {
@@ -51,15 +45,20 @@ static void	_setup_game(t_game *game)
 	game->keys = ft_calloc(0xFFFF, sizeof(bool));
 	game->canvas = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->entities = vector_new(sizeof(t_entity *), 0);
-	game->graph = new_graph();
-	game->ground = sprite(game, "textures/gen/Mid.xpm");
+	game->rdr = rdr_new();
+	edit_init(&game->editor);
 	game->solid = sprite(game, "textures/gen/Water.xpm");
 	game->gem = sprite(game, "textures/gen/Mid.xpm");
 	game->door = sprite(game, "textures/gen/Water.xpm");
-	game->player_s = sprite(game, "textures/gen/Goblin_Idle/0.xpm");
-	game->player_idle = _load_frames(game, "textures/gen/Goblin_Idle/%d.xpm", 6);
-	game->player_walk = _load_frames(game, "textures/gen/Goblin_Walk/%d.xpm", 6);
-	game->money = sprite(game, "textures/gen/Gold.xpm");
+
+	game->goblin_idle = _load_frames(game, "textures/gen/Goblin_Idle/%d.xpm", 6);
+	game->goblin_walk = _load_frames(game, "textures/gen/Goblin_Walk/%d.xpm", 6);
+	game->goblin_atk_side = _load_frames(game, "textures/gen/Goblin_Atk_Side/%d.xpm", 6);
+
+	game->warrior_idle = _load_frames(game, "textures/gen/Warrior_Idle/%d.xpm", 6);
+	game->warrior_walk = _load_frames(game, "textures/gen/Warrior_Walk/%d.xpm", 6);
+	game->warrior_atk_side = _load_frames(game, "textures/gen/Warrior_Atk_Side1/%d.xpm", 6);
+
 	game->money_spawn = _load_frames(game, "textures/gen/Gold_Spawn/%d.xpm", 7);
 
 	game->ground_mid = sprite(game, "textures/gen/Mid.xpm");
@@ -79,39 +78,28 @@ static void	_setup_game(t_game *game)
 	game->ground_rightbt = sprite(game, "textures/gen/RightBT.xpm");
 	game->ground_all = sprite(game, "textures/gen/All.xpm");
 
+	game->foam = _load_frames(game, "textures/gen/Foam/%d.xpm", 8);
+	game->foam_anim = anim_new(game->foam, 8, 100, true);
+
 	game->btn_left = sprite(game, "textures/gen/Btn_Left.xpm");
 	game->btn_mid = sprite(game, "textures/gen/Btn_Mid.xpm");
 	game->btn_right = sprite(game, "textures/gen/Btn_Right.xpm");
-
 	game->hl_tl = sprite(game, "textures/gen/hl_tl.xpm");
 	game->hl_tr = sprite(game, "textures/gen/hl_tr.xpm");
 	game->hl_bl = sprite(game, "textures/gen/hl_bl.xpm");
 	game->hl_br = sprite(game, "textures/gen/hl_br.xpm");
-}
 
-static int	_edit_main(int argc, char *argv[])
-{
-	t_game	game;
-	char	*filename;
+	game->bnr_topleft = sprite(game, "textures/gen/Bnr_TopLeft.xpm");
+	game->bnr_top = sprite(game, "textures/gen/Bnr_Top.xpm");
+	game->bnr_topright = sprite(game, "textures/gen/Bnr_TopRight.xpm");
+	game->bnr_left = sprite(game, "textures/gen/Bnr_Left.xpm");
+	game->bnr_mid = sprite(game, "textures/gen/Bnr_Mid.xpm");
+	game->bnr_right = sprite(game, "textures/gen/Bnr_Right.xpm");
+	game->bnr_botleft = sprite(game, "textures/gen/Bnr_BotLeft.xpm");
+	game->bnr_bot = sprite(game, "textures/gen/Bnr_Bot.xpm");
+	game->bnr_botright = sprite(game, "textures/gen/Bnr_BotRight.xpm");
 
-	(void) argc;
-	_setup_game(&game);
-	filename = argv[1];
-	game.map = map_load(&game, filename, true);
-	if (!game.map)
-		return (ft_printf("Error\nInvalid map\n"), 1);
-	mlx_do_key_autorepeatoff(game.mlx);
-	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
-	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_released_hook, &game);
-	mlx_hook(game.win, 17, 0, close_hook, &game);
-	mlx_mouse_hook(game.win, edit_mouse_hook, &game);
-	mlx_loop_hook(game.mlx, edit_update_hook, &game);
-	mlx_loop(game.mlx);
-	map_save(game.map, &game, filename);
-	game_deinit(&game);
-	mlx_do_key_autorepeaton(game.mlx);
-	mlx_destroy_display(game.mlx);
-	return (0);
+	game->plus = sprite(game, "textures/gen/Plus.xpm");
 }
 
 static int	_normal_main(int argc, char *argv[])
@@ -125,6 +113,8 @@ static int	_normal_main(int argc, char *argv[])
 		return (ft_printf("Error\nInvalid map\n"), 1);
 	game.menu = menu_new();
 	game.menu_opened = true;
+	game.filename = argv[1];
+	srand(getms());
 	mlx_do_key_autorepeatoff(game.mlx);
 	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
 	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_released_hook, &game);
@@ -132,9 +122,11 @@ static int	_normal_main(int argc, char *argv[])
 	mlx_mouse_hook(game.win, mouse_hook, &game);
 	mlx_loop_hook(game.mlx, update_hook, &game);
 	mlx_loop(game.mlx);
-	game_deinit(&game);
+	game_free(&game);
 	mlx_do_key_autorepeaton(game.mlx);
+	mlx_destroy_window(game.mlx, game.win);
 	mlx_destroy_display(game.mlx);
+	free(game.mlx);
 	return (0);
 }
 
@@ -142,8 +134,5 @@ int	main(int argc, char *argv[])
 {
 	if (argc < 2)
 		return (1);
-	else if (argc == 3 && strcmp(argv[2], "--edit") == 0)
-		return (_edit_main(argc, argv));
-	else
-		return (_normal_main(argc, argv));
+	_normal_main(argc, argv);
 }

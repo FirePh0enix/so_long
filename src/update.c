@@ -6,16 +6,18 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/02 19:32:44 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 17:20:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graph.h"
+#include "anim/anim.h"
 #include "entity.h"
 #include "data/vector.h"
 #include "gui.h"
 #include "mlx.h"
 #include "so_long.h"
+#include "render/render.h"
+#include "edit/edit.h"
 
 static void	_collect_entities(t_entity ***entities)
 {
@@ -38,37 +40,45 @@ static void	_collect_entities(t_entity ***entities)
 	}
 }
 
-int	update_hook(t_game *game)
+static void	_update_entities(t_game *game, bool update)
 {
 	unsigned int	i;
 	t_entity		*entity;
+
+	i = 0;
+	while (i < vector_size(game->entities))
+	{
+		entity = game->entities[i];
+		if (update)
+			entity->update(game, entity);
+		rdr_add_sprite(game->rdr, entity->sprite, vec2_add(entity->pos,
+			entity->sprite_offset), (t_add_sprite){entity->z_index, entity->flipped});
+		i++;
+	}
+}
+
+int	update_hook(t_game *game)
+{
 	suseconds_t		time;
 
 	time = getms();
 	if (time - game->last_update < UPDATE_INTERVAL)
 		return (0);
 	game->last_update = time;
+	rdr_clear_screen(game, 0x0);
 	if (game->menu_opened)
-	{
-		//clear_screen(game, 0x0);
 		draw_menu(game, game->menu);
-		mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
-		return (0);
-	}
-	i = 0;
-	while (i < vector_size(game->entities))
+	else
 	{
-		entity = game->entities[i];
-		entity->update(game, entity);
-		graph_add_sprite(game->graph, entity->sprite, vec2_add(entity->pos,
-			entity->sprite_offset), entity->z_index, entity->flipped);
-		i++;
+		_update_entities(game, !game->editor_mode);
+		if (game->editor_mode)
+			edit_update(game);
+		_collect_entities(&game->entities);
+		map_render(game->map, game, game->rdr);
 	}
-	_collect_entities(&game->entities);
-	map_add_to_graph(game->map, game, game->graph);
-	clear_screen(game, 0x0);
-	graph_draw(game->graph, game);
+	rdr_draw(game->rdr, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
-	graph_reset(game->graph);
+	rdr_clear(game->rdr);
+	anim_update(game->foam_anim);
 	return (0);
 }

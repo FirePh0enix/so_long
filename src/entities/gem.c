@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 00:18:29 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/03 19:34:02 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ typedef struct s_money
 {
 	t_anim	*anim;
 }	t_money;
+
+void	gem_free(t_entity *entity);
 
 t_entity	*gem_new(t_game *game, t_vec2 pos)
 {
@@ -31,13 +33,23 @@ t_entity	*gem_new(t_game *game, t_vec2 pos)
 	gem->pos = pos;
 	ext = malloc(sizeof(t_money));
 	gem->extension = ext;
-	ext->anim = anim_new(game->money_spawn, 7, 1000 / 7, false);
+	ext->anim = anim_new(game->money_spawn, 7, 100, false);
 	gem->box = (t_box){{16, 16}, {48 * SCALE, 48 * SCALE}};
 	gem->sprite_offset = (t_vec2){-32, -32};
 	gem->update = gem_update;
+	gem->free = NULL;
 	gem->sprite = game->money_spawn[6];
 	gem->z_index = 1;
 	return (gem);
+}
+
+void	gem_free(t_entity *entity)
+{
+	t_money	*ext;
+
+	ext = entity->extension;
+	free(ext->anim);
+	free(ext);
 }
 
 void	gem_update(t_game *game, t_entity *entity)
