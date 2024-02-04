@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:55 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 17:50:44 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:16:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_editor
 {
 	t_item	item;
 	t_btn	save;
+	t_btn	quit;
 }	t_editor;
 
 void	edit_init(t_editor *editor);

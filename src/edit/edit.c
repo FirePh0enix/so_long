@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 18:03:19 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:49:14 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,29 @@
 static void	_edit_save(t_game *game)
 {
 	map_save(game->map, game, game->filename);
+	map_reload(game, game->map);
+}
+
+static void _edit_quit(t_game *game)
+{
+	// TODO:
+	// map->string is not changed on saved (and should be). This means that when
+	// saving and calling map_reload, this will load the old map.
+	map_reload(game, game->map);
+	game->menu_opened = true;
+	game->editor_mode = false;
 }
 
 void	edit_init(t_editor *editor)
 {
 	editor->item = ITEM_EMPTY;
 	editor->save = (t_btn){32 + 8 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, _edit_save};
+	editor->quit = (t_btn){32 + 10 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, _edit_quit};
 }
 
 static void	_draw_editor_background(t_game *game, t_renderer *rdr)
 {
-	const int	width = 11;
+	const int	width = 13;
 	const int	x = 32;
 	const int	y = WIN_HEIGHT - 192;
 	int			i;
@@ -104,6 +116,7 @@ void	edit_update(t_game *game)
 	_draw_icons(game, game->rdr);
 	_draw_hl(game, &game->editor);
 	btn_update(game, &game->editor.save);
+	btn_update(game, &game->editor.quit);
 }
 
 static bool	_is_hover(t_vec2i m, t_vec2i min, t_vec2i size)
@@ -114,23 +127,26 @@ static bool	_is_hover(t_vec2i m, t_vec2i min, t_vec2i size)
 
 void	edit_click_hook(t_game *game, int mx, int my, int btn)
 {
-	const int	x = 32 + 64;
-	const int	y = WIN_HEIGHT - 192 + 64;
+	const int		x = 32 + 64;
+	const int		y = WIN_HEIGHT - 192 + 64;
+	const t_vec2i	s = (t_vec2i){64, 64};
 
 	btn_click(game, &game->editor.save, mx, my);
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){0, y - 64}, (t_vec2i){WIN_WIDTH, 192}))
+	btn_click(game, &game->editor.quit, mx, my);
+	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){0, y - 64},
+		(t_vec2i){WIN_WIDTH, 192}))
 	{
 		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x, y}, (t_vec2i){64, 64}))
 			game->editor.item = ITEM_EMPTY;
-		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 1 * SCALED_SIZE, y}, (t_vec2i){64, 64}))
+		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 1 * SCALED_SIZE, y}, s))
 			game->editor.item = ITEM_SOLID;
-		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 2 * SCALED_SIZE, y}, (t_vec2i){64, 64}))
+		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 2 * SCALED_SIZE, y}, s))
 			game->editor.item = ITEM_DOOR;
-		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 3 * SCALED_SIZE, y}, (t_vec2i){64, 64}))
+		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 3 * SCALED_SIZE, y}, s))
 			game->editor.item = ITEM_COLLECT;
-		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 4 * SCALED_SIZE, y}, (t_vec2i){64, 64}))
+		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 4 * SCALED_SIZE, y}, s))
 			game->editor.item = ITEM_PLAYER;
-		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 5 * SCALED_SIZE, y}, (t_vec2i){64, 64}))
+		if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 5 * SCALED_SIZE, y}, s))
 			game->editor.item = ITEM_ENEMY;
 	}
 	else

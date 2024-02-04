@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 14:57:04 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:58:11 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	player_update(t_game *game, t_entity *entity)
 	if (entity->health <= 0)
 	{
 		game->menu_opened = true;
+		map_reload(game, game->map);
 		return ;
 	}
 	if (game->keys[' '] && !_is_attacking(ext))

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:14:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 15:07:20 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/04 22:08:51 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,6 @@ void	map_reload(t_game *game, t_map *map)
 	// Entities must also be free'd alongside their extension.
 	vector_free(game->entities);
 	game->entities = vector_new(sizeof(void *), 0);
+	game->player = NULL;
 	map->data = _parse_map(map->string, map->width, map->height, game);
 }
