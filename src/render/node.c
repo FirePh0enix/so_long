@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:48:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 18:03:30 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:59:30 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	_calc_order_with_depth_testing(t_vec2 pos, int order)
 
 void	rdr_add_sprite(
 	t_renderer *rdr,
-	t_sprite *sp,
+	t_img *sp,
 	t_vec2 pos,
 	t_add_sprite param)
 {

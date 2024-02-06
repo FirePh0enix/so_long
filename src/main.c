@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 21:56:22 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:00:10 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 #include <sys/time.h>
 #include "render/render.h"
 
-static t_sprite	**_load_frames(t_game *game, char *name, int size)
+static t_img	**_load_frames(t_game *game, char *name, int size)
 {
 	char		buf[128];
 	int			i;
-	t_sprite	**sprites;
+	t_img	**sprites;
 
 	i = 0;
-	sprites = malloc(sizeof(t_sprite) * size);
+	sprites = malloc(sizeof(t_img) * size);
 	while (i < size)
 	{
 		sprintf(buf, name, i);

@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/04 17:50:59 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/05 15:18:25 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,10 @@ TEXTURES = \
 NAME = so_long
 
 CC = clang
-CFLAGS = -Wall -Wextra -Imlx -Ilibft -MMD -g3 -fPIC -O2 -fno-builtin # -Werror
+CFLAGS += -Wall -Wextra -Imlx -Ilibft -MMD -g3 -fPIC -O2 -fno-builtin # -Werror
 LDFLAGS = -lm -lX11 -lXext
 
 OBJECTS = $(SOURCES:.c=.o)
-TEXTURES_XPM = $(TEXTURES:.png=.xpm)
 
 all: $(NAME)
 
@@ -58,6 +57,9 @@ libft/libft.a:
 
 $(NAME): mlx/libmlx.a libft/libft.a textures/gen $(TEXTURES_XPM) $(OBJECTS)
 	$(CC) -o $(NAME) $(OBJECTS) mlx/libmlx.a libft/libft.a $(LDFLAGS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 -include $(OBJECTS:.o=.d)
 
@@ -73,3 +75,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:18:04 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 00:55:28 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:24:54 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,8 @@ t_vec2i	*astar_search(t_map *map, t_vec2i start, t_vec2i end)
 	t_anode	*start_node;
 	t_anode	*end_node;
 	t_anode	*current_node;
-
 	t_anode	**open_list;
 	t_anode	**close_list;
-
 	int		current_index;
 
 	start_node = _new_node(NULL, start);
@@ -96,7 +94,6 @@ t_vec2i	*astar_search(t_map *map, t_vec2i start, t_vec2i end)
 			j++;
 		}
 
-		//free(open_list[current_index]);
 		vector_remove((void *)&open_list, current_index);
 		vector_add((void *)&close_list, &current_node);
 

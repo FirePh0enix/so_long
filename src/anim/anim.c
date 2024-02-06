@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:18:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/01 16:28:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:53:21 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../so_long.h"
 #include <sys/select.h>
 
-t_anim	*anim_new(t_sprite **sprites, size_t size, int interval, bool loop)
+t_anim	*anim_new(t_img **sprites, size_t size, int interval, bool loop)
 {
 	t_anim	*anim;
 
@@ -42,7 +42,7 @@ void	anim_update(t_anim *anim)
 		anim->current_frame++;
 }
 
-t_sprite	*anim_get_sprite(t_anim *anim)
+t_img	*anim_get_sprite(t_anim *anim)
 {
 	return (anim->sprites[anim->current_frame]);
 }

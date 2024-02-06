@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 13:24:53 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:27:51 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_knight
 	suseconds_t	last_attacked;
 }	t_knight;
 
+static void	knight_free(t_entity *entity);
+
 t_entity	*knight_new(t_game *game, t_vec2 pos)
 {
 	t_entity	*enemy;
@@ -62,12 +64,27 @@ t_entity	*knight_new(t_game *game, t_vec2 pos)
 	ext->current_anim = ext->idle;
 	ext->state = STATE_IDLE;
 	ext->action_end = getms() + 1100;
+	ext->path = 0;
 	enemy->sprite = game->warrior_idle[0];
 	enemy->sprite_offset = (t_vec2){-64, -64};
 	enemy->box = (t_box){{0, 0}, {64 * SCALE, 64 * SCALE}};
 	enemy->update = knight_update;
+	enemy->free = knight_free;
 	enemy->z_index = 100;
 	return (enemy);
+}
+
+static void	knight_free(t_entity *entity)
+{
+	t_knight	*ext;
+
+	ext = entity->extension;
+	free(ext->idle);
+	free(ext->walk);
+	free(ext->atk_side);
+	if (ext->path)
+		vector_free(ext->path);
+	free(entity->extension);
 }
 
 /*
@@ -88,6 +105,15 @@ static t_vec2i	_find_random_pos(t_map *map)
 	return (t_vec2i){};
 }
 
+static void	_invalidate_path(t_knight *ext)
+{
+	if (!ext->path)
+	{
+		vector_free(ext->path);
+		ext->path = NULL;
+	}
+}
+
 static void	_pick_action(t_entity *entity, t_knight *ext, t_map *map)
 {
 	const t_entity	*player = entity->game->player;
@@ -99,6 +125,7 @@ static void	_pick_action(t_entity *entity, t_knight *ext, t_map *map)
 	}
 	else if (vec2_length(vec2_sub(entity->pos, player->pos)) < 3.5 * TILE_SIZE)
 	{
+		_invalidate_path(ext);
 		ext->path = astar_search(map, (t_vec2i){entity->pos.x / 64, entity->pos.y / 64},
 			(t_vec2i){player->pos.x / 64, player->pos.y / 64});
 		if (!ext->path)
@@ -112,6 +139,7 @@ static void	_pick_action(t_entity *entity, t_knight *ext, t_map *map)
 	}
 	else if (ext->state == STATE_IDLE && getms() >= ext->action_end)
 	{
+		_invalidate_path(ext);
 		ext->path = astar_search(map, (t_vec2i){entity->pos.x / 64, entity->pos.y / 64},
 			_find_random_pos(map));
 		if (!ext->path)
@@ -125,7 +153,7 @@ static void	_pick_action(t_entity *entity, t_knight *ext, t_map *map)
 	{
 		ext->state = STATE_IDLE;
 		ext->action_end = getms() + 700;
-		ext->path = NULL;
+		_invalidate_path(ext);
 	}
 }
 
@@ -182,5 +210,5 @@ void	knight_update(t_game *game, t_entity *entity)
 	}
 	entity->sprite = anim_get_sprite(ext->current_anim);
 	anim_update(ext->current_anim);
-	//_draw_debug_path(game, ext);
+	_draw_debug_path(game, ext);
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 18:00:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:54:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,7 @@ typedef struct s_map			t_map;
 typedef struct s_anim			t_anim;
 typedef struct s_renderer		t_renderer;
 
-typedef struct s_sprite
-{
-	t_img	*img;
-	int		width;
-	int		height;
-}	t_sprite;
-
-t_sprite	*sprite(t_game *game, char *filename);
+t_img		*sprite(t_game *game, char *filename);
 
 // ----------------------------------------------
 // EDIT MODE
@@ -75,61 +68,61 @@ typedef struct s_game
 
 	t_anim			*foam_anim;
 
-	t_sprite		*solid;
-	t_sprite		*gem;
-	t_sprite		*door;
+	t_img		*solid;
+	t_img		*gem;
+	t_img		*door;
 
-	t_sprite		**goblin_walk;
-	t_sprite		**goblin_idle;
-	t_sprite		**goblin_atk_side;
+	t_img		**goblin_walk;
+	t_img		**goblin_idle;
+	t_img		**goblin_atk_side;
 
-	t_sprite		**warrior_walk;
-	t_sprite		**warrior_idle;
-	t_sprite		**warrior_atk_side;
+	t_img		**warrior_walk;
+	t_img		**warrior_idle;
+	t_img		**warrior_atk_side;
 
-	t_sprite		*ground_mid;
-	t_sprite		*ground_top;
-	t_sprite		*ground_topleft;
-	t_sprite		*ground_topright;
-	t_sprite		*ground_left;
-	t_sprite		*ground_right;
-	t_sprite		*ground_bot;
-	t_sprite		*ground_botleft;
-	t_sprite		*ground_botright;
-	t_sprite		*ground_toplr;
-	t_sprite		*ground_lr;
-	t_sprite		*ground_botlr;
-	t_sprite		*ground_leftbt;
-	t_sprite		*ground_bt;
-	t_sprite		*ground_rightbt;
-	t_sprite		*ground_all;
+	t_img		*ground_mid;
+	t_img		*ground_top;
+	t_img		*ground_topleft;
+	t_img		*ground_topright;
+	t_img		*ground_left;
+	t_img		*ground_right;
+	t_img		*ground_bot;
+	t_img		*ground_botleft;
+	t_img		*ground_botright;
+	t_img		*ground_toplr;
+	t_img		*ground_lr;
+	t_img		*ground_botlr;
+	t_img		*ground_leftbt;
+	t_img		*ground_bt;
+	t_img		*ground_rightbt;
+	t_img		*ground_all;
 
-	t_sprite		**foam;
+	t_img		**foam;
 
-	t_sprite		**money_spawn;
+	t_img		**money_spawn;
 
-	t_sprite		*btn_left;
-	t_sprite		*btn_mid;
-	t_sprite		*btn_right;
-	t_sprite		*btn_left2;
-	t_sprite		*btn_mid2;
-	t_sprite		*btn_right2;
-	t_sprite		*hl_tl;
-	t_sprite		*hl_tr;
-	t_sprite		*hl_bl;
-	t_sprite		*hl_br;
+	t_img		*btn_left;
+	t_img		*btn_mid;
+	t_img		*btn_right;
+	t_img		*btn_left2;
+	t_img		*btn_mid2;
+	t_img		*btn_right2;
+	t_img		*hl_tl;
+	t_img		*hl_tr;
+	t_img		*hl_bl;
+	t_img		*hl_br;
 
-	t_sprite		*bnr_topleft;
-	t_sprite		*bnr_top;
-	t_sprite		*bnr_topright;
-	t_sprite		*bnr_left;
-	t_sprite		*bnr_mid;
-	t_sprite		*bnr_right;
-	t_sprite		*bnr_botleft;
-	t_sprite		*bnr_bot;
-	t_sprite		*bnr_botright;
+	t_img		*bnr_topleft;
+	t_img		*bnr_top;
+	t_img		*bnr_topright;
+	t_img		*bnr_left;
+	t_img		*bnr_mid;
+	t_img		*bnr_right;
+	t_img		*bnr_botleft;
+	t_img		*bnr_bot;
+	t_img		*bnr_botright;
 
-	t_sprite		*plus;
+	t_img		*plus;
 }	t_game;
 
 # define UPDATE_INTERVAL 16
@@ -178,8 +171,8 @@ void		map_render(t_map *map, t_game *game, t_renderer *rdr);
 void		map_save(t_map *map, t_game *game, char *filename);
 void		map_reload(t_game *game, t_map *map);
 
-t_sprite	*get_ground_tile(t_game *game, t_map *map, int x, int y);
-t_sprite	*get_undertile(t_game *game, t_map *map, int x, int y);
+t_img		*get_ground_tile(t_game *game, t_map *map, int x, int y);
+t_img		*get_undertile(t_game *game, t_map *map, int x, int y);
 
 int			line_width_and_check(char *str);
 int			line_count(char *str);

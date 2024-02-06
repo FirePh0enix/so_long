@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 17:25:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:58:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../math/vec2.h"
 # include <stdbool.h>
+# include "mlx_int.h"
 
-typedef struct s_sprite	t_sprite;
 typedef struct s_game	t_game;
 
 typedef enum
@@ -33,7 +33,7 @@ typedef struct s_node
 	{
 		struct s_node_sprite
 		{
-			t_sprite	*ptr;
+			t_img		*ptr;
 			t_vec2		pos;
 			bool		flipped;
 		}	sprite;
@@ -59,7 +59,7 @@ typedef struct s_add_sprite
 /*
  * Create a new node representing a sprite.
  */
-void	rdr_add_sprite(t_renderer *rdr, t_sprite *sp, t_vec2 pos, t_add_sprite);
+void	rdr_add_sprite(t_renderer *rdr, t_img *sp, t_vec2 pos, t_add_sprite);
 
 typedef struct	s_draw
 {
@@ -67,7 +67,7 @@ typedef struct	s_draw
 	bool	flipped;
 }	t_draw;
 
-void	rdr_draw_sprite(t_game *game, t_sprite *sp, t_vec2 pos, t_draw draw);
+void	rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw);
 void	rdr_clear_screan(t_game *game, unsigned int color);
 
 #endif

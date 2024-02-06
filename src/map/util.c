@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 19:20:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:11:47 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void	map_free(t_map *map)
 {
 	free(map->data);
+	free(map->string);
 	free(map);
 }
 

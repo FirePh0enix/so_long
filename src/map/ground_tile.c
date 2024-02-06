@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:50:48 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/03 12:23:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:57:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	isg(t_map *map, int x, int y)
 	return (map->data[x + y * map->width] == TILE_EMPTY);
 }
 
-t_sprite	*get_ground_tile(t_game *game, t_map *map, int x, int y)
+t_img	*get_ground_tile(t_game *game, t_map *map, int x, int y)
 {
 	if (isg(map, x - 1, y) && isg(map, x + 1, y) && isg(map, x, y - 1) && isg(map, x, y + 1))
 		return (game->ground_mid);
