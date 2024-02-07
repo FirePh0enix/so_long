@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:48:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:59:30 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:44:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	_add_node(t_renderer *rdr, t_node *node)
 static int	_calc_order_with_depth_testing(t_vec2 pos, int order)
 {
 	if (order > 0)
-		return (order + 1000 + pos.y / 64 * 1000);
+		return (order * 1000 + pos.y / 64 * 10);
 	return (order);
 }
 
@@ -56,5 +56,24 @@ void	rdr_add_sprite(
 	node->sprite.ptr = sp;
 	node->sprite.pos = pos;
 	node->sprite.flipped = param.flipped;
+	_add_node(rdr, node);
+}
+
+void	rdr_add_text(
+	t_renderer *rdr,
+	char *str,
+	t_vec2 pos,
+	t_add_text param)
+{
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	node->type = NODE_TEXT;
+	node->next = NULL;
+	node->order = _calc_order_with_depth_testing(pos, param.order);
+	node->text.str = str;
+	node->text.pos = pos;
+	node->text.color = param.color;
+	node->text.font = param.font;
 	_add_node(rdr, node);
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:54:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:56:37 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_entity			t_entity;
 typedef struct s_map			t_map;
 typedef struct s_anim			t_anim;
 typedef struct s_renderer		t_renderer;
+typedef struct s_font			t_font;
 
 t_img		*sprite(t_game *game, char *filename);
 
@@ -45,28 +46,30 @@ int			edit_mouse_hook(unsigned int button, int x, int y, t_game *game);
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
-	bool			*keys;
-	t_img			*canvas;
-	t_entity		**entities;
-	long			last_update;
-	t_renderer		*rdr;
-	t_entity		*player;
-	t_map			*map;
-	char			*filename;
+	void		*mlx;
+	void		*win;
+	bool		*keys;
+	t_img		*canvas;
+	t_entity	**entities;
+	long		last_update;
+	t_renderer	*rdr;
+	t_entity	*player;
+	t_map		*map;
+	char		*filename;
 
-	t_gamemenu		*menu;
-	bool			menu_opened;
+	t_gamemenu	*menu;
+	bool		menu_opened;
 
-	t_editor		editor;
-	bool			editor_mode;
+	t_editor	editor;
+	bool		editor_mode;
 
-	t_vec2			start_pos;
-	int				collectibles_count;
-	int				collectibles;
+	t_vec2		start_pos;
+	int			collectibles_count;
+	int			collectibles;
 
-	t_anim			*foam_anim;
+	t_font		*font;
+
+	t_anim		*foam_anim;
 
 	t_img		*solid;
 	t_img		*gem;

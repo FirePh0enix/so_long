@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:32:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 17:24:33 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:20:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_btn
 	int		x;
 	int		y;
 	int		size;
+	char	*label;
 	t_click	click;
 }	t_btn;
 

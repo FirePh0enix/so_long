@@ -127,3 +127,6 @@ new-tile $BNR "Bnr_Bot" 1 2 $TILE_SIZE
 new-tile $BNR "Bnr_BotRight" 2 2 $TILE_SIZE
 
 new-tile "textures/UI/Icons/Regular_08.png" "Plus" 0 0 $TILE_SIZE
+
+# Font loading
+mkdir -p textures/gen/font

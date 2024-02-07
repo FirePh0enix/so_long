@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:58:20 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:25:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,39 @@
 
 typedef struct s_game	t_game;
 
+typedef struct s_font
+{
+	t_img	*chars[256];
+}	t_font;
+
+t_font	*font_load(t_game *game, char *path);
+
 typedef enum
 {
 	NODE_SPRITE,
+	NODE_TEXT,
 }	t_node_type;
 
 typedef struct s_node
 {
-	t_node_type		type;
-	struct s_node	*next;
-	int				order;
+	t_node_type				type;
+	struct s_node			*next;
+	int						order;
 	union
 	{
 		struct s_node_sprite
 		{
-			t_img		*ptr;
-			t_vec2		pos;
-			bool		flipped;
+			t_img			*ptr;
+			t_vec2			pos;
+			bool			flipped;
 		}	sprite;
+		struct s_node_text
+		{
+			t_font			*font;
+			char			*str;
+			t_vec2			pos;
+			unsigned int	color;
+		}	text;
 	};
 }	t_node;
 
@@ -61,13 +76,30 @@ typedef struct s_add_sprite
  */
 void	rdr_add_sprite(t_renderer *rdr, t_img *sp, t_vec2 pos, t_add_sprite);
 
-typedef struct	s_draw
+typedef struct s_add_text
+{
+	int				order;
+	t_font			*font;
+	unsigned int	color;
+}	t_add_text;
+
+void	rdr_add_text(t_renderer *rdr, char *str, t_vec2 pos, t_add_text);
+
+typedef struct s_draw
 {
 	int		scale;
 	bool	flipped;
 }	t_draw;
 
+typedef struct s_draw_text
+{
+	t_font			*font;
+	unsigned int	color;
+}	t_draw_text;
+
 void	rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw);
-void	rdr_clear_screan(t_game *game, unsigned int color);
+void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw);
+void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw);
+void	rdr_clear_screen(t_game *game, unsigned int color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 11:00:10 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:52:08 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	_setup_game(t_game *game)
 	game->entities = vector_new(sizeof(t_entity *), 0);
 	game->rdr = rdr_new();
 	edit_init(&game->editor);
+	game->font = font_load(game, "textures/gen/font");
 	game->solid = sprite(game, "textures/gen/Water.xpm");
 	game->gem = sprite(game, "textures/gen/Mid.xpm");
 	game->door = sprite(game, "textures/gen/Water.xpm");

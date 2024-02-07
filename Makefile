@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/05 15:18:25 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/07 14:11:57 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,8 @@ SOURCES = \
 	src/data/vector.c \
 	src/render/renderer.c \
 	src/render/draw_sprite.c \
-	src/render/node.c
-
-TEXTURES = \
+	src/render/node.c \
+	src/render/text.c
 
 NAME = so_long
 
