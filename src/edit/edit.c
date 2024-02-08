@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 13:56:49 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 00:03:25 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 static void	_edit_save(t_game *game)
 {
+	game->map = map_load(game, game->filename, false);
 	map_save(game->map, game, game->filename);
 	map_reload(game, game->map);
 }
@@ -26,6 +27,7 @@ static void _edit_quit(t_game *game)
 	// TODO:
 	// map->string is not changed on saved (and should be). This means that when
 	// saving and calling map_reload, this will load the old map.
+	game->map = map_load(game, game->filename, false);
 	map_reload(game, game->map);
 	game->menu_opened = true;
 	game->editor_mode = false;
