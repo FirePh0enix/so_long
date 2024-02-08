@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:30:14 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/07 16:51:54 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:27:29 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_font	*font_load(t_game *game, char *path)
 		buf[ft_strlen(path) + 1] = i;
 		buf2 = ft_strjoin(buf, ".xpm");
 		free(buf);
-		//printf("%s\n", buf2);
 		font->chars[i] = sprite(game, buf2);
 		free(buf2);
 		i++;
@@ -59,9 +58,9 @@ static inline void	_set_pixel_color(t_img *image, int x, int y, int color)
 	*((int *)(addr + pixel_offset)) = color;
 }
 
-void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw)
+void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text d)
 {
-	const t_img		*glyph = draw.font->chars[(int)c];
+	const t_img		*glyph = d.font->chars[(int)c];
 	const int		width = glyph->width * SCALE;
 	const int		height = glyph->height * SCALE;
 	int				x;
@@ -79,9 +78,8 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw)
 				y++;
 				continue ;
 			}
-			if (_get_pixel_color(glyph, x, y) != (int)0xff000000)
-				_set_pixel_color(game->canvas, pos.x + x, pos.y + y,
-					draw.color);
+			if (_get_pixel_color(glyph, x, y) != (int)0xFF000000)
+				_set_pixel_color(game->canvas, pos.x + x, pos.y + y, d.color);
 			// TODO: Gradient
 			y++;
 		}
@@ -91,7 +89,7 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw)
 
 void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw)
 {
-	const int	OFFSET = 26;
+	const int	OFFSET = draw.font->chars[(int)'A']->width;
 	int			i;
 
 	i = 0;

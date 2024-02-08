@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/07 14:52:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:25:29 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	_setup_game(t_game *game)
 	game->entities = vector_new(sizeof(t_entity *), 0);
 	game->rdr = rdr_new();
 	edit_init(&game->editor);
-	game->font = font_load(game, "textures/gen/font");
+	game->font = font_load(game, "textures/gen/regular");
+	game->font = font_load(game, "textures/gen/small");
 	game->solid = sprite(game, "textures/gen/Water.xpm");
 	game->gem = sprite(game, "textures/gen/Mid.xpm");
 	game->door = sprite(game, "textures/gen/Water.xpm");
@@ -99,6 +100,40 @@ static void	_setup_game(t_game *game)
 	game->bnr_botleft = sprite(game, "textures/gen/Bnr_BotLeft.xpm");
 	game->bnr_bot = sprite(game, "textures/gen/Bnr_Bot.xpm");
 	game->bnr_botright = sprite(game, "textures/gen/Bnr_BotRight.xpm");
+
+	game->bnrv_topleft = sprite(game, "textures/gen/Bnrv_TopLeft.xpm");
+	game->bnrv_top = sprite(game, "textures/gen/Bnrv_Top.xpm");
+	game->bnrv_topright = sprite(game, "textures/gen/Bnrv_TopRight.xpm");
+	game->bnrv_left = sprite(game, "textures/gen/Bnrv_Left.xpm");
+	game->bnrv_mid = sprite(game, "textures/gen/Bnrv_Mid.xpm");
+	game->bnrv_right = sprite(game, "textures/gen/Bnrv_Right.xpm");
+	game->bnrv_botleft = sprite(game, "textures/gen/Bnrv_BotLeft.xpm");
+	game->bnrv_bot = sprite(game, "textures/gen/Bnrv_Bot.xpm");
+	game->bnrv_botright = sprite(game, "textures/gen/Bnrv_BotRight.xpm");
+
+	game->bnrcl_topleft = sprite(game, "textures/gen/Bnrcl_TopLeft.xpm");
+	game->bnrcl_top = sprite(game, "textures/gen/Bnrcl_Top.xpm");
+	game->bnrcl_topright = sprite(game, "textures/gen/Bnrcl_TopRight.xpm");
+	game->bnrcl_left = sprite(game, "textures/gen/Bnrcl_Left.xpm");
+	game->bnrcl_mid = sprite(game, "textures/gen/Bnrcl_Mid.xpm");
+	game->bnrcl_right = sprite(game, "textures/gen/Bnrcl_Right.xpm");
+	game->bnrcl_botleft = sprite(game, "textures/gen/Bnrcl_BotLeft.xpm");
+	game->bnrcl_bot = sprite(game, "textures/gen/Bnrcl_Bot.xpm");
+	game->bnrcl_botright = sprite(game, "textures/gen/Bnrcl_BotRight.xpm");
+	
+	game->bnrcr_topleft = sprite(game, "textures/gen/Bnrcr_TopLeft.xpm");
+	game->bnrcr_top = sprite(game, "textures/gen/Bnrcr_Top.xpm");
+	game->bnrcr_topright = sprite(game, "textures/gen/Bnrcr_TopRight.xpm");
+	game->bnrcr_left = sprite(game, "textures/gen/Bnrcr_Left.xpm");
+	game->bnrcr_mid = sprite(game, "textures/gen/Bnrcr_Mid.xpm");
+	game->bnrcr_right = sprite(game, "textures/gen/Bnrcr_Right.xpm");
+	game->bnrcr_botleft = sprite(game, "textures/gen/Bnrcr_BotLeft.xpm");
+	game->bnrcr_bot = sprite(game, "textures/gen/Bnrcr_Bot.xpm");
+	game->bnrcr_botright = sprite(game, "textures/gen/Bnrcr_BotRight.xpm");
+
+	game->rbn_left = sprite(game, "textures/gen/Rbn_Left.xpm");
+	game->rbn_mid = sprite(game, "textures/gen/Rbn_Mid.xpm");
+	game->rbn_right = sprite(game, "textures/gen/Rbn_Right.xpm");
 
 	game->plus = sprite(game, "textures/gen/Plus.xpm");
 }

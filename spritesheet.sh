@@ -126,7 +126,63 @@ new-tile $BNR "Bnr_BotLeft" 0 2 $TILE_SIZE
 new-tile $BNR "Bnr_Bot" 1 2 $TILE_SIZE
 new-tile $BNR "Bnr_BotRight" 2 2 $TILE_SIZE
 
+BNRV="textures/UI/Banners/Banner_Vertical.png"
+new-tile $BNRV "Bnrv_TopLeft" 0 0 $TILE_SIZE
+new-tile $BNRV "Bnrv_Top" 1 0 $TILE_SIZE
+new-tile $BNRV "Bnrv_TopRight" 2 0 $TILE_SIZE
+new-tile $BNRV "Bnrv_Left" 0 1 $TILE_SIZE
+new-tile $BNRV "Bnrv_Mid" 1 1 $TILE_SIZE
+new-tile $BNRV "Bnrv_Right" 2 1 $TILE_SIZE 
+new-tile $BNRV "Bnrv_BotLeft" 0 2 $TILE_SIZE
+new-tile $BNRV "Bnrv_Bot" 1 2 $TILE_SIZE
+new-tile $BNRV "Bnrv_BotRight" 2 2 $TILE_SIZE
+
+BNRCL="textures/UI/Banners/Banner_Connection_Right.png"
+new-tile $BNRCL "Bnrcl_TopLeft" 0 0 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_Top" 1 0 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_TopRight" 2 0 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_Left" 0 1 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_Mid" 1 1 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_Right" 2 1 $TILE_SIZE 
+new-tile $BNRCL "Bnrcl_BotLeft" 0 2 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_Bot" 1 2 $TILE_SIZE
+new-tile $BNRCL "Bnrcl_BotRight" 2 2 $TILE_SIZE
+
+BNRCR="textures/UI/Banners/Banner_Connection_Left.png"
+new-tile $BNRCR "Bnrcr_TopLeft" 0 0 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_Top" 1 0 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_TopRight" 2 0 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_Left" 0 1 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_Mid" 1 1 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_Right" 2 1 $TILE_SIZE 
+new-tile $BNRCR "Bnrcr_BotLeft" 0 2 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_Bot" 1 2 $TILE_SIZE
+new-tile $BNRCR "Bnrcr_BotRight" 2 2 $TILE_SIZE
+
+RIBBON="textures/UI/Ribbons/Ribbon_Red_3Slides.png"
+new-tile $RIBBON "Rbn_Left" 0 0 $TILE_SIZE
+new-tile $RIBBON "Rbn_Mid" 1 0 $TILE_SIZE
+new-tile $RIBBON "Rbn_Right" 2 0 $TILE_SIZE
+
 new-tile "textures/UI/Icons/Regular_08.png" "Plus" 0 0 $TILE_SIZE
 
 # Font loading
-mkdir -p textures/gen/font
+
+letter()
+{
+	FONT="Merchant Copy.ttf"
+	convert -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3/$1.xpm
+}
+
+font()
+{
+	ALPHABET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789:=<>()!?.@'
+	for letter in $(echo "$ALPHABET" | sed -e 's/\(.\)/\1\n/g'); do
+		letter $letter $2 $1
+	done
+}
+
+mkdir -p textures/gen/regular
+font "regular" 55
+mkdir -p textures/gen/small
+font "small" 35

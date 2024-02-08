@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/07 11:56:37 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:24:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_game
 	int			collectibles;
 
 	t_font		*font;
+	t_font		*small_font;
 
 	t_anim		*foam_anim;
 
@@ -125,6 +126,40 @@ typedef struct s_game
 	t_img		*bnr_bot;
 	t_img		*bnr_botright;
 
+	t_img		*bnrv_topleft; // TODO: Free from this
+	t_img		*bnrv_top;
+	t_img		*bnrv_topright;
+	t_img		*bnrv_left;
+	t_img		*bnrv_mid;
+	t_img		*bnrv_right;
+	t_img		*bnrv_botleft;
+	t_img		*bnrv_bot;
+	t_img		*bnrv_botright;
+
+	t_img		*bnrcl_topleft;
+	t_img		*bnrcl_top;
+	t_img		*bnrcl_topright;
+	t_img		*bnrcl_left;
+	t_img		*bnrcl_mid;
+	t_img		*bnrcl_right;
+	t_img		*bnrcl_botleft;
+	t_img		*bnrcl_bot;
+	t_img		*bnrcl_botright;
+
+	t_img		*bnrcr_topleft;
+	t_img		*bnrcr_top;
+	t_img		*bnrcr_topright;
+	t_img		*bnrcr_left;
+	t_img		*bnrcr_mid;
+	t_img		*bnrcr_right;
+	t_img		*bnrcr_botleft;
+	t_img		*bnrcr_bot;
+	t_img		*bnrcr_botright;
+	
+	t_img		*rbn_left;
+	t_img		*rbn_mid;
+	t_img		*rbn_right;
+
 	t_img		*plus;
 }	t_game;
 
@@ -142,6 +177,8 @@ int			key_pressed_hook(int keycode, t_game *game);
 int			key_released_hook(int keycode, t_game *game);
 int			close_hook(t_game *game);
 int			mouse_hook(unsigned int btn, int x, int y, t_game *game);
+
+void		draw_hud(t_game *game);
 
 // ----------------------------------------------
 // MAP
@@ -175,7 +212,6 @@ void		map_save(t_map *map, t_game *game, char *filename);
 void		map_reload(t_game *game, t_map *map);
 
 t_img		*get_ground_tile(t_game *game, t_map *map, int x, int y);
-t_img		*get_undertile(t_game *game, t_map *map, int x, int y);
 
 int			line_width_and_check(char *str);
 int			line_count(char *str);

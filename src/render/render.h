@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/07 13:25:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:05:08 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum
 {
 	NODE_SPRITE,
 	NODE_TEXT,
+	NODE_BLUR,
 }	t_node_type;
 
 typedef struct s_node
@@ -52,6 +53,10 @@ typedef struct s_node
 			t_vec2			pos;
 			unsigned int	color;
 		}	text;
+		struct s_node_blur
+		{
+			int	px;
+		}	blur;
 	};
 }	t_node;
 
@@ -91,6 +96,11 @@ typedef struct s_draw
 	bool	flipped;
 }	t_draw;
 
+/*
+ * Add a Gaussian blur filter to the whole screen.
+ */
+void	rdr_add_blur(t_renderer *rdr, int px, int z_index);
+
 typedef struct s_draw_text
 {
 	t_font			*font;
@@ -100,6 +110,16 @@ typedef struct s_draw_text
 void	rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw);
 void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw);
 void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw);
+void	rdr_blur_screen(t_game *game, int px);
 void	rdr_clear_screen(t_game *game, unsigned int color);
+
+/*
+ * Color manipulation
+ */
+
+unsigned char	get_red(unsigned char color);
+unsigned char	get_green(unsigned char color);
+unsigned char	get_blue(unsigned char color);
+unsigned char	get_alpha(unsigned char color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:49:57 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/07 12:51:13 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:05:55 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	rdr_draw(t_renderer *rdr, t_game *game)
 		else if (node->type == NODE_TEXT)
 			rdr_draw_text(game, node->text.str, node->text.pos,
 				(t_draw_text){node->text.font, node->text.color});
+		else if (node->type == NODE_BLUR)
+			rdr_blur_screen(game, node->blur.px);
 		node = node->next;
 	}
 }

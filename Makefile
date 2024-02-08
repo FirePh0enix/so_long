@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/07 14:11:57 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/08 16:11:27 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ SOURCES = \
 	src/hooks.c \
 	src/sprite.c \
 	src/update.c \
+	src/hud.c \
 	src/gui.c \
+	src/banner.c \
+	src/ribbon.c \
 	src/utils.c \
 	src/anim/anim.c \
 	src/edit/edit.c \
@@ -36,7 +39,9 @@ SOURCES = \
 	src/render/renderer.c \
 	src/render/draw_sprite.c \
 	src/render/node.c \
-	src/render/text.c
+	src/render/text.c \
+	src/render/pixel.c \
+	src/render/blur.c
 
 NAME = so_long
 

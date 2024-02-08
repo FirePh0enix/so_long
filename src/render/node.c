@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:48:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/07 13:44:46 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:04:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,17 @@ void	rdr_add_text(
 	node->text.pos = pos;
 	node->text.color = param.color;
 	node->text.font = param.font;
+	_add_node(rdr, node);
+}
+
+void	rdr_add_blur(t_renderer *rdr, int px, int z_index)
+{
+	t_node	*node;
+
+	node = malloc(sizeof(t_node));
+	node->type = NODE_BLUR;
+	node->next = NULL;
+	node->order = _calc_order_with_depth_testing((t_vec2){}, z_index);
+	node->blur.px = px;
 	_add_node(rdr, node);
 }

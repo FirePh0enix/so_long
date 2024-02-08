@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 22:49:14 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:56:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,17 @@ static void _edit_quit(t_game *game)
 void	edit_init(t_editor *editor)
 {
 	editor->item = ITEM_EMPTY;
-	editor->save = (t_btn){32 + 8 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, _edit_save};
-	editor->quit = (t_btn){32 + 10 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, _edit_quit};
+	editor->save = (t_btn){32 + 8 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, "Save", _edit_save};
+	editor->quit = (t_btn){32 + 10 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, "Close", _edit_quit};
 }
 
 static void	_draw_editor_background(t_game *game, t_renderer *rdr)
 {
-	const int	width = 13;
 	const int	x = 32;
 	const int	y = WIN_HEIGHT - 192;
-	int			i;
 
-	rdr_add_sprite(rdr, game->bnr_topleft, (t_vec2){x, y},
-		(t_add_sprite){900, false});
-	rdr_add_sprite(rdr, game->bnr_left, (t_vec2){x, y + 1 * SCALED_SIZE},
-		(t_add_sprite){900, false});
-	rdr_add_sprite(rdr, game->bnr_botleft, (t_vec2){x, y + 2 * SCALED_SIZE},
-		(t_add_sprite){900, false});
-	i = 1;
-	while (i < width - 1)
-	{
-		rdr_add_sprite(rdr, game->bnr_top, (t_vec2){x + i * SCALED_SIZE, y},
-			(t_add_sprite){900, false});
-		rdr_add_sprite(rdr, game->bnr_mid,
-			(t_vec2){x + i * SCALED_SIZE, y + 1 * SCALED_SIZE},
-			(t_add_sprite){900, false});
-		rdr_add_sprite(rdr, game->bnr_bot,
-			(t_vec2){x + i * SCALED_SIZE, y + 2 * SCALED_SIZE},
-			(t_add_sprite){900, false});
-		i++;
-	}
-	rdr_add_sprite(rdr, game->bnr_topright,
-		(t_vec2){x + (width - 1) * SCALED_SIZE, y},
-		(t_add_sprite){900, false});
-	rdr_add_sprite(rdr, game->bnr_right,
-			(t_vec2){x + (width - 1) * SCALED_SIZE, y + 1 * SCALED_SIZE},
-			(t_add_sprite){900, false});
-	rdr_add_sprite(rdr, game->bnr_botright,
-			(t_vec2){x + (width - 1) * SCALED_SIZE, y + 2 * SCALED_SIZE},
-			(t_add_sprite){900, false});
+	(void) rdr;
+	draw_banner_h(game, (t_vec2i){x, y}, (t_vec2i){13, 3});
 }
 
 static void	_draw_icons(t_game *game, t_renderer *rdr)
