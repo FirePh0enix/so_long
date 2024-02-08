@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:44:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 16:15:35 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:40:35 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	draw_menu(t_game *game, t_gamemenu *menu)
 	const char	*credits_me[] = {"Made by ledelbec", "@FirePh0enix on Github"};
 	const char	*credits[] = {"Credits to Pixel Frog", "on itch.io for the art"};
 
-	rdr_add_blur(game->rdr, 5, 800);
+	rdr_add_blur(game->rdr, 2, 800);
 	draw_banner_cl(game, (t_vec2i){x - 5 * SCALED_SIZE, SCALED_SIZE * 2}, (t_vec2i){6, 5});
 	_draw_text(game, (char *)credits_me[0], (t_vec2i){text_center_x(game->font, (char *)credits_me[0],
 				x - 1.5 * SCALED_SIZE, SCALED_SIZE * 2), SCALED_SIZE * 4});

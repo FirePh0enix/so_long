@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 16:05:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 22:26:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 # include "mlx_int.h"
 
 typedef struct s_game	t_game;
+
+/*
+ * Color manipulation
+ */
+
+typedef struct s_trgb
+{
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	t;
+}	t_trgb;
+
+t_trgb	get_pixel_color(t_img *img, int x, int y);
+void	set_pixel_color(t_img *img, int x, int y, t_trgb color);
 
 typedef struct s_font
 {
@@ -62,7 +77,8 @@ typedef struct s_node
 
 typedef struct s_renderer
 {
-	t_node	*root;
+	t_node			*root;
+	unsigned int	*pixels;
 }	t_renderer;
 
 t_renderer	*rdr_new();
@@ -113,13 +129,6 @@ void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw);
 void	rdr_blur_screen(t_game *game, int px);
 void	rdr_clear_screen(t_game *game, unsigned int color);
 
-/*
- * Color manipulation
- */
 
-unsigned char	get_red(unsigned char color);
-unsigned char	get_green(unsigned char color);
-unsigned char	get_blue(unsigned char color);
-unsigned char	get_alpha(unsigned char color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:49:57 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 16:05:55 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:45:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_renderer	*rdr_new()
 
 	rdr = malloc(sizeof(t_renderer));
 	rdr->root = NULL;
+	rdr->pixels = malloc(sizeof(t_trgb) * WIN_WIDTH * WIN_HEIGHT);
 	return (rdr);
 }
 

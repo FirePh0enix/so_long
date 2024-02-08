@@ -6,26 +6,18 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:09:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 11:23:52 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:24:03 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned char	get_red(unsigned int color)
+#include "render.h"
+
+t_trgb	get_pixel_color(t_img *img, int x, int y)
 {
-	return ((color >> 16) & 0xFF);
+	return (((t_trgb*)img->data)[x + y * img->width]);
 }
 
-unsigned char	get_green(unsigned int color)
+void	set_pixel_color(t_img *img, int x, int y, t_trgb color)
 {
-	return ((color >> 8) & 0xFF);
-}
-
-unsigned char	get_blue(unsigned int color)
-{
-	return (color & 0xFF);
-}
-
-unsigned char	get_alpha(unsigned int color)
-{
-	return ((color >> 24) & 0xFF);
+	((t_trgb *)img->data)[x + y  * img->width] = color;
 }
