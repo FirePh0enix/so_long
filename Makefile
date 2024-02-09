@@ -6,19 +6,23 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/08 16:11:27 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/09 16:20:02 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SOURCES = \
 	src/main.c \
 	src/game_free.c \
+	src/load_sprites.c \
 	src/hooks.c \
 	src/sprite.c \
 	src/update.c \
 	src/hud.c \
 	src/gui.c \
+	src/menu.c \
+	src/button.c \
 	src/banner.c \
+	src/banner_utils.c \
 	src/ribbon.c \
 	src/utils.c \
 	src/anim/anim.c \
@@ -33,6 +37,7 @@ SOURCES = \
 	src/entities/player.c \
 	src/entities/gem.c \
 	src/math/box.c \
+	src/math/vec2_basic.c \
 	src/math/vec2_calc.c \
 	src/math/a_star.c \
 	src/data/vector.c \

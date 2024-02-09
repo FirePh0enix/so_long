@@ -1,0 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   button.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/09 11:15:13 by ledelbec          #+#    #+#             */
+/*   Updated: 2024/02/09 11:15:34 by ledelbec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "gui.h"
+
+void	btn_update(t_game *game, t_btn *btn)
+{
+	int			mx;
+	int			my;
+
+	mlx_mouse_get_pos(game->mlx, game->win, &mx, &my);
+	_draw_button(game, btn);
+	if (mx >= btn->x && mx <= btn->x + btn->size * SCALED_SIZE
+		&& my >= btn->y && my <= btn->y + SCALED_SIZE)
+		draw_hl(game, btn->x, btn->y, btn->size);
+}
+
+void	btn_click(t_game *game, t_btn *btn, int mx, int my)
+{
+	if (mx >= btn->x && mx <= btn->x + btn->size * SCALED_SIZE
+		&& my >= btn->y && my <= btn->y + SCALED_SIZE)
+		btn->click(game);
+}

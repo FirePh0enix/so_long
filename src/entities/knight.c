@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 14:25:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:47:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,9 @@ static void	_draw_debug_path(t_game *game, t_knight *ext)
 		unsigned int	i = 0;
 		while (i < vector_size(ext->path))
 		{
-			rdr_add_sprite(game->rdr, game->plus,
-					(t_vec2){ext->path[i].x * TILE_SIZE, ext->path[i].y * TILE_SIZE},
+			rdr_add_sprite(game->rdr, sp(game)[SP_PLUS],
+					(t_vec2){ext->path[i].x * TILE_SIZE,
+						ext->path[i].y * TILE_SIZE},
 					(t_add_sprite){100, false});
 			i++;
 		}

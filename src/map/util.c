@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 11:11:47 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:50:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	map_render(t_map *map, t_game *game, t_renderer *rdr)
 		while (y < map->height)
 		{
 			if (map->data[x + y * map->width] == TILE_SOLID)
-				rdr_add_sprite(rdr, game->solid,
+				rdr_add_sprite(rdr, sp(game)[SP_WATER],
 					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, (t_add_sprite){-2, false});
 			else if (map->data[x + y * map->width] == TILE_EMPTY)
 				_add_tile_sprite(game, x, y);
 			else if (map->data[x + y * map->width] == TILE_DOOR)
-				rdr_add_sprite(rdr, game->door,
+				rdr_add_sprite(rdr, sp(game)[SP_WATER],
 					(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, (t_add_sprite){0, false});
 			y++;
 		}

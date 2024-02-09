@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:59:11 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:50:55 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	rdr_clear_screen(t_game *game, unsigned int color)
 
 	x = 0;
 	if (color == 0x0)
-		color = _get_pixel_color(game->solid, 0, 0);
+		color = _get_pixel_color(sp(game)[SP_WATER], 0, 0);
 	while (x < game->canvas->width)
 	{
 		y = 0;

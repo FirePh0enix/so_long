@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:50:48 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:57:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:45:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,34 @@ static int	isg(t_map *map, int x, int y)
 t_img	*get_ground_tile(t_game *game, t_map *map, int x, int y)
 {
 	if (isg(map, x - 1, y) && isg(map, x + 1, y) && isg(map, x, y - 1) && isg(map, x, y + 1))
-		return (game->ground_mid);
+		return (sp(game)[SP_GROUND_M]);
 	if (isg(map, x - 1, y) && isg(map, x, y + 1) && isg(map, x + 1, y))
-		return (game->ground_top);
+		return (sp(game)[SP_GROUND_T]);
 	if (isg(map, x, y - 1) && isg(map, x + 1, y) && isg(map, x, y + 1))
-		return (game->ground_left);
+		return (sp(game)[SP_GROUND_L]);
 	if (isg(map, x - 1, y) && isg(map, x, y - 1) && isg(map, x + 1, y))
-		return (game->ground_bot);
+		return (sp(game)[SP_GROUND_B]);
 	if (isg(map, x, y - 1) && isg(map, x - 1, y) && isg(map, x, y + 1))
-		return (game->ground_right);
+		return (sp(game)[SP_GROUND_R]);
 	if (isg(map, x + 1, y) && isg(map, x, y + 1))
-		return (game->ground_topleft);
+		return (sp(game)[SP_GROUND_TL]);
 	if (isg(map, x - 1, y) && isg(map, x, y + 1))
-		return (game->ground_topright);
+		return (sp(game)[SP_GROUND_TR]);
 	if (isg(map, x, y - 1) && isg(map, x + 1, y))
-		return (game->ground_botleft);
+		return (sp(game)[SP_GROUND_BL]);
 	if (isg(map, x - 1, y) && isg(map, x, y - 1))
-		return (game->ground_botright);
+		return (sp(game)[SP_GROUND_BR]);
 	if (isg(map, x - 1, y) && isg(map, x + 1, y))
-		return (game->ground_bt);
+		return (sp(game)[SP_GROUND_BT]);
 	if (isg(map, x, y - 1) && isg(map, x, y + 1))
-		return (game->ground_lr);
+		return (sp(game)[SP_GROUND_LR]);
 	if (isg(map, x - 1, y))
-		return (game->ground_rightbt);
+		return (sp(game)[SP_GROUND_RBT]);
 	if (isg(map, x + 1, y))
-		return (game->ground_leftbt);
+		return (sp(game)[SP_GROUND_LBT]);
 	if (isg(map, x, y + 1))
-		return (game->ground_toplr);
+		return (sp(game)[SP_GROUND_TLR]);
 	if (isg(map, x, y - 1))
-		return (game->ground_botlr);
-	return (game->ground_all);
+		return (sp(game)[SP_GROUND_BLR]);
+	return (sp(game)[SP_GROUND_ALL]);
 }

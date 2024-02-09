@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:19:17 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 12:13:50 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:18:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_vec2	vec2_normalized(t_vec2 v);
 
 bool	vec2_equals(t_vec2 v1, t_vec2 v2, float approx);
 
-typedef struct	s_vec2i
+typedef struct s_vec2i
 {
 	int	x;
 	int	y;

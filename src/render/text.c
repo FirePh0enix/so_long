@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:30:14 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 15:27:29 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:07:34 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text d)
 			}
 			if (_get_pixel_color(glyph, x, y) != (int)0xFF000000)
 				_set_pixel_color(game->canvas, pos.x + x, pos.y + y, d.color);
-			// TODO: Gradient
 			y++;
 		}
 		x++;
@@ -89,13 +88,13 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text d)
 
 void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw)
 {
-	const int	OFFSET = draw.font->chars[(int)'A']->width;
+	const int	offset = draw.font->chars[(int) 'A']->width;
 	int			i;
 
 	i = 0;
 	while (str[i])
 	{
-		pos.x += OFFSET;
+		pos.x += offset;
 		if (draw.font->chars[(int)str[i]])
 		{
 			rdr_draw_glyph(game, str[i], pos, draw);
