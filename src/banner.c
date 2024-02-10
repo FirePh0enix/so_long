@@ -6,28 +6,12 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:26:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 16:13:46 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/10 11:34:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "math/vec2.h"
 #include "so_long.h"
-
-struct s_images
-{
-	t_img	*topleft;
-	t_img	*top;
-	t_img	*topright;
-	t_img	*left;
-	t_img	*mid;
-	t_img	*right;
-	t_img	*botleft;
-	t_img	*bot;
-	t_img	*botright;
-	int		left_index;
-	int		mid_index;
-	int		right_index;
-};
 
 static void	_draw_banner(
 	t_game *game,

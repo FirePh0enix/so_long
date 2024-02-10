@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:03:45 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 00:54:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/10 11:36:53 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	vector_free_with(void *vec, void (*func)(void *))
 		func(*((void**)vec + i));
 		i++;
 	}
-	free(vec - sizeof(t_vec_data));
+	vector_free(vec);
 }
 
 void	vector_pop(void *vec)
