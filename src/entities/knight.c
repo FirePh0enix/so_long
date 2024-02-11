@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 15:47:18 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:21:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ static void	_draw_debug_path(t_game *game, t_knight *ext)
 			rdr_add_sprite(game->rdr, sp(game)[SP_PLUS],
 					(t_vec2){ext->path[i].x * TILE_SIZE,
 						ext->path[i].y * TILE_SIZE},
-					(t_add_sprite){100, false});
+					(t_add_sprite){100, 0, false});
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:25:32 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 16:08:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:35:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	draw_hud(t_game *game)
 	rdr_add_text(game->rdr, (void *)msg, (t_vec2){
 		text_center_x(game->font, (void *)msg, x, size * SCALED_SIZE),
 		text_center_y(game->font, (void *)msg, 0, SCALED_SIZE) - 8},
-		(t_add_text){992, game->font, 0x0});
+		(t_add_text){992000, 5, game->font, 0x0});
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:26:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 11:34:46 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:47:52 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	draw_banner_h(t_game *g, t_vec2i pos, t_vec2i size)
 {
 	const struct s_images	imgs = {sp(g)[SP_BNR_TL], sp(g)[SP_BNR_T],
 		sp(g)[SP_BNR_TR], sp(g)[SP_BNR_L], sp(g)[SP_BNR_M], sp(g)[SP_BNR_R],
-		sp(g)[SP_BNR_BL], sp(g)[SP_BNR_B], sp(g)[SP_BNR_BR], 900, 900, 900};
+		sp(g)[SP_BNR_BL], sp(g)[SP_BNR_B], sp(g)[SP_BNR_BR],
+		900000, 900000, 900000};
 
 	_draw_banner(g, pos, size, &imgs);
 }
@@ -54,7 +55,8 @@ void	draw_banner_v(t_game *g, t_vec2i pos, t_vec2i size)
 {
 	const struct s_images	imgs = {sp(g)[SP_BNRV_TL], sp(g)[SP_BNRV_T],
 		sp(g)[SP_BNRV_TR], sp(g)[SP_BNRV_L], sp(g)[SP_BNRV_M], sp(g)[SP_BNRV_R],
-		sp(g)[SP_BNRV_BL], sp(g)[SP_BNRV_B], sp(g)[SP_BNRV_BR], 900, 900, 900};
+		sp(g)[SP_BNRV_BL], sp(g)[SP_BNRV_B], sp(g)[SP_BNRV_BR],
+		900000, 900000, 900000};
 
 	_draw_banner(g, pos, size, &imgs);
 }
@@ -64,8 +66,8 @@ void	draw_banner_cl(t_game *g, t_vec2i pos, t_vec2i size)
 	const struct s_images	imgs = {sp(g)[SP_BNRCL_TL], sp(g)[SP_BNRCL_T],
 		sp(g)[SP_BNRCL_TR], sp(g)[SP_BNRCL_L], sp(g)[SP_BNRCL_M],
 		sp(g)[SP_BNRCL_R],
-		sp(g)[SP_BNRCL_BL], sp(g)[SP_BNRCL_B], sp(g)[SP_BNRCL_BR], 900, 900,
-		890};
+		sp(g)[SP_BNRCL_BL], sp(g)[SP_BNRCL_B], sp(g)[SP_BNRCL_BR],
+		900000, 900000, 890000};
 
 	_draw_banner(g, pos, size, &imgs);
 }
@@ -76,7 +78,7 @@ void	draw_banner_cr(t_game *g, t_vec2i pos, t_vec2i size)
 		sp(g)[SP_BNRCR_TR], sp(g)[SP_BNRCR_L], sp(g)[SP_BNRCR_M],
 		sp(g)[SP_BNRCR_R],
 		sp(g)[SP_BNRCR_BL], sp(g)[SP_BNRCR_B], sp(g)[SP_BNRCR_BR],
-		890, 900, 900};
+		890000, 900000, 900000};
 
 	_draw_banner(g, pos, size, &imgs);
 }

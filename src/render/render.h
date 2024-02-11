@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/08 22:26:49 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 13:30:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		rdr_draw(t_renderer *rdr, t_game *game);
 typedef struct s_add_sprite
 {
 	int		order;
+	int		level;
 	bool	flipped;
 }	t_add_sprite;
 
@@ -100,6 +101,7 @@ void	rdr_add_sprite(t_renderer *rdr, t_img *sp, t_vec2 pos, t_add_sprite);
 typedef struct s_add_text
 {
 	int				order;
+	int				level;
 	t_font			*font;
 	unsigned int	color;
 }	t_add_text;
@@ -128,7 +130,5 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw);
 void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw);
 void	rdr_blur_screen(t_game *game, int px);
 void	rdr_clear_screen(t_game *game, unsigned int color);
-
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:55:36 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/10 23:24:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_entity
 	bool		flipped;
 	int			health;
 	int			max_health;
+	int			level;
 }	t_entity;
 
 // ----------------------------------------------

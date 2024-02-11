@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:15:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 15:37:18 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:14:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ static void	_draw_button(t_game *game, t_btn *btn)
 
 	rdr_add_sprite(game->rdr, sp(game)[SP_BTN_LEFT],
 		(t_vec2){btn->x, btn->y},
-		(t_add_sprite){910, false});
+		(t_add_sprite){910000, 5, false});
 	i = -1;
 	while (++i < btn->size - 2)
 		rdr_add_sprite(game->rdr, sp(game)[SP_BTN_MID],
 			(t_vec2){btn->x + (1 + i) * SCALED_SIZE, btn->y},
-			(t_add_sprite){910, false});
+			(t_add_sprite){910000, 5, false});
 	rdr_add_sprite(game->rdr, sp(game)[SP_BTN_RIGHT],
 		(t_vec2){btn->x + (btn->size - 1) * SCALED_SIZE, btn->y},
-		(t_add_sprite){910, false});
+		(t_add_sprite){910000, 5, false});
 	rdr_add_text(game->rdr, btn->label, (t_vec2){
 		text_center_x(game->font, btn->label, btn->x, btn->size * 64),
 		text_center_y(game->font, btn->label, btn->y, 64) - 8},
-		(t_add_text){911, game->font, 0x0});
+		(t_add_text){911000, 5, game->font, 0x0});
 }
 
 void	btn_update(t_game *game, t_btn *btn)
@@ -58,11 +58,12 @@ void	draw_hl(t_game *game, int x, int y, int size)
 	const int	s = size * SCALED_SIZE;
 
 	rdr_add_sprite(game->rdr, sp(game)[SP_HL_TL],
-		(t_vec2){x - 32, y - 32}, (t_add_sprite){1100, false});
+		(t_vec2){x - 32, y - 32}, (t_add_sprite){920000, 5, false});
 	rdr_add_sprite(game->rdr, sp(game)[SP_HL_TR],
-		(t_vec2){x - 32 + s, y - 32}, (t_add_sprite){1100, false});
+		(t_vec2){x - 32 + s, y - 32}, (t_add_sprite){920000, 5, false});
 	rdr_add_sprite(game->rdr, sp(game)[SP_HL_BL],
-		(t_vec2){x - 32, y - 32 + SCALED_SIZE}, (t_add_sprite){1100, false});
+		(t_vec2){x - 32, y - 32 + SCALED_SIZE}, (t_add_sprite){920000, 5,
+		false});
 	rdr_add_sprite(game->rdr, sp(game)[SP_HL_BR],
-		(t_vec2){x - 32 + s, y - 32 + 64}, (t_add_sprite){1100, false});
+		(t_vec2){x - 32 + s, y - 32 + 64}, (t_add_sprite){920000, 5, false});
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 11:42:21 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:12:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ static void	_draw_icons(t_game *game, t_renderer *rdr)
 	const int	y = WIN_HEIGHT - 192 + 1 * SCALED_SIZE;
 
 	rdr_add_sprite(rdr, sp(game)[SP_GROUND_ALL], (t_vec2){x, y},
-		(t_add_sprite){9100, false});
+		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, sp(game)[SP_WATER], (t_vec2){x + 1 * SCALED_SIZE, y},
-		(t_add_sprite){9100, false});
+		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, sp(game)[SP_DOOR], (t_vec2){x + 2 * SCALED_SIZE, y},
-		(t_add_sprite){9100, false});
+		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, game->money_spawn[6],
 		(t_vec2){x + 3 * SCALED_SIZE - 32, y - 32},
-		(t_add_sprite){9100, false});
+		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, game->goblin_idle[0],
 		(t_vec2){x + 4 * SCALED_SIZE - 64, y - 64},
-		(t_add_sprite){9100, false});
+		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, game->warrior_idle[0],
 		(t_vec2){x + 5 * SCALED_SIZE - 64, y - 64},
-		(t_add_sprite){9100, false});
+		(t_add_sprite){9100, 5, false});
 }
 
 static void	_draw_hl(t_game *game, t_editor *editor)

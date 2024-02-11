@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 15:49:35 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:44:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct s_game			t_game;
 typedef struct s_entity			t_entity;
 typedef struct s_map			t_map;
+typedef struct s_map2			t_map2;
 typedef struct s_anim			t_anim;
 typedef struct s_renderer		t_renderer;
 typedef struct s_font			t_font;
@@ -64,6 +65,26 @@ enum
 	SP_GROUND_BT,
 	SP_GROUND_RBT,
 	SP_GROUND_ALL,
+	SP_CLIFF_TL,
+	SP_CLIFF_T,
+	SP_CLIFF_TR,
+	SP_CLIFF_L,
+	SP_CLIFF_M,
+	SP_CLIFF_R,
+	SP_CLIFF_BL,
+	SP_CLIFF_B,
+	SP_CLIFF_BR,
+	SP_CLIFF_TLR,
+	SP_CLIFF_LR,
+	SP_CLIFF_BLR,
+	SP_CLIFF_LBT,
+	SP_CLIFF_BT,
+	SP_CLIFF_RBT,
+	SP_CLIFF_ALL,
+	SP_CLIFF_SIDE_L,
+	SP_CLIFF_SIDE_M,
+	SP_CLIFF_SIDE_R,
+	SP_CLIFF_SIDE_ALL,
 	SP_BTN_LEFT,
 	SP_BTN_MID,
 	SP_BTN_RIGHT,
@@ -127,6 +148,8 @@ typedef struct s_game
 	t_map		*map;
 	char		*filename;
 
+	t_map2		*map2;
+
 	t_gamemenu	*menu;
 	bool		menu_opened;
 
@@ -189,6 +212,26 @@ typedef enum tile
 	TILE_PLAYER,
 	TILE_ENEMY
 }	t_tile;
+
+typedef struct s_level
+{
+	t_tile	*data;
+	char	*string;
+	char	*filename;
+	int		width;
+	int		height;
+}	t_level;
+
+typedef struct s_map2
+{
+	t_level	*levels;
+	int		level_count;
+	int		width;
+	int		height;
+}	t_map2;
+
+t_map2		*map2_load(t_game *game, char **filenames, int count);
+void		map2_draw(t_game *game, t_map2 *map, t_renderer *rdr);
 
 typedef struct s_map
 {

@@ -6,19 +6,18 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:44:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 11:47:06 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:18:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "so_long.h"
 #include "render/render.h"
-#include <stdlib.h>
 
 static void	_draw_text(t_game *game, char *str, t_vec2i pos)
 {
 	rdr_add_text(game->rdr, str, (t_vec2){pos.x, pos.y},
-		(t_add_text){910, game->font, 0x0});
+		(t_add_text){910000, 5, game->font, 0x0});
 }
 
 void	draw_menu(t_game *g, t_gamemenu *menu)
@@ -27,7 +26,7 @@ void	draw_menu(t_game *g, t_gamemenu *menu)
 	const char	*c_me[] = {"Made by ledelbec", "@FirePh0enix on Github"};
 	const char	*c[] = {"Credits to Pixel Frog", "on itch.io for the art"};
 
-	rdr_add_blur(g->rdr, 2, 800);
+	rdr_add_blur(g->rdr, 2, 100000);
 	draw_banner_cl(g, (t_vec2i){x - 5 * SCALED_SIZE, SCALED_SIZE * 2},
 		(t_vec2i){6, 5});
 	_draw_text(g, (char *)c_me[0], (t_vec2i){

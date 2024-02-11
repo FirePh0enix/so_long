@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:46:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 15:51:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:44:03 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,26 @@ static void	_load_sprites4(t_game *g, t_img **sp)
 	sp[SP_RBN_MID] = sprite(g, "textures/gen/Rbn_Mid.xpm");
 	sp[SP_RBN_RIGHT] = sprite(g, "textures/gen/Rbn_Right.xpm");
 	sp[SP_PLUS] = sprite(g, "textures/gen/Plus.xpm");
+	sp[SP_CLIFF_TL] = sprite(g, "textures/gen/Cliff_TopLeft.xpm");
+	sp[SP_CLIFF_T] = sprite(g, "textures/gen/Cliff_Top.xpm");
+	sp[SP_CLIFF_TR] = sprite(g, "textures/gen/Cliff_TopRight.xpm");
+	sp[SP_CLIFF_L] = sprite(g, "textures/gen/Cliff_Left.xpm");
+	sp[SP_CLIFF_M] = sprite(g, "textures/gen/Cliff_Mid.xpm");
+	sp[SP_CLIFF_R] = sprite(g, "textures/gen/Cliff_Right.xpm");
+	sp[SP_CLIFF_BL] = sprite(g, "textures/gen/Cliff_BotLeft.xpm");
+	sp[SP_CLIFF_B] = sprite(g, "textures/gen/Cliff_Bot.xpm");
+	sp[SP_CLIFF_BR] = sprite(g, "textures/gen/Cliff_BotRight.xpm");
+	sp[SP_CLIFF_TLR] = sprite(g, "textures/gen/Cliff_TopLR.xpm");
+	sp[SP_CLIFF_LR] = sprite(g, "textures/gen/Cliff_LR.xpm");
+	sp[SP_CLIFF_BLR] = sprite(g, "textures/gen/Cliff_BotLR.xpm");
+	sp[SP_CLIFF_LBT] = sprite(g, "textures/gen/Cliff_LeftBT.xpm");
+	sp[SP_CLIFF_BT] = sprite(g, "textures/gen/Cliff_BT.xpm");
+	sp[SP_CLIFF_RBT] = sprite(g, "textures/gen/Cliff_RightBT.xpm");
+	sp[SP_CLIFF_ALL] = sprite(g, "textures/gen/Cliff_All.xpm");
+	sp[SP_CLIFF_SIDE_L] = sprite(g, "textures/gen/Cliff_SideLeft.xpm");
+	sp[SP_CLIFF_SIDE_M] = sprite(g, "textures/gen/Cliff_SideMid.xpm");
+	sp[SP_CLIFF_SIDE_R] = sprite(g, "textures/gen/Cliff_SideRight.xpm");
+	sp[SP_CLIFF_SIDE_ALL] = sprite(g, "textures/gen/Cliff_SideAll.xpm");
 }
 
 void	load_sprites(t_game *game)

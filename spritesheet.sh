@@ -58,16 +58,42 @@ new-tile $GROUND_SHEET "Right" 2 1 $TILE_SIZE
 new-tile $GROUND_SHEET "BotLeft" 0 2 $TILE_SIZE
 new-tile $GROUND_SHEET "Bot" 1 2 $TILE_SIZE
 new-tile $GROUND_SHEET "BotRight" 2 2 $TILE_SIZE
-
 new-tile $GROUND_SHEET "TopLR" 3 0 $TILE_SIZE
 new-tile $GROUND_SHEET "LR" 3 1 $TILE_SIZE
 new-tile $GROUND_SHEET "BotLR" 3 2 $TILE_SIZE
-
 new-tile $GROUND_SHEET "LeftBT" 0 3 $TILE_SIZE
 new-tile $GROUND_SHEET "BT" 1 3 $TILE_SIZE
 new-tile $GROUND_SHEET "RightBT" 2 3 $TILE_SIZE
-
 new-tile $GROUND_SHEET "All" 3 3 $TILE_SIZE
+
+# Cliff tiles
+CLIFF="textures/Terrain/Ground/Tilemap_Elevation.png"
+new-tile $CLIFF "Cliff_TopLeft" 0 0 $TILE_SIZE
+new-tile $CLIFF "Cliff_Top" 1 0 $TILE_SIZE
+new-tile $CLIFF "Cliff_TopRight" 2 0 $TILE_SIZE
+new-tile $CLIFF "Cliff_Left" 0 1 $TILE_SIZE
+new-tile $CLIFF "Cliff_Mid" 1 1 $TILE_SIZE
+new-tile $CLIFF "Cliff_Right" 2 1 $TILE_SIZE
+new-tile $CLIFF "Cliff_BotLeft" 0 2 $TILE_SIZE
+new-tile $CLIFF "Cliff_Bot" 1 2 $TILE_SIZE
+new-tile $CLIFF "Cliff_BotRight" 2 2 $TILE_SIZE
+new-tile $CLIFF "Cliff_TopLR" 3 0 $TILE_SIZE
+new-tile $CLIFF "Cliff_LR" 3 1 $TILE_SIZE
+new-tile $CLIFF "Cliff_BotLR" 3 2 $TILE_SIZE
+new-tile $CLIFF "Cliff_LeftBT" 0 4 $TILE_SIZE
+new-tile $CLIFF "Cliff_BT" 1 4 $TILE_SIZE
+new-tile $CLIFF "Cliff_RightBT" 2 4 $TILE_SIZE
+new-tile $CLIFF "Cliff_All" 3 4 $TILE_SIZE
+
+new-tile $CLIFF "Cliff_SideLeft" 0 3 $TILE_SIZE
+new-tile $CLIFF "Cliff_SideMid" 1 3 $TILE_SIZE
+new-tile $CLIFF "Cliff_SideRight" 2 3 $TILE_SIZE
+new-tile $CLIFF "Cliff_SideAll" 3 3 $TILE_SIZE
+
+new-tile $CLIFF "Stair_Left" 0 6 $TILE_SIZE
+new-tile $CLIFF "Stair_Mid" 1 6 $TILE_SIZE
+new-tile $CLIFF "Stair_Right" 2 6 $TILE_SIZE
+new-tile $CLIFF "Stair_All" 3 6 $TILE_SIZE
 
 # Water tiles
 new-tile "textures/Terrain/Water/Water.png" "Water" 0 0 $TILE_SIZE

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 11:12:42 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:25:53 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	_update_entities(t_game *game, bool update)
 			entity->update(game, entity);
 		rdr_add_sprite(game->rdr, entity->sprite, vec2_add(entity->pos,
 				entity->sprite_offset),
-			(t_add_sprite){entity->z_index, entity->flipped});
+			(t_add_sprite){entity->z_index, entity->level, entity->flipped});
 		i++;
 	}
 }
@@ -67,7 +67,8 @@ int	update_hook(t_game *game)
 		return (0);
 	game->last_update = time;
 	rdr_clear_screen(game, 0x0);
-	map_render(game->map, game, game->rdr);
+	//map_render(game->map, game, game->rdr);
+	map2_draw(game, game->map2, game->rdr);
 	if (game->menu_opened)
 		draw_menu(game, game->menu);
 	else
