@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 16:39:44 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:10:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 	ext->current_anim = ext->walk;
 	player->sprite = game->goblin_idle[0];
 	player->sprite_offset = (t_vec2){-64, -64};
-	player->z_index = 150;
+	player->z_index = 15;
 	player->vel = (t_vec2){};
 	player->max_health = 5;
 	player->health = player->max_health;
@@ -69,9 +69,9 @@ static void	_move(t_game *game, t_entity *entity)
 {
 	while (entity->vel.x != 0)
 	{
-		if (!box_collide_with_map(box_for_position(
+		if (!box_collide_with_map2(box_for_position(
 					entity->box, vec2_add(entity->pos,
-						(t_vec2){entity->vel.x, 0})), game->map))
+						(t_vec2){entity->vel.x, 0})), entity->level, game->map2))
 			break ;
 		if (entity->vel.x > 0)
 			entity->vel.x--;
@@ -81,9 +81,9 @@ static void	_move(t_game *game, t_entity *entity)
 	entity->pos.x += entity->vel.x;
 	while (entity->vel.y != 0)
 	{
-		if (!box_collide_with_map(box_for_position(
+		if (!box_collide_with_map2(box_for_position(
 					entity->box, vec2_add(entity->pos,
-						(t_vec2){0, entity->vel.y})), game->map))
+						(t_vec2){0, entity->vel.y})), entity->level, game->map2))
 			break ;
 		if (entity->vel.y > 0)
 			entity->vel.y--;
@@ -121,6 +121,26 @@ static bool	_is_attacking(t_player *ext)
 					< ext->current_anim->frame_interval*/));
 }
 
+static void	_stair_collision(t_entity *entity)
+{
+	const t_map2	*map = entity->game->map2;
+	const t_vec2i	tpos = (t_vec2i){(entity->pos.x + 32) / 64,
+		(entity->pos.y + 60) / 64};
+	
+	if (map->levels[entity->level].data[tpos.x + tpos.y * map->width] ==
+			TILE_STAIR)
+	{
+		if (((int)entity->pos.y + 40) % 64 < 32)
+			entity->level++;
+	}
+	else if (entity->level > 0 && map->levels[entity->level - 1].data[tpos.x + tpos.y * map->width] ==
+			TILE_STAIR)
+	{
+		if (((int)entity->pos.y + 63) % 64 > 56)
+			entity->level--;
+	}
+}
+
 void	player_update(t_game *game, t_entity *entity)
 {
 	t_vec2		exit_pos;
@@ -130,7 +150,7 @@ void	player_update(t_game *game, t_entity *entity)
 	if (entity->health <= 0)
 	{
 		game->menu_opened = true;
-		map_reload(game, game->map);
+		//map_reload(game, game->map);
 		return ;
 	}
 	if (game->keys[' '] && !_is_attacking(ext))
@@ -161,7 +181,7 @@ void	player_update(t_game *game, t_entity *entity)
 	_move(game, entity);
 	entity->vel.x = 0;
 	entity->vel.y = 0;
-	exit_pos = _map_find_exit(game->map);
+	//exit_pos = _map_find_exit(game->map);
 	if (box_collide_with_box(box_for_position(entity->box, entity->pos),
 			box_for_position((t_box){{0, 0},
 				{16 * SCALE, 16 * SCALE}}, exit_pos))
@@ -169,5 +189,7 @@ void	player_update(t_game *game, t_entity *entity)
 	{
 		printf("YOU WIN!\n");
 	}
+	_stair_collision(entity);
+	printf("%d\n", entity->level);
 	//printf("Health %d/%d\n", entity->health, entity->max_health);
 }

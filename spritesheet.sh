@@ -90,10 +90,10 @@ new-tile $CLIFF "Cliff_SideMid" 1 3 $TILE_SIZE
 new-tile $CLIFF "Cliff_SideRight" 2 3 $TILE_SIZE
 new-tile $CLIFF "Cliff_SideAll" 3 3 $TILE_SIZE
 
-new-tile $CLIFF "Stair_Left" 0 6 $TILE_SIZE
-new-tile $CLIFF "Stair_Mid" 1 6 $TILE_SIZE
-new-tile $CLIFF "Stair_Right" 2 6 $TILE_SIZE
-new-tile $CLIFF "Stair_All" 3 6 $TILE_SIZE
+new-tile $CLIFF "Stair_Left" 0 7 $TILE_SIZE
+new-tile $CLIFF "Stair_Mid" 1 7 $TILE_SIZE
+new-tile $CLIFF "Stair_Right" 2 7 $TILE_SIZE
+new-tile $CLIFF "Stair_All" 3 7 $TILE_SIZE
 
 # Water tiles
 new-tile "textures/Terrain/Water/Water.png" "Water" 0 0 $TILE_SIZE

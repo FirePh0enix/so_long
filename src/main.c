@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 16:17:05 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:36:17 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,8 @@ static int	_normal_main(int argc, char *argv[])
 
 	(void) argc;
 	_setup_game(&game);
-	game.map = map_load(&game, argv[1], false);
 	game.map2 = map2_load(&game, argv + 1, argc - 1);
-	if (!game.map || !game.map2)
+	if (!game.map2)
 		return (ft_printf("Error\nInvalid map\n"), 1);
 	game.menu = menu_new();
 	game.menu_opened = true;

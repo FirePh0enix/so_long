@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:37:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 14:31:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:36:52 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	game_free(t_game *game)
 		i++;
 	}
 	vector_free(game->entities);
-	map_free(game->map);
+	// FIXME: map_free(game->map2);
 	free(game->menu);
 	mlx_destroy_image(game->mlx, game->canvas);
 }

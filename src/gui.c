@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:44:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/11 14:18:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:28:35 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	_draw_text(t_game *game, char *str, t_vec2i pos)
 {
 	rdr_add_text(game->rdr, str, (t_vec2){pos.x, pos.y},
-		(t_add_text){910000, 5, game->font, 0x0});
+		(t_add_text){10, 5, game->font, 0x0});
 }
 
 void	draw_menu(t_game *g, t_gamemenu *menu)

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:48:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/11 13:25:53 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:35:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	rdr_add_sprite(
 	node->type = NODE_SPRITE;
 	node->next = NULL;
 	node->order = _calc_order_with_depth_testing(pos, param.order, param.level);
+	printf("%d\n", node->order);
 	node->sprite.ptr = sp;
 	node->sprite.pos = pos;
 	node->sprite.flipped = param.flipped;

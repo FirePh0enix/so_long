@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:47:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 17:49:51 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:38:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	_place_item(int x, int y, t_item item, t_game *game)
 	const int	tile_x = x / SCALED_SIZE;
 	const int	tile_y = y / SCALED_SIZE;
 
-	if (item == ITEM_EMPTY)
+	/*if (item == ITEM_EMPTY)
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
 	else if (item == ITEM_SOLID)
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_SOLID;
@@ -44,7 +44,7 @@ static void	_place_item(int x, int y, t_item item, t_game *game)
 		game->map->data[tile_x + tile_y * game->map->width] = TILE_EMPTY;
 		add_entity(&game->entities, knight_new(game,
 				(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
-	}
+	}*/
 }
 
 static void	_resize(t_map *map, int tile_x, int tile_y)
@@ -80,7 +80,7 @@ void	edit_place(t_game *game, int btn, int x, int y)
 {
 	if (btn == 1)
 	{
-		_resize(game->map, x / SCALED_SIZE, y / SCALED_SIZE);
+		//_resize(game->map, x / SCALED_SIZE, y / SCALED_SIZE);
 		_place_item(x, y, game->editor.item, game);
 	}
 	else if (btn == 3)

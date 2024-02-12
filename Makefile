@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/10 16:24:04 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/12 16:07:47 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SOURCES = \
 	\
 	src/map2/load.c \
 	src/map2/draw.c \
+	src/map2/collision.c \
 	\
 	src/entities/knight.c \
 	src/entities/player.c \
@@ -55,7 +56,7 @@ SOURCES = \
 NAME = so_long
 
 CC = clang
-CFLAGS += -Wall -Wextra -Imlx -Ilibft -MMD -g3 -fPIC -O2 -fno-builtin # -Werror
+CFLAGS += -Wall -Wextra -Imlx -Ilibft -MMD -g3 -fPIC #-O2 -fno-builtin # -Werror
 LDFLAGS = -lm -lX11 -lXext
 
 OBJECTS = $(SOURCES:.c=.o)

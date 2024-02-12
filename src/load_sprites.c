@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:46:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 21:44:03 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:48:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ static void	_load_sprites1(t_game *g, t_img **sp)
 	sp[SP_GROUND_BT] = sprite(g, "textures/gen/BT.xpm");
 	sp[SP_GROUND_RBT] = sprite(g, "textures/gen/RightBT.xpm");
 	sp[SP_GROUND_ALL] = sprite(g, "textures/gen/All.xpm");
+	sp[SP_STAIR_LEFT] = sprite(g, "textures/gen/Stair_Left.xpm");
+	sp[SP_STAIR_MID] = sprite(g, "textures/gen/Stair_Mid.xpm");
+	sp[SP_STAIR_RIGHT] = sprite(g, "textures/gen/Stair_Right.xpm");
+	sp[SP_STAIR_ALL] = sprite(g, "textures/gen/Stair_All.xpm");
 }
 
 static void	_load_sprites2(t_game *g, t_img **sp)

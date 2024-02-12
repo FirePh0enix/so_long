@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 20:30:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:41:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static t_tile	_put_tile(t_game *game, char c, int x, int y)
 		return (TILE_EMPTY);
 	else if (c == 'E')
 		return (TILE_DOOR);
+	else if (c == 'S')
+		return (TILE_STAIR);
 	else if (c == 'C')
 	{
 		add_entity(&game->entities, gem_new(game, (t_vec2){x * 64, y * 64}));

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 21:44:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:45:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ enum
 	SP_CLIFF_SIDE_M,
 	SP_CLIFF_SIDE_R,
 	SP_CLIFF_SIDE_ALL,
+	SP_STAIR_LEFT,
+	SP_STAIR_MID,
+	SP_STAIR_RIGHT,
+	SP_STAIR_ALL,
 	SP_BTN_LEFT,
 	SP_BTN_MID,
 	SP_BTN_RIGHT,
@@ -145,7 +149,6 @@ typedef struct s_game
 	long		last_update;
 	t_renderer	*rdr;
 	t_entity	*player;
-	t_map		*map;
 	char		*filename;
 
 	t_map2		*map2;
@@ -210,6 +213,7 @@ typedef enum tile
 	TILE_DOOR,
 	TILE_COLLECT,
 	TILE_PLAYER,
+	TILE_STAIR,
 	TILE_ENEMY
 }	t_tile;
 

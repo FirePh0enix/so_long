@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 20:02:42 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 15:50:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:39:25 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void _add_tile_sprite(t_game *game, int x, int y)
 {
 	rdr_add_sprite(game->rdr, anim_get_sprite(game->foam_anim),
 		(t_vec2){x * SCALED_SIZE - 64, y * SCALED_SIZE - 64}, (t_add_sprite){-1, false});
-	rdr_add_sprite(game->rdr, get_ground_tile(game, game->map, x, y),
-		(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, (t_add_sprite){0, false});
+	//rdr_add_sprite(game->rdr, get_ground_tile(game, game->map, x, y),
+	//	(t_vec2){x * SCALED_SIZE, y * SCALED_SIZE}, (t_add_sprite){0, false});
 }
 
 void	map_render(t_map *map, t_game *game, t_renderer *rdr)

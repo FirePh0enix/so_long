@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/11 14:21:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:39:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void	knight_update(t_game *game, t_entity *entity)
 	ext = entity->extension;
 	entity->sprite = anim_get_sprite(ext->current_anim);
 	anim_update(ext->current_anim);
-	_pick_action(entity, ext, game->map);
+	//_pick_action(entity, ext, game->map);
 	if (ext->state == STATE_IDLE)
 		ext->current_anim = ext->idle;
 	else if (ext->state == STATE_ATTACKING)
