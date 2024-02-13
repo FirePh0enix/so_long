@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 13:41:46 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:39:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	_load_level(t_game *game, t_level *level, char *filename)
 	level->width = line_width_and_check(level->string);
 	level->height = line_count(level->string);
 	level->data = malloc(sizeof(t_tile) * level->width * level->height);
+	level->filename = filename;
 	x = -1;
 	while (++x < level->width)
 	{

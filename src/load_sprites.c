@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:46:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 13:48:41 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:24:55 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ static void	_load_sprites1(t_game *g, t_img **sp)
 	sp[SP_STAIR_MID] = sprite(g, "textures/gen/Stair_Mid.xpm");
 	sp[SP_STAIR_RIGHT] = sprite(g, "textures/gen/Stair_Right.xpm");
 	sp[SP_STAIR_ALL] = sprite(g, "textures/gen/Stair_All.xpm");
+	sp[SP_BTN_LEFT_P] = sprite(g, "textures/gen/Btn_Left_Press.xpm");
+	sp[SP_BTN_MID_P] = sprite(g, "textures/gen/Btn_Mid_Press.xpm");
+	sp[SP_BTN_RIGHT_P] = sprite(g, "textures/gen/Btn_Right_Press.xpm");
+	sp[SP_BTN_ALL_P] = sprite(g, "textures/gen/Btn_All_Press.xpm");
 }
 
 static void	_load_sprites2(t_game *g, t_img **sp)
 {
-	sp[SP_BTN_LEFT] = sprite(g, "textures/gen/Btn_Left.xpm");
-	sp[SP_BTN_MID] = sprite(g, "textures/gen/Btn_Mid.xpm");
-	sp[SP_BTN_RIGHT] = sprite(g, "textures/gen/Btn_Right.xpm");
 	sp[SP_HL_TL] = sprite(g, "textures/gen/hl_tl.xpm");
 	sp[SP_HL_TR] = sprite(g, "textures/gen/hl_tr.xpm");
 	sp[SP_HL_BL] = sprite(g, "textures/gen/hl_bl.xpm");
@@ -64,6 +65,9 @@ static void	_load_sprites2(t_game *g, t_img **sp)
 	sp[SP_BNRV_BL] = sprite(g, "textures/gen/Bnrv_BotLeft.xpm");
 	sp[SP_BNRV_B] = sprite(g, "textures/gen/Bnrv_Bot.xpm");
 	sp[SP_BNRV_BR] = sprite(g, "textures/gen/Bnrv_BotRight.xpm");
+	sp[SP_ONE] = sprite(g, "textures/gen/One.xpm");
+	sp[SP_TWO] = sprite(g, "textures/gen/Two.xpm");
+	sp[SP_THREE] = sprite(g, "textures/gen/Three.xpm");
 }
 
 static void	_load_sprites3(t_game *g, t_img **sp)
@@ -86,6 +90,11 @@ static void	_load_sprites3(t_game *g, t_img **sp)
 	sp[SP_BNRCR_BL] = sprite(g, "textures/gen/Bnrcr_BotLeft.xpm");
 	sp[SP_BNRCR_B] = sprite(g, "textures/gen/Bnrcr_Bot.xpm");
 	sp[SP_BNRCR_BR] = sprite(g, "textures/gen/Bnrcr_BotRight.xpm");
+	sp[SP_BTN_LEFT] = sprite(g, "textures/gen/Btn_Left.xpm");
+	sp[SP_BTN_MID] = sprite(g, "textures/gen/Btn_Mid.xpm");
+	sp[SP_BTN_RIGHT] = sprite(g, "textures/gen/Btn_Right.xpm");
+	sp[SP_BTN_ALL] = sprite(g, "textures/gen/Btn_All.xpm");
+	sp[SP_PLUS] = sprite(g, "textures/gen/Plus.xpm");
 }
 
 static void	_load_sprites4(t_game *g, t_img **sp)

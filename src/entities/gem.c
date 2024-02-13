@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 11:02:45 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:37:02 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_entity	*gem_new(t_game *game, t_vec2 pos)
 	gem->update = gem_update;
 	gem->free = gem_free;
 	gem->sprite = game->money_spawn[6];
-	gem->z_index = 1;
+	gem->z_index = 10;
 	return (gem);
 }
 

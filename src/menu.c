@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:46:20 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 11:47:30 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:13:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_gamemenu	*menu_new(void)
 	t_gamemenu	*menu;
 
 	menu = malloc(sizeof(t_gamemenu));
-	menu->play = (t_btn){x, 4 * SCALED_SIZE, btn_size, "PLAY", play_click};
-	menu->edit = (t_btn){x, 6 * SCALED_SIZE, btn_size, "EDIT", edit_click};
+	menu->play = (t_btn){x, 4 * SCALED_SIZE, btn_size, "Play", NULL, play_click};
+	menu->edit = (t_btn){x, 6 * SCALED_SIZE, btn_size, "Edit", NULL, edit_click};
 	return (menu);
 }

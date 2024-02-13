@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 13:36:17 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:14:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	_setup_game(t_game *g)
 	g->canvas = mlx_new_image(g->mlx, WIN_WIDTH, WIN_HEIGHT);
 	g->entities = vector_new(sizeof(t_entity *), 0);
 	g->rdr = rdr_new();
-	edit_init(&g->editor);
 	load_sprites(g);
+	edit_init(&g->editor, g);
 	g->font = font_load(g, "textures/gen/regular");
 	g->font = font_load(g, "textures/gen/small");
 	g->goblin_idle = _load_frames(g, "textures/gen/Goblin_Idle/%d.xpm", 6);

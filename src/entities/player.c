@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 16:10:41 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:14:15 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,5 @@ void	player_update(t_game *game, t_entity *entity)
 		printf("YOU WIN!\n");
 	}
 	_stair_collision(entity);
-	printf("%d\n", entity->level);
 	//printf("Health %d/%d\n", entity->health, entity->max_health);
 }

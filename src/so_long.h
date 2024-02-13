@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 13:45:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:33:59 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ enum
 	SP_BTN_LEFT,
 	SP_BTN_MID,
 	SP_BTN_RIGHT,
+	SP_BTN_ALL,
+	SP_BTN_LEFT_P,
+	SP_BTN_MID_P,
+	SP_BTN_RIGHT_P,
+	SP_BTN_ALL_P,
+	SP_POINTER,
 	SP_HL_TL,
 	SP_HL_TR,
 	SP_HL_BL,
@@ -136,6 +142,10 @@ enum
 	SP_RBN_MID,
 	SP_RBN_RIGHT,
 	SP_PLUS,
+	SP_LOCK,
+	SP_ONE,
+	SP_TWO,
+	SP_THREE,
 	SP_MAX,
 };
 
@@ -236,6 +246,7 @@ typedef struct s_map2
 
 t_map2		*map2_load(t_game *game, char **filenames, int count);
 void		map2_draw(t_game *game, t_map2 *map, t_renderer *rdr);
+void		map2_save(t_map2 *map, t_game *game);
 
 typedef struct s_map
 {

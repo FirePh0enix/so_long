@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:55 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 22:16:57 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:48:08 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,15 @@ typedef struct s_editor
 	t_item	item;
 	t_btn	save;
 	t_btn	quit;
+
+	t_btn	l1;
+	t_btn	l2;
+	t_btn	l3;
+
+	int		level;
 }	t_editor;
 
-void	edit_init(t_editor *editor);
+void	edit_init(t_editor *editor, t_game *g);
 void	edit_update(t_game *game);
 void	edit_click_hook(t_game *game, int x, int y, int btn);
 void	edit_place(t_game *game, int btn, int x, int y);

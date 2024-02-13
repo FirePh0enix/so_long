@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 13:37:10 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:34:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static void	_edit_save(t_game *game)
 {
-	//map_save(game->map, game, game->filename);
+	map2_save(game->map2, game);
 	//map_reload(game, game->map);
 }
 
@@ -31,20 +31,45 @@ static void _edit_quit(t_game *game)
 	game->editor_mode = false;
 }
 
-void	edit_init(t_editor *editor)
+static void	_edit_l1(t_game *game)
 {
-	editor->item = ITEM_EMPTY;
-	editor->save = (t_btn){32 + 8 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, "Save", _edit_save};
-	editor->quit = (t_btn){32 + 10 * SCALED_SIZE, WIN_HEIGHT - 192 + 1 * SCALED_SIZE, 2, "Close", _edit_quit};
+	game->editor.l1.pressed = true;
+	game->editor.l2.pressed = false;
+	game->editor.l3.pressed = false;
+	game->editor.level = 0;
 }
 
-static void	_draw_editor_background(t_game *game, t_renderer *rdr)
+static void	_edit_l2(t_game *game)
 {
-	const int	x = 32;
-	const int	y = WIN_HEIGHT - 192;
+	game->editor.l1.pressed = false;
+	game->editor.l2.pressed = true;
+	game->editor.l3.pressed = false;
+	game->editor.level = 1;
+}
 
-	(void) rdr;
-	draw_banner_h(game, (t_vec2i){x, y}, (t_vec2i){13, 3});
+static void	_edit_l3(t_game *game)
+{
+	game->editor.l1.pressed = false;
+	game->editor.l2.pressed = false;
+	game->editor.l3.pressed = true;
+	game->editor.level = 2;
+}
+
+void	edit_init(t_editor *editor, t_game *g)
+{
+	editor->item = ITEM_EMPTY;
+	editor->save = btn_new_label((t_vec2i){32 + 8 * 64,
+			WIN_HEIGHT - 192 + 1 * 64}, 2, "Save", _edit_save);
+	editor->quit = btn_new_label((t_vec2i){32 + 10 * 64,
+			WIN_HEIGHT - 192 + 1 * 64}, 2, "Close", _edit_quit);
+	editor->l1 = btn_new_img((t_vec2i){32 + 13 * 64,
+		WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_ONE], _edit_l1);
+	editor->l2 = btn_new_img((t_vec2i){32 + 14 * 64,
+		WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_TWO], _edit_l2);
+	editor->l3 = btn_new_img((t_vec2i){32 + 15 * 64,
+		WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_THREE], _edit_l3);
+	editor->l1.pressed = true;
+	editor->level = 0;
 }
 
 static void	_draw_icons(t_game *game, t_renderer *rdr)
@@ -93,11 +118,14 @@ static void	_draw_hl(t_game *game, t_editor *editor)
 
 void	edit_update(t_game *game)
 {
-	_draw_editor_background(game, game->rdr);
+	draw_banner_h(game, (t_vec2i){32, WIN_HEIGHT - 192}, (t_vec2i){17, 3});
 	_draw_icons(game, game->rdr);
 	_draw_hl(game, &game->editor);
 	btn_update(game, &game->editor.save);
 	btn_update(game, &game->editor.quit);
+	btn_update(game, &game->editor.l1);
+	btn_update(game, &game->editor.l2);
+	btn_update(game, &game->editor.l3);
 }
 
 static bool	_is_hover(t_vec2i m, t_vec2i min, t_vec2i size)
@@ -114,6 +142,9 @@ void	edit_click_hook(t_game *game, int mx, int my, int btn)
 
 	btn_click(game, &game->editor.save, mx, my);
 	btn_click(game, &game->editor.quit, mx, my);
+	btn_click(game, &game->editor.l1, mx, my);
+	btn_click(game, &game->editor.l2, mx, my);
+	btn_click(game, &game->editor.l3, mx, my);
 	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){0, y - 64},
 		(t_vec2i){WIN_WIDTH, 192}))
 	{

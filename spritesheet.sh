@@ -135,11 +135,21 @@ BTN_RED="textures/UI/Buttons/Button_Red_3Slides.png"
 new-tile $BTN_RED "Btn_Left" 0 0 $TILE_SIZE
 new-tile $BTN_RED "Btn_Mid" 1 0 $TILE_SIZE
 new-tile $BTN_RED "Btn_Right" 2 0 $TILE_SIZE
+new-tile "textures/UI/Buttons/Button_Red.png" "Btn_All" 0 0 $TILE_SIZE
+
+BTN_RED_P="textures/UI/Buttons/Button_Red_3Slides_Pressed.png"
+new-tile $BTN_RED_P "Btn_Left_Press" 0 0 $TILE_SIZE
+new-tile $BTN_RED_P "Btn_Mid_Press" 1 0 $TILE_SIZE
+new-tile $BTN_RED_P "Btn_Right_Press" 2 0 $TILE_SIZE
+new-tile "textures/UI/Buttons/Button_Red_Pressed.png" "Btn_All_Press" 0 0 $TILE_SIZE
 
 new-tile "textures/UI/Pointers/03.png" "hl_tl" 0 0 $TILE_SIZE
 new-tile "textures/UI/Pointers/04.png" "hl_tr" 0 0 $TILE_SIZE
 new-tile "textures/UI/Pointers/05.png" "hl_bl" 0 0 $TILE_SIZE
 new-tile "textures/UI/Pointers/06.png" "hl_br" 0 0 $TILE_SIZE
+
+# Cursor
+new-tile "textures/UI/Pointers/01.png" "Pointer" 0 0 $TILE_SIZE
 
 BNR="textures/UI/Banners/Banner_Horizontal.png"
 new-tile $BNR "Bnr_TopLeft" 0 0 $TILE_SIZE
@@ -191,6 +201,10 @@ new-tile $RIBBON "Rbn_Mid" 1 0 $TILE_SIZE
 new-tile $RIBBON "Rbn_Right" 2 0 $TILE_SIZE
 
 new-tile "textures/UI/Icons/Regular_08.png" "Plus" 0 0 $TILE_SIZE
+new-tile "textures/UI/Icons/Regular_04.png" "One" 0 0 $TILE_SIZE
+new-tile "textures/UI/Icons/Regular_05.png" "Two" 0 0 $TILE_SIZE
+new-tile "textures/UI/Icons/Regular_06.png" "Three" 0 0 $TILE_SIZE
+new-tile "textures/UI/Icons/Regular_10.png" "Lock" 0 0 $TILE_SIZE
 
 # Font loading
 
