@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 16:33:59 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:17:25 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,8 @@ enum
 	SP_ONE,
 	SP_TWO,
 	SP_THREE,
+	SP_GOLDMINEA,
+	SP_GOLDMINEI,
 	SP_MAX,
 };
 
@@ -172,6 +174,9 @@ typedef struct s_game
 	t_vec2		start_pos;
 	int			collectibles_count;
 	int			collectibles;
+
+	t_vec2		exit_pos;
+	int			exit_level;
 
 	t_font		*font;
 	t_font		*small_font;
@@ -247,6 +252,10 @@ typedef struct s_map2
 t_map2		*map2_load(t_game *game, char **filenames, int count);
 void		map2_draw(t_game *game, t_map2 *map, t_renderer *rdr);
 void		map2_save(t_map2 *map, t_game *game);
+void		map2_reload(t_game *game, t_map2 *map);
+
+bool		check_files(char **filenames, int count);
+bool		check_errors(t_map2 *map);
 
 typedef struct s_map
 {

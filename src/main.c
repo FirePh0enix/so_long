@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 16:14:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:12:23 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ t_img	**sp(t_game *game)
 	return (game->sprites);
 }
 
-static void	_setup_game(t_game *g)
+static int	_setup_game(t_game *g)
 {
 	ft_bzero(g, sizeof(t_game));
 	g->mlx = mlx_init();
+	if (!g->mlx)
+		return (0);
 	g->win = mlx_new_window(g->mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
+	if (!g->win)
+		return (free(g->mlx), 0);
 	g->keys = ft_calloc(0xFFFF, sizeof(bool));
 	g->canvas = mlx_new_image(g->mlx, WIN_WIDTH, WIN_HEIGHT);
 	g->entities = vector_new(sizeof(t_entity *), 0);
@@ -66,6 +70,7 @@ static void	_setup_game(t_game *g)
 	g->money_spawn = _load_frames(g, "textures/gen/Gold_Spawn/%d.xpm", 7);
 	g->foam = _load_frames(g, "textures/gen/Foam/%d.xpm", 8);
 	g->foam_anim = anim_new(g->foam, 8, 100, true);
+	return (1);
 }
 
 static int	_normal_main(int argc, char *argv[])
@@ -73,7 +78,8 @@ static int	_normal_main(int argc, char *argv[])
 	t_game	game;
 
 	(void) argc;
-	_setup_game(&game);
+	if (!_setup_game(&game))
+		return (0);
 	game.map2 = map2_load(&game, argv + 1, argc - 1);
 	if (!game.map2)
 		return (ft_printf("Error\nInvalid map\n"), 1);

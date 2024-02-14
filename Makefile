@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/13 16:34:34 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/14 11:23:29 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SOURCES = \
 	src/map2/draw.c \
 	src/map2/collision.c \
 	src/map2/save.c \
+	src/map2/check_errors.c \
 	\
 	src/entities/knight.c \
 	src/entities/player.c \

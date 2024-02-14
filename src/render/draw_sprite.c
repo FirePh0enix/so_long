@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 15:50:55 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:20:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,16 @@ static unsigned int	_get_pixel(t_img *sp, int x, int y, t_draw draw)
 
 void	rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw)
 {
-	const int		width = sp->width * draw.scale;
-	const int		height = sp->height * draw.scale;
+	int				width;
+	int				height;
 	int				x;
 	int				y;
 	unsigned int	color;
 
+	if (!sp)
+		return ;
+	width = sp->width * draw.scale;
+	height = sp->height * draw.scale;
 	x = 0;
 	while (x < width)
 	{
@@ -80,7 +84,7 @@ void	rdr_clear_screen(t_game *game, unsigned int color)
 	int	y;
 
 	x = 0;
-	if (color == 0x0)
+	if (color == 0x0 && sp(game)[SP_WATER] != NULL)
 		color = _get_pixel_color(sp(game)[SP_WATER], 0, 0);
 	while (x < game->canvas->width)
 	{

@@ -23,6 +23,20 @@ new-tile()
 	new-tile-with-name $1 $NAME $3 $4 $5
 }
 
+# $1 -> Original file
+# $2 -> Output file name
+# $3 -> Tile X
+# $4 -> Tile Y
+# $5 -> Frame width
+# $6 -> Frame height
+new-tile-wh()
+{
+	NAME="textures/gen/$2.xpm"
+	X=$(($3*$5))
+	Y=$(($4*$5))
+	convert -crop ${5}x${6}+$X+$Y "$1" $NAME
+}
+
 # Extract an full animation.
 # Frames of animations are 192x192, but the image inside is ~64x64
 # $1 -> Original file
@@ -125,6 +139,10 @@ new-anim $GOBLIN_SHEET "Goblin_Walk" 0 1 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Atk_Side" 0 2 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Atk_Down" 0 3 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Atk_Up" 0 4 6 $ENTITY_SIZE
+
+# Buildings
+new-tile-wh "textures/Resources/Gold Mine/GoldMine_Active.png" "GoldMineA" 0 0 192 128
+new-tile-wh "textures/Resources/Gold Mine/GoldMine_Inactive.png" "GoldMineI" 0 0 192 128
 
 # Props sprites
 GOLD_SPAWN="textures/Resources/Resources/G_Spawn.png"

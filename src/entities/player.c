@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 11:14:15 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:45:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,15 +126,16 @@ static void	_stair_collision(t_entity *entity)
 	const t_map2	*map = entity->game->map2;
 	const t_vec2i	tpos = (t_vec2i){(entity->pos.x + 32) / 64,
 		(entity->pos.y + 60) / 64};
-	
+
 	if (map->levels[entity->level].data[tpos.x + tpos.y * map->width] ==
-			TILE_STAIR)
+			TILE_STAIR && entity->level < map->level_count - 1)
 	{
 		if (((int)entity->pos.y + 40) % 64 < 32)
 			entity->level++;
 	}
-	else if (entity->level > 0 && map->levels[entity->level - 1].data[tpos.x + tpos.y * map->width] ==
-			TILE_STAIR)
+	else if (entity->level > 0
+		&& map->levels[entity->level - 1].data[tpos.x + tpos.y * map->width] ==
+		TILE_STAIR)
 	{
 		if (((int)entity->pos.y + 63) % 64 > 56)
 			entity->level--;
@@ -143,7 +144,6 @@ static void	_stair_collision(t_entity *entity)
 
 void	player_update(t_game *game, t_entity *entity)
 {
-	t_vec2		exit_pos;
 	t_player	*ext;
 
 	ext = entity->extension;
@@ -181,13 +181,13 @@ void	player_update(t_game *game, t_entity *entity)
 	_move(game, entity);
 	entity->vel.x = 0;
 	entity->vel.y = 0;
-	//exit_pos = _map_find_exit(game->map);
 	if (box_collide_with_box(box_for_position(entity->box, entity->pos),
 			box_for_position((t_box){{0, 0},
-				{16 * SCALE, 16 * SCALE}}, exit_pos))
+				{16 * SCALE, 16 * SCALE}}, game->exit_pos))
 		&& game->collectibles == game->collectibles_count)
 	{
-		printf("YOU WIN!\n");
+		// map_reload
+		game->menu_opened = true;
 	}
 	_stair_collision(entity);
 	//printf("Health %d/%d\n", entity->health, entity->max_health);

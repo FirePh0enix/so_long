@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:18:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 15:38:01 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:16:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,15 @@ static void	_draw_level(t_game *g, t_renderer *rdr, t_level *level, int index)
 				_draw_floor_tile(g, x, y);
 			else if (tile == TILE_STAIR)
 				rdr_add_sprite(rdr, sp(g)[SP_STAIR_ALL],
-					(t_vec2){x * 64, y * 64}, (t_add_sprite){index * 10000,
+					(t_vec2){x * 64, y * 64}, (t_add_sprite){10,
 					index, false });
 			else if (tile == TILE_EMPTY)
 				_draw_elevated_tile(g, index, x, y);
+			else if (tile == TILE_DOOR)
+				rdr_add_sprite(rdr, sp(g)[SP_GOLDMINEI],
+					(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){15,
+					index, false});
+				
 		}
 	}
 }
