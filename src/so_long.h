@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 15:17:25 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:14:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,16 +265,7 @@ typedef struct s_map
 	char	*string;
 }	t_map;
 
-t_map		*map_load(t_game *game, char *filename, bool bypass);
-void		map_free(t_map *map);
-void		map_render(t_map *map, t_game *game, t_renderer *rdr);
-void		map_save(t_map *map, t_game *game, char *filename);
-void		map_reload(t_game *game, t_map *map);
-
-t_img		*get_ground_tile(t_game *game, t_map *map, int x, int y);
-
 int			line_width_and_check(char *str);
 int			line_count(char *str);
-bool		check_borders(t_map *map);
 
 #endif

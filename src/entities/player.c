@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 13:45:26 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:15:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,26 +93,6 @@ static void	_move(t_game *game, t_entity *entity)
 	entity->pos.y += entity->vel.y;
 }
 
-static t_vec2	_map_find_exit(t_map *map)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < map->width)
-	{
-		y = 0;
-		while (y < map->height)
-		{
-			if (map->data[x + y * map->width] == TILE_DOOR)
-				return ((t_vec2){x * SCALED_SIZE, y * SCALED_SIZE});
-			y++;
-		}
-		x++;
-	}
-	return ((t_vec2){0, 0});
-}
-
 static bool	_is_attacking(t_player *ext)
 {
 	return ((ext->current_anim == ext->atk_side)
@@ -150,7 +130,7 @@ void	player_update(t_game *game, t_entity *entity)
 	if (entity->health <= 0)
 	{
 		game->menu_opened = true;
-		//map_reload(game, game->map);
+		map2_reload(game, game->map2);
 		return ;
 	}
 	if (game->keys[' '] && !_is_attacking(ext))

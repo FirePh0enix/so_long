@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:32:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 16:06:40 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:53:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_btn
 	bool	disabled;
 }	t_btn;
 
-t_btn	btn_new_label(t_vec2i pos, int size, char *label, t_click click);
-t_btn	btn_new_img(t_vec2i pos, int size, t_img *img, t_click click);
+t_btn		btn_new_label(t_vec2i pos, int size, char *label, t_click click);
+t_btn		btn_new_img(t_vec2i pos, int size, t_img *img, t_click click);
 
 typedef struct s_gamemenu
 {
