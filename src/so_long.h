@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:14:18 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:42:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "math/vec2.h"
 # include "gui.h"
 # include "edit/edit.h"
+# include "entity.h"
 
 // 720x480
 // 1440x960
@@ -257,15 +258,9 @@ void		map2_reload(t_game *game, t_map2 *map);
 bool		check_files(char **filenames, int count);
 bool		check_errors(t_map2 *map);
 
-typedef struct s_map
-{
-	t_tile	*data;
-	int		width;
-	int		height;
-	char	*string;
-}	t_map;
-
 int			line_width_and_check(char *str);
 int			line_count(char *str);
+
+t_tile		etype_to_tile(t_etype etype);
 
 #endif

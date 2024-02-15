@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:46:20 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 14:13:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:22:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ static void	edit_click(t_game *game)
 
 t_gamemenu	*menu_new(void)
 {
-	const int	btn_size = 4;
-	const int	x = 1440 / 2 - btn_size * SCALED_SIZE / 2;
+	const int	x = 1440 / 2 - 4 * SCALED_SIZE / 2;
 	t_gamemenu	*menu;
 
 	menu = malloc(sizeof(t_gamemenu));
-	menu->play = (t_btn){x, 4 * SCALED_SIZE, btn_size, "Play", NULL, play_click};
-	menu->edit = (t_btn){x, 6 * SCALED_SIZE, btn_size, "Edit", NULL, edit_click};
+	menu->play = btn_new_label((t_vec2i){x, 4 * 64}, 4, "Play", play_click);
+	menu->edit = btn_new_label((t_vec2i){x, 6 * 64}, 4, "Edit", edit_click);
 	return (menu);
 }

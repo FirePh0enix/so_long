@@ -6,13 +6,25 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:47:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 16:20:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:25:33 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "edit.h"
 #include "../so_long.h"
 #include "../entity.h"
+
+static void	_place_collectible(t_game *game, t_level *level, int x, int y)
+{
+	const int	tile_x = x / SCALED_SIZE;
+	const int	tile_y = y / SCALED_SIZE;
+
+	remove_entity(game, x, y);
+	level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
+	add_entity(&game->entities, gem_new(game,
+			(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
+	game->collectibles_count++;
+}
 
 static void	_place_item(int x, int y, t_item item, t_game *game)
 {
@@ -28,13 +40,7 @@ static void	_place_item(int x, int y, t_item item, t_game *game)
 	else if (item == ITEM_DOOR)
 		level->data[tile_x + tile_y * level->width] = TILE_DOOR;
 	else if (item == ITEM_COLLECT)
-	{
-		remove_entity(game, x, y);
-		level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
-		add_entity(&game->entities, gem_new(game,
-				(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
-		game->collectibles_count++;
-	}
+		_place_collectible(game, level, x, y);
 	else if (item == ITEM_PLAYER)
 	{
 		level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
@@ -90,5 +96,4 @@ void	edit_place(t_game *game, int btn, int x, int y)
 	{
 		remove_entity(game, x, y);
 	}
-
 }

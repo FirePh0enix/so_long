@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 14:46:24 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:45:22 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ bool	check_errors(t_map2 *map)
 	int	i;
 	int	width;
 	int	height;
+
 	if (!map || map->level_count == 0)
 		return (false);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 15:14:36 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:54:04 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ static char	*_read_to_string(char *filename)
 	int		str_size;
 	int		n;
 
+	fd = open(filename, O_RDONLY | O_DIRECTORY);
+	if (fd != -1)
+		return (close(fd), NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
@@ -117,7 +120,7 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 	map->width = map->levels[0].width;
 	map->height = map->levels[0].height;
 	if (!check_errors(map))
-		return (free(map), NULL); // Free here
+		return (free(map), NULL); // Free each level here
 	return (map);
 }
 

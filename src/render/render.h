@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/11 13:30:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:31:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ typedef struct s_trgb
 	unsigned char	t;
 }	t_trgb;
 
-t_trgb	get_pixel_color(t_img *img, int x, int y);
-void	set_pixel_color(t_img *img, int x, int y, t_trgb color);
+t_trgb		get_pixel_color(t_img *img, int x, int y);
+void		set_pixel_color(t_img *img, int x, int y, t_trgb color);
 
 typedef struct s_font
 {
 	t_img	*chars[256];
 }	t_font;
 
-t_font	*font_load(t_game *game, char *path);
+t_font		*font_load(t_game *game, char *path);
 
-typedef enum
+typedef enum e_node_type
 {
 	NODE_SPRITE,
 	NODE_TEXT,
@@ -81,7 +81,7 @@ typedef struct s_renderer
 	unsigned int	*pixels;
 }	t_renderer;
 
-t_renderer	*rdr_new();
+t_renderer	*rdr_new(void);
 void		rdr_free(t_renderer *rdr);
 void		rdr_clear(t_renderer *rdr);
 void		rdr_draw(t_renderer *rdr, t_game *game);
@@ -96,7 +96,8 @@ typedef struct s_add_sprite
 /*
  * Create a new node representing a sprite.
  */
-void	rdr_add_sprite(t_renderer *rdr, t_img *sp, t_vec2 pos, t_add_sprite);
+void		rdr_add_sprite(t_renderer *rdr, t_img *sp, t_vec2 pos,
+				t_add_sprite as);
 
 typedef struct s_add_text
 {
@@ -106,7 +107,7 @@ typedef struct s_add_text
 	unsigned int	color;
 }	t_add_text;
 
-void	rdr_add_text(t_renderer *rdr, char *str, t_vec2 pos, t_add_text);
+void		rdr_add_text(t_renderer *rdr, char *str, t_vec2 pos, t_add_text at);
 
 typedef struct s_draw
 {
@@ -117,7 +118,7 @@ typedef struct s_draw
 /*
  * Add a Gaussian blur filter to the whole screen.
  */
-void	rdr_add_blur(t_renderer *rdr, int px, int z_index);
+void		rdr_add_blur(t_renderer *rdr, int px, int z_index);
 
 typedef struct s_draw_text
 {
@@ -125,10 +126,11 @@ typedef struct s_draw_text
 	unsigned int	color;
 }	t_draw_text;
 
-void	rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw);
-void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw);
-void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw);
-void	rdr_blur_screen(t_game *game, int px);
-void	rdr_clear_screen(t_game *game, unsigned int color);
+void		rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw);
+void		rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text draw);
+void		rdr_draw_text(t_game *game, char *str, t_vec2 pos,
+				t_draw_text draw);
+void		rdr_blur_screen(t_game *game, int px);
+void		rdr_clear_screen(t_game *game, unsigned int color);
 
 #endif

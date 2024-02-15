@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 15:28:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:48:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	update_hook(t_game *game)
 		return (0);
 	game->last_update = time;
 	rdr_clear_screen(game, 0x0);
-	//map_render(game->map, game, game->rdr);
 	map2_draw(game, game->map2, game->rdr);
 	if (game->menu_opened)
 		draw_menu(game, game->menu);

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:18:04 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 11:24:54 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:45:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static bool	_contains_node(t_anode **nodes, t_anode *n)
 /*
  * https://gist.github.com/ryancollingwood/32446307e976a11a1185a5394d6657bc
  */
-t_vec2i	*astar_search(t_map *map, t_vec2i start, t_vec2i end)
+t_vec2i	*astar_search(t_level *map, t_vec2i start, t_vec2i end)
 {
 	t_anode	*start_node;
 	t_anode	*end_node;

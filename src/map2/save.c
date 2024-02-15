@@ -6,24 +6,13 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:00 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 16:51:05 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:41:51 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 #include "../entity.h"
 #include "../data/vector.h"
-
-static	t_tile	_etype_to_tile(t_etype etype)
-{
-	if (etype == ETYPE_GEM)
-		return (TILE_COLLECT);
-	else if (etype == ETYPE_PLAYER)
-		return (TILE_PLAYER);
-	else if (etype == ETYPE_ENEMY)
-		return (TILE_ENEMY);
-	return (TILE_EMPTY);
-}
 
 static void	_save_entities(t_level *level, int index, t_entity **entities)
 {
@@ -37,7 +26,7 @@ static void	_save_entities(t_level *level, int index, t_entity **entities)
 		if (entity->level == index)
 			level->data[((int)entity->pos.x / SCALED_SIZE)
 				+ ((int)entity->pos.y / SCALED_SIZE) * level->width]
-				= _etype_to_tile(entity->type);
+				= etype_to_tile(entity->type);
 		i++;
 	}
 }
@@ -76,7 +65,7 @@ static void	_write_to_string(t_level *level)
 		while (y < level->height)
 		{
 			level->string[x + y * width] = _get_tile_str(
-				level->data[x + y * level->width])[0];
+					level->data[x + y * level->width])[0];
 			y++;
 		}
 		level->string[level->width * y * level->width] = '\n';

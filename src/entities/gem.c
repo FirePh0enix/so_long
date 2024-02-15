@@ -6,12 +6,13 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 13:37:02 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:00:04 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../entity.h"
 #include "../anim/anim.h"
+#include "../so_long.h"
 #include <stdio.h>
 
 typedef struct s_money
@@ -26,12 +27,12 @@ t_entity	*gem_new(t_game *game, t_vec2 pos)
 	t_entity	*gem;
 	t_money		*ext;
 
-	gem = malloc(sizeof(t_entity));
+	gem = ft_calloc(1, sizeof(t_entity));
 	gem->game = game;
 	gem->type = ETYPE_GEM;
 	gem->state = STATE_NOT_ALIVE;
 	gem->pos = pos;
-	ext = malloc(sizeof(t_money));
+	ext = ft_calloc(1, sizeof(t_money));
 	gem->extension = ext;
 	ext->anim = anim_new(game->money_spawn, 7, 100, false);
 	gem->box = (t_box){{16, 16}, {48 * SCALE, 48 * SCALE}};
@@ -54,8 +55,8 @@ void	gem_free(t_entity *entity)
 
 void	gem_update(t_game *game, t_entity *entity)
 {
-	t_money	*money;
-	const t_box	pbox = {{0, 0},{64, 64}};
+	t_money		*money;
+	const t_box	pbox = {{0, 0}, {64, 64}};
 
 	money = entity->extension;
 	entity->sprite = anim_get_sprite(money->anim);

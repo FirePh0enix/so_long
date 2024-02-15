@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:12:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:55:19 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:27:15 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_anim
 {
-	t_img 		**sprites;
+	t_img		**sprites;
 	size_t		size;
 	size_t		current_frame;
 	suseconds_t	frame_interval;
@@ -33,4 +33,3 @@ void		anim_update(t_anim *anim);
 t_img		*anim_get_sprite(t_anim *anim);
 
 #endif
-

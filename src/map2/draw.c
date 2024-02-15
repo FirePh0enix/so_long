@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:18:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 13:16:49 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:40:45 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	isg(t_level *map, int x, int y)
 		|| map->data[x + y * map->width] == TILE_STAIR);
 }
 
-t_img	*_get_ground_tile(t_game *game, t_level *map, int x, int y)
+static t_img	*_get_ground_tile1(t_game *game, t_level *map, int x, int y)
 {
 	if (isg(map, x - 1, y) && isg(map, x + 1, y) && isg(map, x, y - 1)
 		&& isg(map, x, y + 1))
@@ -46,6 +46,16 @@ t_img	*_get_ground_tile(t_game *game, t_level *map, int x, int y)
 		return (sp(game)[SP_GROUND_BT]);
 	if (isg(map, x, y - 1) && isg(map, x, y + 1))
 		return (sp(game)[SP_GROUND_LR]);
+	return (NULL);
+}
+
+t_img	*_get_ground_tile(t_game *game, t_level *map, int x, int y)
+{
+	t_img	*img;
+
+	img = _get_ground_tile1(game, map, x, y);
+	if (img)
+		return (img);
 	if (isg(map, x - 1, y))
 		return (sp(game)[SP_GROUND_RBT]);
 	if (isg(map, x + 1, y))

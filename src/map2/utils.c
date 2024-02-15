@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:13:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:18:15 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:44:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	line_count(char *str)
 	return (count);
 }
 
-bool	check_borders(t_map *map)
+bool	check_borders(t_level *map)
 {
 	int	i;
 

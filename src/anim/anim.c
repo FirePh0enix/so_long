@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:18:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/06 10:53:21 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:26:35 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ t_img	*anim_get_sprite(t_anim *anim)
 {
 	return (anim->sprites[anim->current_frame]);
 }
-

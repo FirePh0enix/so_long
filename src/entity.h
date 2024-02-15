@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/10 23:24:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:43:52 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "math/box.h"
 # include "math/vec2.h"
-# include "so_long.h"
 
 typedef struct s_entity	t_entity;
+typedef struct s_game	t_game;
+typedef struct s_img	t_img;
+typedef struct s_anim	t_anim;
 
 typedef void			(*t_update)(t_game *, t_entity *);
 typedef void			(*t_free)(t_entity *);
@@ -60,6 +62,14 @@ typedef struct s_entity
 // PLAYER
 
 # define PLAYER_SPEED 3
+
+typedef struct s_player
+{
+	t_anim		*current_anim;
+	t_anim		*walk;
+	t_anim		*idle;
+	t_anim		*atk_side;
+}	t_player;
 
 t_entity	*player_new(t_game *game, t_vec2 pos);
 void		player_update(t_game *game, t_entity *entity);

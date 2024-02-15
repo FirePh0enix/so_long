@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:45:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 14:20:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:51:39 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static inline void	_set_pixel_color(t_img *image, int x, int y, int color)
 static unsigned int	_get_pixel(t_img *sp, int x, int y, t_draw draw)
 {
 	const int		width = sp->width * draw.scale;
+
 	if (!draw.flipped)
 		return (_get_pixel_color(sp, x / draw.scale, y / draw.scale));
 	else
@@ -57,24 +58,19 @@ void	rdr_draw_sprite(t_game *game, t_img *sp, t_vec2 pos, t_draw draw)
 		return ;
 	width = sp->width * draw.scale;
 	height = sp->height * draw.scale;
-	x = 0;
-	while (x < width)
+	x = -1;
+	while (++x < width)
 	{
-		y = 0;
-		while (y < height)
+		y = -1;
+		while (++y < height)
 		{
 			if (pos.x + x < 0 || pos.x + x >= game->canvas->width
 				|| pos.y + y < 0 || pos.y + y >= game->canvas->height)
-			{
-				y++;
 				continue ;
-			}
 			color = _get_pixel(sp, x, y, draw);
 			if (color != 0xff000000)
 				_set_pixel_color(game->canvas, pos.x + x, pos.y + y, color);
-			y++;
 		}
-		x++;
 	}
 }
 

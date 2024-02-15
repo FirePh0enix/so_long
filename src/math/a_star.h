@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:16:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/04 00:01:53 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:45:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "../so_long.h"
 
-t_vec2i	*astar_search(t_map *map, t_vec2i start, t_vec2i end);
+t_vec2i	*astar_search(t_level *map, t_vec2i start, t_vec2i end);
 
 #endif
