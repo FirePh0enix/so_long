@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:49:57 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:25:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:13:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_renderer	*rdr_new(void)
 void	rdr_free(t_renderer *rdr)
 {
 	rdr_clear(rdr);
+	free(rdr->pixels);
 	free(rdr);
 }
 

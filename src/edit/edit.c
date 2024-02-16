@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:36:33 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:24:03 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,56 +15,19 @@
 #include "../math/vec2.h"
 #include "../render/render.h"
 
-static void	_edit_save(t_game *game)
-{
-	map2_save(game->map2, game);
-	map2_reload(game, game->map2);
-}
-
-static void	_edit_quit(t_game *game)
-{
-	map2_reload(game, game->map2);
-	game->menu_opened = true;
-	game->editor_mode = false;
-}
-
-static void	_edit_l1(t_game *game)
-{
-	game->editor.l1.pressed = true;
-	game->editor.l2.pressed = false;
-	game->editor.l3.pressed = false;
-	game->editor.level = 0;
-}
-
-static void	_edit_l2(t_game *game)
-{
-	game->editor.l1.pressed = false;
-	game->editor.l2.pressed = true;
-	game->editor.l3.pressed = false;
-	game->editor.level = 1;
-}
-
-static void	_edit_l3(t_game *game)
-{
-	game->editor.l1.pressed = false;
-	game->editor.l2.pressed = false;
-	game->editor.l3.pressed = true;
-	game->editor.level = 2;
-}
-
 void	edit_init(t_editor *editor, t_game *g)
 {
 	editor->item = ITEM_EMPTY;
 	editor->save = btn_new_label((t_vec2i){32 + 8 * 64,
-			WIN_HEIGHT - 192 + 1 * 64}, 2, "Save", _edit_save);
+			WIN_HEIGHT - 192 + 1 * 64}, 2, "Save", edit_save);
 	editor->quit = btn_new_label((t_vec2i){32 + 10 * 64,
-			WIN_HEIGHT - 192 + 1 * 64}, 2, "Close", _edit_quit);
+			WIN_HEIGHT - 192 + 1 * 64}, 2, "Close", edit_quit);
 	editor->l1 = btn_new_img((t_vec2i){32 + 13 * 64,
-			WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_ONE], _edit_l1);
+			WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_ONE], edit_l1);
 	editor->l2 = btn_new_img((t_vec2i){32 + 14 * 64,
-			WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_TWO], _edit_l2);
+			WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_TWO], edit_l2);
 	editor->l3 = btn_new_img((t_vec2i){32 + 15 * 64,
-			WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_THREE], _edit_l3);
+			WIN_HEIGHT - 192 + 1 * 64}, 1, sp(g)[SP_THREE], edit_l3);
 	editor->l1.pressed = true;
 	editor->level = 0;
 }
@@ -123,46 +86,4 @@ void	edit_update(t_game *game)
 	btn_update(game, &game->editor.l1);
 	btn_update(game, &game->editor.l2);
 	btn_update(game, &game->editor.l3);
-}
-
-static bool	_is_hover(t_vec2i m, t_vec2i min, t_vec2i size)
-{
-	return (m.x >= min.x && m.x <= min.x + size.x
-		&& m.y >= min.y && m.y <= min.y + size.y);
-}
-
-static void	_select(t_game *game, int mx, int my)
-{
-	const int		x = 32 + 64;
-	const int		y = WIN_HEIGHT - 192 + 64;
-	const t_vec2i	s = (t_vec2i){64, 64};
-
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x, y}, (t_vec2i){64, 64}))
-		game->editor.item = ITEM_EMPTY;
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 1 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_SOLID;
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 2 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_DOOR;
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 3 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_COLLECT;
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 4 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_PLAYER;
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 5 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_ENEMY;
-}
-
-void	edit_click_hook(t_game *game, int mx, int my, int btn)
-{
-	const int		y = WIN_HEIGHT - 192 + 64;
-
-	btn_click(game, &game->editor.save, mx, my);
-	btn_click(game, &game->editor.quit, mx, my);
-	btn_click(game, &game->editor.l1, mx, my);
-	btn_click(game, &game->editor.l2, mx, my);
-	btn_click(game, &game->editor.l3, mx, my);
-	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){0, y - 64},
-		(t_vec2i){WIN_WIDTH, 192}))
-		_select(game, mx, my);
-	else
-		edit_place(game, btn, mx, my);
 }

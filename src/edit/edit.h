@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:55 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/13 15:48:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:21:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,11 @@ void	edit_init(t_editor *editor, t_game *g);
 void	edit_update(t_game *game);
 void	edit_click_hook(t_game *game, int x, int y, int btn);
 void	edit_place(t_game *game, int btn, int x, int y);
+
+void	edit_save(t_game *game);
+void	edit_quit(t_game *game);
+void	edit_l1(t_game *game);
+void	edit_l2(t_game *game);
+void	edit_l3(t_game *game);
 
 #endif

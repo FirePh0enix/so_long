@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:43:52 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:58:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # include "math/box.h"
 # include "math/vec2.h"
+# include <sys/select.h>
 
 typedef struct s_entity	t_entity;
 typedef struct s_game	t_game;
 typedef struct s_img	t_img;
 typedef struct s_anim	t_anim;
+typedef struct s_level	t_level;
 
 typedef void			(*t_update)(t_game *, t_entity *);
 typedef void			(*t_free)(t_entity *);
@@ -83,7 +85,34 @@ void		gem_update(t_game *game, t_entity *entity);
 // ----------------------------------------------
 // ENEMY
 
+typedef enum e_ai_state
+{
+	STATE_IDLE,
+	STATE_PATROLING,
+	STATE_CHASING,
+	STATE_ATTACKING,
+}	t_ai_state;
+
+typedef struct s_knight
+{
+	t_anim		*current_anim;
+	t_anim		*idle;
+	t_anim		*walk;
+	t_anim		*atk_side;
+
+	t_ai_state	state;
+	suseconds_t	action_end;
+
+	t_vec2i		*path;
+	int			current_path;
+	t_vec2		target_pos;
+
+	suseconds_t	last_attacked;
+}	t_knight;
+
 t_entity	*knight_new(t_game *game, t_vec2 pos);
 void		knight_update(t_game *game, t_entity *entity);
+
+void		knight_pick_action(t_entity *entity, t_knight *ext, t_level *map);
 
 #endif

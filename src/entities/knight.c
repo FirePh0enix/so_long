@@ -6,43 +6,17 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:46:11 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:47:07 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../entity.h"
 #include "../so_long.h"
 #include "../anim/anim.h"
-#include "../math/a_star.h"
 #include "../data/vector.h"
 #include "../render/render.h"
 #include <stdlib.h>
 #include <sys/select.h>
-
-typedef enum e_ai_state
-{
-	STATE_IDLE,
-	STATE_PATROLING,
-	STATE_CHASING,
-	STATE_ATTACKING,
-}	t_ai_state;
-
-typedef struct s_knight
-{
-	t_anim		*current_anim;
-	t_anim		*idle;
-	t_anim		*walk;
-	t_anim		*atk_side;
-
-	t_ai_state	state;
-	suseconds_t	action_end;
-
-	t_vec2i		*path;
-	int			current_path;
-	t_vec2		target_pos;
-
-	suseconds_t	last_attacked;
-}	t_knight;
 
 static void	knight_free(t_entity *entity);
 
@@ -87,78 +61,6 @@ static void	knight_free(t_entity *entity)
 	free(entity->extension);
 }
 
-/*
- * Find a random position in the map for the knight to go to.
- */
-static t_vec2i	_find_random_pos(t_level *map)
-{
-	int	x;
-	int	y;
-
-	while (1)
-	{
-		x = rand() % map->width;
-		y = rand() % map->height;
-		if (map->data[x + y * map->width] == TILE_EMPTY)
-			return ((t_vec2i){x, y});
-	}
-	return ((t_vec2i){});
-}
-
-static void	_invalidate_path(t_knight *ext)
-{
-	if (ext->path)
-	{
-		vector_free(ext->path);
-		ext->path = NULL;
-	}
-}
-
-static void	_pick_action(t_entity *entity, t_knight *ext, t_level *map)
-{
-	const t_entity	*player = entity->game->player;
-
-	if (vec2_length(vec2_sub(entity->pos, player->pos)) < 1.0 * TILE_SIZE)
-	{
-		ext->path = NULL;
-		ext->state = STATE_ATTACKING;
-	}
-	else if (vec2_length(vec2_sub(entity->pos, player->pos)) < 3.5 * TILE_SIZE)
-	{
-		_invalidate_path(ext);
-		ext->path = astar_search(map, (t_vec2i){entity->pos.x / 64,
-				entity->pos.y / 64},
-				(t_vec2i){player->pos.x / 64, player->pos.y / 64});
-		if (!ext->path)
-		{
-			ext->state = STATE_IDLE;
-			return ;
-		}
-		ext->target_pos = (t_vec2){ext->path[0].x * 64, ext->path[0].y * 64};
-		ext->current_path = vector_size(ext->path) - 2;
-		ext->state = STATE_CHASING;
-	}
-	else if (ext->state == STATE_IDLE && getms() >= ext->action_end)
-	{
-		_invalidate_path(ext);
-		ext->path = astar_search(map, (t_vec2i){entity->pos.x / 64,
-				entity->pos.y / 64},
-				_find_random_pos(map));
-		if (!ext->path)
-			return ;
-		ext->target_pos = (t_vec2){ext->path[0].x * 64, ext->path[0].y * 64};
-		ext->current_path = vector_size(ext->path) - 2;
-		ext->state = STATE_PATROLING;
-	}
-	else if (ext->state == STATE_PATROLING
-		&& vec2_equals(entity->pos, ext->target_pos, 16))
-	{
-		ext->state = STATE_IDLE;
-		ext->action_end = getms() + 700;
-		_invalidate_path(ext);
-	}
-}
-
 /*static void	_draw_debug_path(t_game *game, t_knight *ext)
 {
 	if (ext->path)
@@ -185,17 +87,30 @@ static void	_attack(t_knight *ext, t_entity *player)
 	}
 }
 
+static void	_patrol(t_entity *entity, t_knight *ext)
+{
+	t_vec2i	path_pos;
+	t_vec2	path_pos_abs;
+	t_vec2	dir;
+
+	path_pos = ext->path[ext->current_path];
+	path_pos_abs = (t_vec2){path_pos.x * 64, path_pos.y * 64};
+	dir = vec2_normalized(vec2_sub(path_pos_abs, entity->pos));
+	entity->flipped = dir.x < 0;
+	entity->pos = vec2_add(entity->pos, vec2_mul(dir, 2));
+	if (vec2_equals(entity->pos, path_pos_abs, 4))
+		ext->current_path--;
+	ext->current_anim = ext->walk;
+}
+
 void	knight_update(t_game *game, t_entity *entity)
 {
 	t_knight	*ext;
-	t_vec2i		path_pos;
-	t_vec2		path_pos_abs;
-	t_vec2		dir;
 
 	ext = entity->extension;
 	entity->sprite = anim_get_sprite(ext->current_anim);
 	anim_update(ext->current_anim);
-	//_pick_action(entity, ext, game->map);
+	knight_pick_action(entity, ext, game->map2->levels + entity->level);
 	if (ext->state == STATE_IDLE)
 		ext->current_anim = ext->idle;
 	else if (ext->state == STATE_ATTACKING)
@@ -204,16 +119,7 @@ void	knight_update(t_game *game, t_entity *entity)
 		_attack(ext, game->player);
 	}
 	else if (ext->state == STATE_PATROLING || ext->state == STATE_CHASING)
-	{
-		path_pos = ext->path[ext->current_path];
-		path_pos_abs = (t_vec2){path_pos.x * 64, path_pos.y * 64};
-		dir = vec2_normalized(vec2_sub(path_pos_abs, entity->pos));
-		entity->flipped = dir.x < 0;
-		entity->pos = vec2_add(entity->pos, vec2_mul(dir, 2));
-		if (vec2_equals(entity->pos, path_pos_abs, 4))
-			ext->current_path--;
-		ext->current_anim = ext->walk;
-	}
+		_patrol(entity, ext);
 	entity->sprite = anim_get_sprite(ext->current_anim);
 	anim_update(ext->current_anim);
 }

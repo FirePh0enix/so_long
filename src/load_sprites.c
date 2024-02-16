@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:46:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 11:38:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:20:36 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,10 @@ static void	_load_sprites3(t_game *g, t_img **sp)
 	sp[SP_BTN_MID] = sprite(g, "textures/gen/Btn_Mid.xpm");
 	sp[SP_BTN_RIGHT] = sprite(g, "textures/gen/Btn_Right.xpm");
 	sp[SP_BTN_ALL] = sprite(g, "textures/gen/Btn_All.xpm");
-	sp[SP_PLUS] = sprite(g, "textures/gen/Plus.xpm");
 	sp[SP_POINTER] = sprite(g, "textures/gen/Pointer.xpm");
 }
+
+// FIXME: SP_PLUS sprite leak for some reason.
 
 static void	_load_sprites4(t_game *g, t_img **sp)
 {

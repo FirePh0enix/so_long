@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:42:35 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:39:02 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:40:08 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,36 @@ static bool	_collide_with_upper_layer(t_box box, int index, t_map2 *map)
 	return (false);
 }
 
+static bool	_collide_door(t_level *level, t_box box, int x, int y)
+{
+	return (level->data[x + y * level->width] == TILE_DOOR
+		&& (
+			box_collide_with_box(box, box_for_position((t_box){{0, 0},
+					{64, 64}}, (t_vec2){(x - 1) * 64, y * 64}))
+			|| _collide_with_stair(box, x, y, false)
+			|| box_collide_with_box(box, box_for_position((t_box){{0, 0},
+					{64, 64}}, (t_vec2){(x + 1) * 64, y * 64})))
+		);
+}
+
+static bool	_collision_stair(t_map2 *map, int index, t_box box, t_vec2i pos)
+{
+	t_level	*level;
+
+	level = &map->levels[index];
+	return (level->data[pos.x + pos.y * level->width] == TILE_SOLID
+		&& box_collide_with_box(box, box_for_position((t_box){{0, 0},
+				{64, 64}}, (t_vec2){pos.x * 64, pos.y * 64}))
+			&& (index == 0
+					|| map->levels[index
+						- 1].data[pos.x + pos.y * level->width] != TILE_STAIR));
+}
+
 bool	box_collide_with_map2(t_box box, int index, t_map2 *map)
 {
 	const t_level	*level = &map->levels[index];
 	int				x;
 	int				y;
-	t_box			tbox;
 
 	x = -1;
 	while (++x < map->width)
@@ -74,37 +98,18 @@ bool	box_collide_with_map2(t_box box, int index, t_map2 *map)
 		y = -1;
 		while (++y < map->height)
 		{
-			tbox = (t_box){{0, 0}, {64, 64}};
 			if (index > 0
 				&& map->levels[index - 1].data[x + y * map->width] == TILE_STAIR
 				&& _collide_with_stair(box, x, y, true))
 				return (true);
-			else if (level->data[x + y * level->width] == TILE_SOLID
-				&& box_collide_with_box(box, box_for_position(tbox, (t_vec2){
-						x * 64, y * 64}))
-				&& (index == 0
-					|| map->levels[index
-						- 1].data[x + y * map->width] != TILE_STAIR))
-			{
+			else if (_collision_stair(map, index, box, (t_vec2i){x, y}))
 				return (true);
-			}
 			else if (level->data[x + y * level->width] == TILE_STAIR
 				&& _collide_with_stair(box, x, y, false))
 				return (true);
-			else if (level->data[x + y * level->width] == TILE_DOOR)
-			{
-				if (box_collide_with_box(box, box_for_position(tbox, (t_vec2){
-							(x - 1) * 64, y * 64})))
-					return (true);
-				if (_collide_with_stair(box, x, y, false))
-					return (true);
-				if (box_collide_with_box(box, box_for_position(tbox, (t_vec2){
-							(x + 1) * 64, y * 64})))
-					return (true);
-			}
+			else if (_collide_door((void *)level, box, x, y))
+				return (true);
 		}
 	}
-	if (_collide_with_upper_layer(box, index, map))
-		return (true);
-	return (false);
+	return (_collide_with_upper_layer(box, index, map));
 }

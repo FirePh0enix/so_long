@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:42:41 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:18:34 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			edit_mouse_hook(unsigned int button, int x, int y, t_game *game);
 // ----------------------------------------------
 // GAME
 
-enum
+enum e_sprite
 {
 	SP_WATER,
 	SP_DOOR,
@@ -254,6 +254,9 @@ t_map2		*map2_load(t_game *game, char **filenames, int count);
 void		map2_draw(t_game *game, t_map2 *map, t_renderer *rdr);
 void		map2_save(t_map2 *map, t_game *game);
 void		map2_reload(t_game *game, t_map2 *map);
+void		map2_free(t_map2 *map);
+
+t_img		*get_ground_tile(t_game *game, t_level *map, int x, int y);
 
 bool		check_files(char **filenames, int count);
 bool		check_errors(t_map2 *map);

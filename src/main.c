@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 14:12:23 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:11:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	_setup_game(t_game *g)
 	load_sprites(g);
 	edit_init(&g->editor, g);
 	g->font = font_load(g, "textures/gen/regular");
-	g->font = font_load(g, "textures/gen/small");
+	g->small_font = font_load(g, "textures/gen/small");
 	g->goblin_idle = _load_frames(g, "textures/gen/Goblin_Idle/%d.xpm", 6);
 	g->goblin_walk = _load_frames(g, "textures/gen/Goblin_Walk/%d.xpm", 6);
 	g->goblin_atk_side = _load_frames(g,

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:37:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/14 14:22:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:16:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	_free_images(t_game *game)
 	_free_anim(game, game->foam, 8);
 	free(game->foam_anim);
 	i = -1;
-	while (++i)
+	while (++i < SP_MAX)
 		if (game->sprites[i])
 			mlx_destroy_image(game->mlx, game->sprites[i]);
 }
@@ -65,7 +65,9 @@ void	game_free(t_game *game)
 		i++;
 	}
 	vector_free(game->entities);
-	// FIXME: map_free(game->map2);
+	map2_free(game->map2);
+	font_free(game, game->font);
+	font_free(game, game->small_font);
 	free(game->menu);
 	mlx_destroy_image(game->mlx, game->canvas);
 }

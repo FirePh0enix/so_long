@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/15 15:44:24 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/16 12:07:51 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,18 +26,24 @@ SOURCES = \
 	src/ribbon.c \
 	src/utils.c \
 	src/anim/anim.c \
+	\
 	src/edit/edit.c \
 	src/edit/place.c \
+	src/edit/buttons.c \
+	src/edit/click.c \
 	\
 	src/map2/load.c \
 	src/map2/draw.c \
+	src/map2/draw_utils.c \
 	src/map2/collision.c \
 	src/map2/save.c \
 	src/map2/save_utils.c \
 	src/map2/check_errors.c \
 	src/map2/utils.c \
+	src/map2/free.c \
 	\
 	src/entities/knight.c \
+	src/entities/knight_ai.c \
 	src/entities/player.c \
 	src/entities/player_update.c \
 	src/entities/gem.c \
@@ -46,12 +52,14 @@ SOURCES = \
 	src/math/vec2_calc.c \
 	src/math/a_star.c \
 	src/data/vector.c \
+	\
 	src/render/renderer.c \
 	src/render/draw_sprite.c \
 	src/render/node.c \
 	src/render/text.c \
 	src/render/pixel.c \
-	src/render/blur.c
+	src/render/blur.c \
+	src/render/font.c
 
 NAME = so_long
 
