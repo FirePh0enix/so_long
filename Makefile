@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/16 12:07:51 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/16 12:31:09 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ clean:
 	rm -rf $(OBJECTS) $(OBJECTS:.o=.d)
 	cd mlx && make clean && rm -f libmlx.a
 	cd libft && make fclean
+	rm -rf textures/gen
 
 fclean: clean
 	rm -f $(NAME)
