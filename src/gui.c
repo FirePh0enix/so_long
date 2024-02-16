@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:44:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/12 11:28:35 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:53:03 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	_draw_text(t_game *game, char *str, t_vec2i pos)
 {
 	rdr_add_text(game->rdr, str, (t_vec2){pos.x, pos.y},
-		(t_add_text){10, 5, game->font, 0x0});
+		(t_add_text){10, 5, game->small_font, 0x0});
 }
 
 void	draw_menu(t_game *g, t_gamemenu *menu)
@@ -30,16 +30,18 @@ void	draw_menu(t_game *g, t_gamemenu *menu)
 	draw_banner_cl(g, (t_vec2i){x - 5 * SCALED_SIZE, SCALED_SIZE * 2},
 		(t_vec2i){6, 5});
 	_draw_text(g, (char *)c_me[0], (t_vec2i){
-		text_center_x(g->font, (char *)c_me[0],
+		text_center_x(g->small_font, (char *)c_me[0],
 			x - 1.5 * SCALED_SIZE, SCALED_SIZE * 2), SCALED_SIZE * 4});
 	_draw_text(g, (char *)c_me[1], (t_vec2i){
-		text_center_x(g->font, (char *)c_me[1],
+		text_center_x(g->small_font, (char *)c_me[1],
 			x - 0.8 * SCALED_SIZE, SCALED_SIZE * 2), SCALED_SIZE * 4.5});
 	draw_banner_cr(g, (t_vec2i){x + 7 * SCALED_SIZE, SCALED_SIZE * 2},
 		(t_vec2i){6, 5});
-	_draw_text(g, (char *)c[0], (t_vec2i){text_center_x(g->font, (char *)c[0],
+	_draw_text(g, (char *)c[0], (t_vec2i){text_center_x(g->small_font,
+			(char *)c[0],
 			x + 11 * SCALED_SIZE, SCALED_SIZE * 2), SCALED_SIZE * 4});
-	_draw_text(g, (char *)c[1], (t_vec2i){text_center_x(g->font, (char *)c[1],
+	_draw_text(g, (char *)c[1], (t_vec2i){text_center_x(g->small_font,
+			(char *)c[1],
 			x + 11 * SCALED_SIZE, SCALED_SIZE * 2), SCALED_SIZE * 4.5});
 	draw_banner_v(g, (t_vec2i){WIN_WIDTH / 2 - 64 * 4, 0}, (t_vec2i){8, 10});
 	btn_update(g, &menu->play);
@@ -52,9 +54,23 @@ void	menu_mouse_click(t_game *game, t_gamemenu *menu, int x, int y)
 	btn_click(game, &menu->edit, x, y);
 }
 
+static int	_font_width(t_font *font)
+{
+	if (font->chars[(int) 'A'])
+		return (font->chars[(int) 'A']->width);
+	return (0);
+}
+
+static int	_font_height(t_font *font)
+{
+	if (font->chars[(int) 'A'])
+		return (font->chars[(int) 'A']->height);
+	return (0);
+}
+
 int	text_center_x(t_font *font, char *s, int px, int pwidth)
 {
-	const int	width = font->chars[(int) 'A']->width * ft_strlen(s);
+	const int	width = _font_width(font) * ft_strlen(s);
 	const int	fx = px + pwidth / 2 - width;
 
 	return (fx);
@@ -62,7 +78,7 @@ int	text_center_x(t_font *font, char *s, int px, int pwidth)
 
 int	text_center_y(t_font *font, char *s, int py, int pheight)
 {
-	const int	height = font->chars[(int) 'A']->height;
+	const int	height = _font_height(font);
 	const int	fy = py + pheight / 2 - height / 2;
 
 	(void) s;

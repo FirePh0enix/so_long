@@ -6,36 +6,12 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:30:14 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:17:28 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:47:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
-#include "libft.h"
 #include "../so_long.h"
-
-t_font	*font_load(t_game *game, char *path)
-{
-	t_font			*font;
-	char			*buf;
-	char			*buf2;
-	unsigned char	i;
-
-	font = ft_calloc(1, sizeof(t_font));
-	i = 32;
-	while (i < 127)
-	{
-		buf = path;
-		buf = ft_strjoin(path, "/ ");
-		buf[ft_strlen(path) + 1] = i;
-		buf2 = ft_strjoin(buf, ".xpm");
-		free(buf);
-		font->chars[i] = sprite(game, buf2);
-		free(buf2);
-		i++;
-	}
-	return (font);
-}
 
 static inline int	_get_pixel_color(const t_img *image, int x, int y)
 {
@@ -86,9 +62,16 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text d)
 	}
 }
 
+static int	_font_width(t_font *font)
+{
+	if (font->chars[(int) 'A'])
+		return (font->chars[(int) 'A']->width);
+	return (0);
+}
+
 void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw)
 {
-	const int	offset = draw.font->chars[(int) 'A']->width;
+	const int	offset = _font_width(draw.font);
 	int			i;
 
 	i = 0;
