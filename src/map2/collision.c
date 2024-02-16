@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 11:42:35 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:40:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:29:40 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,19 @@ static bool	_collide_with_upper_layer(t_box box, int index, t_map2 *map)
 	return (false);
 }
 
-static bool	_collide_door(t_level *level, t_box box, int x, int y)
+static bool	_collide_door(t_game *game, t_level *level, t_box box, t_vec2i pos)
 {
-	return (level->data[x + y * level->width] == TILE_DOOR
+	return (level->data[pos.x + pos.y * level->width] == TILE_DOOR
 		&& (
 			box_collide_with_box(box, box_for_position((t_box){{0, 0},
-					{64, 64}}, (t_vec2){(x - 1) * 64, y * 64}))
-			|| _collide_with_stair(box, x, y, false)
+					{64, 64}}, (t_vec2){(pos.x - 1) * 64, pos.y * 64}))
+			|| ((game->collectibles == game->collectibles_count
+					&& _collide_with_stair(box, pos.x, pos.y, false))
+				|| (game->collectibles != game->collectibles_count
+				&& box_collide_with_box(box, box_for_position((t_box){{0, 0},
+					{64, 64}}, (t_vec2){pos.x * 64, pos.y * 64}))))
 			|| box_collide_with_box(box, box_for_position((t_box){{0, 0},
-					{64, 64}}, (t_vec2){(x + 1) * 64, y * 64})))
+					{64, 64}}, (t_vec2){(pos.x + 1) * 64, pos.y * 64})))
 		);
 }
 
@@ -86,7 +90,7 @@ static bool	_collision_stair(t_map2 *map, int index, t_box box, t_vec2i pos)
 						- 1].data[pos.x + pos.y * level->width] != TILE_STAIR));
 }
 
-bool	box_collide_with_map2(t_box box, int index, t_map2 *map)
+bool	box_collide_with_map2(t_game *game, t_box box, int index, t_map2 *map)
 {
 	const t_level	*level = &map->levels[index];
 	int				x;
@@ -107,7 +111,7 @@ bool	box_collide_with_map2(t_box box, int index, t_map2 *map)
 			else if (level->data[x + y * level->width] == TILE_STAIR
 				&& _collide_with_stair(box, x, y, false))
 				return (true);
-			else if (_collide_door((void *)level, box, x, y))
+			else if (_collide_door(game, (void *)level, box, (t_vec2i){x, y}))
 				return (true);
 		}
 	}

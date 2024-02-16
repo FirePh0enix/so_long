@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:00 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:41:51 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:51:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,16 @@ static char	*_get_tile_str(t_tile tile)
 	return ("@");
 }
 
-static void	_write_to_string(t_level *level)
+static void	_rewrite_to_string(t_level *level)
 {
 	int			x;
 	int			y;
 	const int	width = level->width + 1;
 
 	free(level->string);
-	level->string = malloc(width * level->height);
+	level->string = ft_calloc(1, width * level->height);
+	if (!level->string)
+		return ;
 	x = 0;
 	while (x < level->width)
 	{
@@ -68,7 +70,7 @@ static void	_write_to_string(t_level *level)
 					level->data[x + y * level->width])[0];
 			y++;
 		}
-		level->string[level->width * y * level->width] = '\n';
+		level->string[(width - 1) + (y - 1) * width] = '\n';
 		x++;
 	}
 }
@@ -97,7 +99,7 @@ static void	_save_level(t_level *level, int index, t_game *game)
 		y++;
 	}
 	close(fd);
-	_write_to_string(level);
+	_rewrite_to_string(level);
 	ft_printf("Map saved to %s\n", level->filename);
 }
 

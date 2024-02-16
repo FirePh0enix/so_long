@@ -8,3 +8,4 @@ compile_flags.txt
 
 textures/gen
 .DS_Store
+*.tar.gz

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:54:04 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:53:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ static char	*_read_to_string(char *filename)
 	while (n > 0)
 	{
 		n = read(fd, buffer, 4096);
-		str = realloc(str, str_size + n + 1);
+		str = ft_realloc(str, str_size + n + 1);
 		ft_memcpy(str + str_size, buffer, n);
-		str[str_size + n] = '\0';
+		printf("(%s) (%s) %d\n", buffer, str, n);
+		//str[str_size + n] = '\0';
 		str_size += n;
 	}
 	close(fd);
@@ -85,6 +86,7 @@ static int	_load_level(t_game *game, t_level *level, int index, char *filename)
 	int	y;
 
 	level->string = _read_to_string(filename);
+	//printf("%s\n", level->string);
 	level->width = line_width_and_check(level->string);
 	if (level->width == -1)
 		return (-1);

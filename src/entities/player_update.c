@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:33:41 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:36:02 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:31:01 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	_move(t_game *game, t_entity *ent)
 {
 	while (ent->vel.x != 0)
 	{
-		if (!box_collide_with_map2(box_for_position(
+		if (!box_collide_with_map2(game, box_for_position(
 					ent->box, vec2_add(ent->pos,
 						(t_vec2){ent->vel.x, 0})), ent->level, game->map2))
 			break ;
@@ -31,7 +31,7 @@ static void	_move(t_game *game, t_entity *ent)
 	ent->pos.x += ent->vel.x;
 	while (ent->vel.y != 0)
 	{
-		if (!box_collide_with_map2(box_for_position(
+		if (!box_collide_with_map2(game, box_for_position(
 					ent->box, vec2_add(ent->pos,
 						(t_vec2){0, ent->vel.y})), ent->level, game->map2))
 			break ;
