@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:18:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 14:32:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:33:45 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static void	_draw_level(t_game *g, t_renderer *rdr, t_level *level, int index)
 					(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false});
 			else if (tile == TILE_DOOR)
 				rdr_add_sprite(rdr, sp(g)[SP_GOLDMINEI],
-					(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){13,
-					index, 0});
+					(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){-100,
+					index, false});
 			else if (tile == TILE_EMPTY)
 				_draw_empty(g, index, x, y);
 		}

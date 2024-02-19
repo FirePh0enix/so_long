@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:18:34 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:01:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ t_img		*get_ground_tile(t_game *game, t_level *map, int x, int y);
 
 bool		check_files(char **filenames, int count);
 bool		check_errors(t_map2 *map);
+bool		check_finish(t_game *game, t_map2 *map);
 
 int			line_width_and_check(char *str);
 int			line_count(char *str);

@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/16 12:31:09 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/19 15:02:39 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SOURCES = \
 	src/map2/save.c \
 	src/map2/save_utils.c \
 	src/map2/check_errors.c \
+	src/map2/check_finish.c \
 	src/map2/utils.c \
 	src/map2/free.c \
 	\

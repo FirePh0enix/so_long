@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 15:53:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:01:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ static char	*_read_to_string(char *filename)
 	str = NULL;
 	str_size = 0;
 	n = 4096;
-	while (n > 0)
+	while (n == 4096)
 	{
+		ft_bzero(buffer, 4096);
 		n = read(fd, buffer, 4096);
-		str = ft_realloc(str, str_size + n + 1);
-		ft_memcpy(str + str_size, buffer, n);
-		printf("(%s) (%s) %d\n", buffer, str, n);
-		//str[str_size + n] = '\0';
+		if (n == -1)
+			return (NULL);
+		if (str == NULL)
+			str = ft_calloc(1, n + 1);
+		else
+			str = realloc(str, str_size + n + 1);
+		memcpy(str + str_size, buffer, n);
+		str[str_size + n] = '\0';
 		str_size += n;
 	}
 	close(fd);
@@ -121,7 +126,7 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 			return (NULL);
 	map->width = map->levels[0].width;
 	map->height = map->levels[0].height;
-	if (!check_errors(map))
+	if (!check_errors(map) || !check_finish(game, map))
 		return (free(map), NULL); // Free each level here
 	return (map);
 }
