@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/19 15:01:13 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:00:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ static t_tile	_put_tile(t_game *game, char c, t_vec2i pos, int level)
 	{
 		if (game->player)
 			return (-1);
+		game->start_pos.x = pos.x;
+		game->start_pos.y = pos.y;
+		game->start_level = level;
 		game->player = add_entity(&game->entities,
-				player_new(game, (t_vec2){pos.x * 64, pos.y * 64}));
+				player_new(game, (t_vec2){pos.x * 64, pos.y * 64 - 16}));
 		return (TILE_EMPTY);
 	}
 	return (-1);
@@ -91,7 +94,6 @@ static int	_load_level(t_game *game, t_level *level, int index, char *filename)
 	int	y;
 
 	level->string = _read_to_string(filename);
-	//printf("%s\n", level->string);
 	level->width = line_width_and_check(level->string);
 	if (level->width == -1)
 		return (-1);

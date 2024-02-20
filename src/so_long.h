@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/19 15:01:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/20 10:54:16 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,8 @@ typedef struct s_game
 	bool		editor_mode;
 
 	t_vec2		start_pos;
+	int			start_level;
+
 	int			collectibles_count;
 	int			collectibles;
 
