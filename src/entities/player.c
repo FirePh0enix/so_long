@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 15:58:18 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:46:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static void	player_free(t_entity *entity);
 
-t_entity	*player_new(t_game *game, t_vec2 pos)
+t_entity	*player_new(t_game *game, t_vec2 pos, int level)
 {
 	t_entity	*player;
 	t_player	*ext;
@@ -43,6 +43,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos)
 	player->vel = (t_vec2){};
 	player->max_health = 5;
 	player->health = player->max_health;
+	player->level = level;
 	return (player);
 }
 

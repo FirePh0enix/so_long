@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 16:00:04 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:00:33 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_money
 
 void	gem_free(t_entity *entity);
 
-t_entity	*gem_new(t_game *game, t_vec2 pos)
+t_entity	*gem_new(t_game *game, t_vec2 pos, int level)
 {
 	t_entity	*gem;
 	t_money		*ext;
@@ -40,7 +40,8 @@ t_entity	*gem_new(t_game *game, t_vec2 pos)
 	gem->update = gem_update;
 	gem->free = gem_free;
 	gem->sprite = game->money_spawn[6];
-	gem->z_index = 10;
+	gem->z_index = 14;
+	gem->level = level;
 	return (gem);
 }
 

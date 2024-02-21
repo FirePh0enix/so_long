@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:35:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/20 18:01:13 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:59:35 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ static bool	_is_tile_solid(t_map_check *check, int level, int x, int y)
 		|| check->levels[level][index] == 'S');
 }
 
+static void	_check_rec(t_map_check *check, int level, int x, int y);
+
+static void	_check_all_sides(t_map_check *check, int level, int x, int y)
+{
+	_check_rec(check, level, x - 1, y);
+	_check_rec(check, level, x + 1, y);
+	if (check->levels[level][x + (y - 1) * (check->width + 1)] == 'S')
+		_check_rec(check, level + 1, x, y - 2);
+	else
+		_check_rec(check, level, x, y - 1);
+	if (level > 0 && check->levels[level - 1][x + (y + 1)
+		* (check->width + 1)] == 'S')
+		_check_rec(check, level - 1, x, y + 2);
+	if (check->levels[level][x + (y + 1) * (check->width + 1)] != 'E')
+		_check_rec(check, level, x, y + 1);
+}
+
 static void	_check_rec(t_map_check *check, int level, int x, int y)
 {
 	int	index;
@@ -43,27 +60,14 @@ static void	_check_rec(t_map_check *check, int level, int x, int y)
 		return ;
 	index = x + y * (check->width + 1);
 	if (check->levels[level][index] == 'C')
-	{
 		check->collectibles++;
-	}
 	else if (check->levels[level][index] == 'E')
 	{
 		check->has_exit = true;
 		return ;
 	}
-	else if (level > 0 && check->levels[level - 1][x + (y + 1) * (check->width + 1)] == 'S')
-		_check_rec(check, level - 1, x, y + 2);
-	printf("%d\n", level);
 	check->levels[level][index] = '1';
-	_check_rec(check, level, x - 1, y);
-	_check_rec(check, level, x + 1, y);
-	if (check->levels[level][x + (y - 1) * (check->width + 1)] == 'S')
-		_check_rec(check, level + 1, x, y - 2);
-	else
-		_check_rec(check, level, x, y - 1);
-	if (check->levels[level][x + (y + 1) * (check->width + 1)] != 'E'
-		&& !_is_tile_solid(check, level, x, y + 1))
-		_check_rec(check, level, x, y + 1);
+	_check_all_sides(check, level, x, y);
 }
 
 static char	*_preprocess(char *level, char *upper, int width, int height)
@@ -91,29 +95,27 @@ static char	*_preprocess(char *level, char *upper, int width, int height)
 
 bool	check_finish(t_game *game, t_map2 *map)
 {
-	t_map_check	mapc;
+	t_map_check	c;
 	int			i;
 
-	mapc.levels = malloc(sizeof(char *) * map->level_count);
-	mapc.level_count = map->level_count;
-	mapc.width = map->width;
-	mapc.height = map->height;
-	mapc.collectibles = 0;
-	mapc.has_exit = false;
+	c.levels = ft_calloc(1, sizeof(char *) * (map->level_count + 1));
+	c.level_count = map->level_count;
+	c.width = map->width;
+	c.height = map->height;
+	c.collectibles = 0;
+	c.has_exit = false;
 	i = -1;
-	while (++i < mapc.level_count)
-		mapc.levels[i] = ft_strdup(map->levels[i].string);
+	while (++i < c.level_count)
+		c.levels[i] = ft_strdup(map->levels[i].string);
 	i = -1;
-	while (++i < mapc.level_count)
-	{
-		printf("Before:\n%s\n", mapc.levels[i]);
-		printf("After\n%s\n", _preprocess(mapc.levels[i], i + 1 < mapc.level_count ? mapc.levels[i + 1] : NULL, mapc.width, mapc.height));
-	}
-	_check_rec(&mapc, game->start_level, game->start_pos.x, game->start_pos.y);
+	while (++i < c.level_count)
+		_preprocess(c.levels[i], c.levels[i + 1], c.width, c.height);
+	_check_rec(&c, game->start_level, game->start_pos.x, game->start_pos.y);
 	i = -1;
-	while (++i < mapc.level_count)
-		free(mapc.levels[i]);
-	free(mapc.levels);
-	return (mapc.collectibles == game->collectibles_count
-		&& mapc.collectibles > 0 && mapc.has_exit);
+	while (++i < c.level_count)
+		free(c.levels[i]);
+	free(c.levels);
+	printf("Collectibles: %d\n", game->collectibles_count);
+	return (c.collectibles == game->collectibles_count
+		&& c.collectibles > 0 && c.has_exit);
 }

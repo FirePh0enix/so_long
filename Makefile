@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/19 15:02:39 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/21 14:24:50 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,15 @@ SOURCES = \
 	src/update.c \
 	src/hud.c \
 	src/gui.c \
+	src/gui_text.c \
 	src/menu.c \
 	src/button.c \
+	src/button_utils.c \
 	src/banner.c \
 	src/banner_utils.c \
 	src/ribbon.c \
 	src/utils.c \
+	src/entity.c \
 	src/anim/anim.c \
 	\
 	src/edit/edit.c \
@@ -33,6 +36,7 @@ SOURCES = \
 	src/edit/click.c \
 	\
 	src/map2/load.c \
+	src/map2/load_utils.c \
 	src/map2/draw.c \
 	src/map2/draw_utils.c \
 	src/map2/collision.c \
@@ -51,8 +55,11 @@ SOURCES = \
 	src/math/box.c \
 	src/math/vec2_basic.c \
 	src/math/vec2_calc.c \
+	src/math/vec2i.c \
 	src/math/a_star.c \
+	src/math/a_star_utils.c \
 	src/data/vector.c \
+	src/data/vector_free.c \
 	\
 	src/render/renderer.c \
 	src/render/draw_sprite.c \

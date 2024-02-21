@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:47:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:25:33 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:48:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	_place_collectible(t_game *game, t_level *level, int x, int y)
 	remove_entity(game, x, y);
 	level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
 	add_entity(&game->entities, gem_new(game,
-			(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
+			(t_vec2){tile_x * 64, tile_y * 64}, game->editor.level));
 	game->collectibles_count++;
 }
 
@@ -45,13 +45,13 @@ static void	_place_item(int x, int y, t_item item, t_game *game)
 	{
 		level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
 		add_entity(&game->entities, player_new(game,
-				(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
+				(t_vec2){tile_x * 64, tile_y * 64}, game->editor.level));
 	}
 	else if (item == ITEM_ENEMY)
 	{
 		level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
 		add_entity(&game->entities, knight_new(game,
-				(t_vec2){tile_x * SCALED_SIZE, tile_y * SCALED_SIZE}));
+				(t_vec2){tile_x * 64, tile_y * 64}, game->editor.level));
 	}
 }
 

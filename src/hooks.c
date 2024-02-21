@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:24:23 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/20 11:26:52 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:20:08 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	key_pressed_hook(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 	{
-		// FIXME mlx_loop_end(game->mlx);
+		mlx_loop_end(game->mlx);
 		return (0);
 	}
-	if (keycode >= 0xFFFF)
+	if (keycode < 0 || keycode >= 0xFFFF)
 		return (0);
 	game->keys[keycode] = true;
 	return (0);

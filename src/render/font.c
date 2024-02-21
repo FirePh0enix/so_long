@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:05:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:51:28 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:02:27 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_font	*font_load(t_game *game, char *path)
 	return (font);
 }
 
-void		font_free(t_game *game, t_font *font)
+void	font_free(t_game *game, t_font *font)
 {
 	int	i;
 

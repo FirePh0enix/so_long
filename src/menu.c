@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:46:20 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:22:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:41:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static void	play_click(t_game *game)
 {
-	game->menu_opened = false;
+	if (game->map_valid)
+		game->menu_opened = false;
 }
 
 static void	edit_click(t_game *game)

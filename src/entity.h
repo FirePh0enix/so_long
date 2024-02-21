@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:58:57 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:10:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ typedef struct s_player
 	t_anim		*atk_side;
 }	t_player;
 
-t_entity	*player_new(t_game *game, t_vec2 pos);
+t_entity	*player_new(t_game *game, t_vec2 pos, int level);
 void		player_update(t_game *game, t_entity *entity);
 
 // ----------------------------------------------
 // GEM
 
-t_entity	*gem_new(t_game *game, t_vec2 pos);
+t_entity	*gem_new(t_game *game, t_vec2 pos, int level);
 void		gem_update(t_game *game, t_entity *entity);
 
 // ----------------------------------------------
@@ -110,9 +110,11 @@ typedef struct s_knight
 	suseconds_t	last_attacked;
 }	t_knight;
 
-t_entity	*knight_new(t_game *game, t_vec2 pos);
+t_entity	*knight_new(t_game *game, t_vec2 pos, int level);
 void		knight_update(t_game *game, t_entity *entity);
 
 void		knight_pick_action(t_entity *entity, t_knight *ext, t_level *map);
+
+void		entity_free(t_entity *entity);
 
 #endif

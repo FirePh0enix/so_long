@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:19:17 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/09 16:18:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:37:02 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ typedef struct s_vec2i
 	int	x;
 	int	y;
 }	t_vec2i;
+
+int		vec2i_length_sqr(t_vec2i a, t_vec2i b);
 
 #endif

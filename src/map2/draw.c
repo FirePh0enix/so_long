@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:18:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/19 14:33:45 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:13:58 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ static void	_draw_elevated_tile(t_game *g, int index, int x, int y)
 		false});
 	if (level1->data[x + (y + 1) * level1->width] != TILE_STAIR)
 		rdr_add_sprite(g->rdr, sp(g)[SP_CLIFF_SIDE_ALL],
-			(t_vec2){x * 64, (y + 1) * 64}, (t_add_sprite){8,
+			(t_vec2){x * 64, (y + 1) * 64}, (t_add_sprite){11,
 			index - 1, false});
 	rdr_add_sprite(g->rdr, get_ground_tile(g, level, x, y),
-		(t_vec2){x * 64, y * 64}, (t_add_sprite){10,
-		index, false});
+		(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false});
 }
 
 static void	_draw_floor_tile(t_game *g, int x, int y)
@@ -69,7 +68,7 @@ static void	_draw_level(t_game *g, t_renderer *rdr, t_level *level, int index)
 					(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false});
 			else if (tile == TILE_DOOR)
 				rdr_add_sprite(rdr, sp(g)[SP_GOLDMINEI],
-					(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){-100,
+					(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){14,
 					index, false});
 			else if (tile == TILE_EMPTY)
 				_draw_empty(g, index, x, y);

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/20 11:00:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:08:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,16 @@
 #include "../entity.h"
 #include "../data/vector.h"
 
-static char	*_read_to_string(char *filename)
+static t_tile	_put_player(t_game *game, t_vec2i pos, int level)
 {
-	int		fd;
-	char	*str;
-	char	buffer[4096];
-	int		str_size;
-	int		n;
-
-	fd = open(filename, O_RDONLY | O_DIRECTORY);
-	if (fd != -1)
-		return (close(fd), NULL);
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (NULL);
-	str = NULL;
-	str_size = 0;
-	n = 4096;
-	while (n == 4096)
-	{
-		ft_bzero(buffer, 4096);
-		n = read(fd, buffer, 4096);
-		if (n == -1)
-			return (NULL);
-		if (str == NULL)
-			str = ft_calloc(1, n + 1);
-		else
-			str = realloc(str, str_size + n + 1);
-		memcpy(str + str_size, buffer, n);
-		str[str_size + n] = '\0';
-		str_size += n;
-	}
-	close(fd);
-	return (str);
+	if (game->player)
+		return (-1);
+	game->start_pos.x = pos.x;
+	game->start_pos.y = pos.y;
+	game->start_level = level;
+	game->player = add_entity(&game->entities,
+			player_new(game, (t_vec2){pos.x * 64, pos.y * 64 - 16}, level));
+	return (TILE_EMPTY);
 }
 
 static t_tile	_put_tile(t_game *game, char c, t_vec2i pos, int level)
@@ -56,35 +33,25 @@ static t_tile	_put_tile(t_game *game, char c, t_vec2i pos, int level)
 	else if (c == '0')
 		return (TILE_EMPTY);
 	else if (c == 'E')
-	{
-		game->exit_pos = (t_vec2){pos.x * 64, pos.y * 64};
-		game->exit_level = level;
-		return (TILE_DOOR);
-	}
+		return (game->exit_pos = (t_vec2){pos.x * 64, pos.y * 64},
+			game->exit_level = level, TILE_DOOR);
 	else if (c == 'S')
 		return (TILE_STAIR);
 	else if (c == 'C')
 	{
-		add_entity(&game->entities, gem_new(game, (t_vec2){pos.x * 64, pos.y * 64}));
+		add_entity(&game->entities, gem_new(game, (t_vec2){pos.x * 64,
+				pos.y * 64}, level));
 		game->collectibles_count++;
 		return (TILE_EMPTY);
 	}
 	else if (c == 'F')
 	{
-		add_entity(&game->entities, knight_new(game, (t_vec2){pos.x * 64, pos.y * 64}));
+		add_entity(&game->entities, knight_new(game, (t_vec2){pos.x * 64,
+				pos.y * 64}, level));
 		return (TILE_EMPTY);
 	}
 	else if (c == 'P')
-	{
-		if (game->player)
-			return (-1);
-		game->start_pos.x = pos.x;
-		game->start_pos.y = pos.y;
-		game->start_level = level;
-		game->player = add_entity(&game->entities,
-				player_new(game, (t_vec2){pos.x * 64, pos.y * 64 - 16}));
-		return (TILE_EMPTY);
-	}
+		return (_put_player(game, pos, level));
 	return (-1);
 }
 
@@ -93,7 +60,7 @@ static int	_load_level(t_game *game, t_level *level, int index, char *filename)
 	int	x;
 	int	y;
 
-	level->string = _read_to_string(filename);
+	level->string = read_to_string(filename);
 	level->width = line_width_and_check(level->string);
 	if (level->width == -1)
 		return (-1);
@@ -129,7 +96,8 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 	map->width = map->levels[0].width;
 	map->height = map->levels[0].height;
 	if (!check_errors(map) || !check_finish(game, map))
-		return (free(map), NULL); // Free each level here
+		return (map2_free(map), NULL);
+	game->map_valid = true;
 	return (map);
 }
 
@@ -137,10 +105,16 @@ void	map2_reload(t_game *game, t_map2 *map)
 {
 	int	i;
 
-	vector_free(game->entities); // Correctly free entities
+	vector_free_with(game->entities, (void *)entity_free);
 	game->entities = vector_new(sizeof(void *), 0);
 	game->player = NULL;
+	game->collectibles = 0;
+	game->collectibles_count = 0;
 	i = -1;
 	while (++i < map->level_count)
 		_load_level(game, map->levels + i, i, map->levels[i].filename);
+	if (check_errors(map) && check_finish(game, map))
+		game->map_valid = true;
+	else
+		game->map_valid = false;
 }

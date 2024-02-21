@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/20 10:54:16 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:38:44 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct s_game
 	char		*filename;
 
 	t_map2		*map2;
+	bool		map_valid;
 
 	t_gamemenu	*menu;
 	bool		menu_opened;
@@ -257,6 +258,8 @@ void		map2_draw(t_game *game, t_map2 *map, t_renderer *rdr);
 void		map2_save(t_map2 *map, t_game *game);
 void		map2_reload(t_game *game, t_map2 *map);
 void		map2_free(t_map2 *map);
+
+char		*read_to_string(char *filename);
 
 t_img		*get_ground_tile(t_game *game, t_level *map, int x, int y);
 

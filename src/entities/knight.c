@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:47:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:47:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 static void	knight_free(t_entity *entity);
 
-t_entity	*knight_new(t_game *game, t_vec2 pos)
+t_entity	*knight_new(t_game *game, t_vec2 pos, int level)
 {
 	t_entity	*enemy;
 	t_knight	*ext;
@@ -45,6 +45,7 @@ t_entity	*knight_new(t_game *game, t_vec2 pos)
 	enemy->update = knight_update;
 	enemy->free = knight_free;
 	enemy->z_index = 100;
+	enemy->level = level;
 	return (enemy);
 }
 

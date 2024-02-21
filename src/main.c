@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:11:26 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:19:16 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ t_img	**sp(t_game *game)
 	return (game->sprites);
 }
 
+static void	_init_anims(t_game *g)
+{
+	g->goblin_idle = _load_frames(g, "textures/gen/Goblin_Idle/%d.xpm", 6);
+	g->goblin_walk = _load_frames(g, "textures/gen/Goblin_Walk/%d.xpm", 6);
+	g->goblin_atk_side = _load_frames(g,
+			"textures/gen/Goblin_Atk_Side/%d.xpm", 6);
+	g->warrior_idle = _load_frames(g, "textures/gen/Warrior_Idle/%d.xpm", 6);
+	g->warrior_walk = _load_frames(g, "textures/gen/Warrior_Walk/%d.xpm", 6);
+	g->warrior_atk_side = _load_frames(g,
+			"textures/gen/Warrior_Atk_Side1/%d.xpm", 6);
+	g->money_spawn = _load_frames(g, "textures/gen/Gold_Spawn/%d.xpm", 7);
+	g->foam = _load_frames(g, "textures/gen/Foam/%d.xpm", 8);
+	g->foam_anim = anim_new(g->foam, 8, 100, true);
+}
+
 static int	_setup_game(t_game *g)
 {
 	ft_bzero(g, sizeof(t_game));
@@ -59,26 +74,15 @@ static int	_setup_game(t_game *g)
 	edit_init(&g->editor, g);
 	g->font = font_load(g, "textures/gen/regular");
 	g->small_font = font_load(g, "textures/gen/small");
-	g->goblin_idle = _load_frames(g, "textures/gen/Goblin_Idle/%d.xpm", 6);
-	g->goblin_walk = _load_frames(g, "textures/gen/Goblin_Walk/%d.xpm", 6);
-	g->goblin_atk_side = _load_frames(g,
-			"textures/gen/Goblin_Atk_Side/%d.xpm", 6);
-	g->warrior_idle = _load_frames(g, "textures/gen/Warrior_Idle/%d.xpm", 6);
-	g->warrior_walk = _load_frames(g, "textures/gen/Warrior_Walk/%d.xpm", 6);
-	g->warrior_atk_side = _load_frames(g,
-			"textures/gen/Warrior_Atk_Side1/%d.xpm", 6);
-	g->money_spawn = _load_frames(g, "textures/gen/Gold_Spawn/%d.xpm", 7);
-	g->foam = _load_frames(g, "textures/gen/Foam/%d.xpm", 8);
-	g->foam_anim = anim_new(g->foam, 8, 100, true);
+	_init_anims(g);
 	return (1);
 }
 
-static int	_normal_main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	(void) argc;
-	if (!_setup_game(&game))
+	if (argc > 1 && argc <= 4 && !_setup_game(&game))
 		return (0);
 	game.map2 = map2_load(&game, argv + 1, argc - 1);
 	if (!game.map2)
@@ -90,7 +94,7 @@ static int	_normal_main(int argc, char *argv[])
 	mlx_do_key_autorepeatoff(game.mlx);
 	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
 	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_released_hook, &game);
-	mlx_hook(game.win, 17, 0, close_hook, &game);
+	mlx_hook(game.win, DestroyNotify, 0, close_hook, &game);
 	mlx_mouse_hook(game.win, mouse_hook, &game);
 	mlx_loop_hook(game.mlx, update_hook, &game);
 	mlx_loop(game.mlx);
@@ -99,12 +103,4 @@ static int	_normal_main(int argc, char *argv[])
 	mlx_destroy_window(game.mlx, game.win);
 	mlx_destroy_display(game.mlx);
 	free(game.mlx);
-	return (0);
-}
-
-int	main(int argc, char *argv[])
-{
-	if (argc < 2)
-		return (1);
-	_normal_main(argc, argv);
 }
