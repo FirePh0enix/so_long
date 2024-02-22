@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/21 14:24:50 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/22 14:30:16 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SOURCES = \
 	src/ribbon.c \
 	src/utils.c \
 	src/entity.c \
+	src/end.c \
 	src/anim/anim.c \
 	\
 	src/edit/edit.c \

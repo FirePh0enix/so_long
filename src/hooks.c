@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:24:23 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 11:20:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:05:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	mouse_hook(unsigned int btn, int x, int y, t_game *game)
 		menu_mouse_click(game, game->menu, x, y);
 	else if (game->editor_mode)
 		edit_click_hook(game, x, y, btn);
+	else if (game->end_reached)
+		btn_click(game, &game->end.exit, x, y);
 	return (0);
 }
 

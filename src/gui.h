@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:32:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 13:53:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:59:55 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_btn		btn_new_img(t_vec2i pos, int size, t_img *img, t_click click);
 typedef struct s_gamemenu
 {
 	t_btn	play;
+	t_btn	coop;
 	t_btn	edit;
 }	t_gamemenu;
 

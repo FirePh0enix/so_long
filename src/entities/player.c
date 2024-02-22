@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 10:46:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:10:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos, int level)
 	player->box = (t_box){{5, 43}, {59, 69}};
 	player->update = player_update;
 	player->free = player_free;
-	ext = malloc(sizeof(t_player));
+	ext = ft_calloc(1, sizeof(t_player));
 	player->extension = ext;
 	ext->walk = anim_new(game->goblin_walk, 6, 100, true);
 	ext->idle = anim_new(game->goblin_idle, 6, 100, true);

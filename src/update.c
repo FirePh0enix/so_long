@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/19 14:14:29 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:18:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,30 @@ static void	_update_entities(t_game *game, bool update)
 	unsigned int	i;
 	t_entity		*entity;
 
-	i = 0;
-	while (i < vector_size(game->entities))
+	i = -1;
+	while (++i < vector_size(game->entities))
 	{
 		entity = game->entities[i];
-		if (update)
+		if (update && entity->update)
 			entity->update(game, entity);
 		rdr_add_sprite(game->rdr, entity->sprite, vec2_add(entity->pos,
 				entity->sprite_offset),
 			(t_add_sprite){entity->z_index, entity->level, entity->flipped});
-		i++;
+	}
+}
+
+static void	_check_victory(t_game *game, t_entity *player)
+{
+	if (game->editor_mode)
+		return ;
+	if (box_collide_with_box(box_for_position(player->box, player->pos),
+			box_for_position((t_box){{0, 0},
+				{16 * SCALE, 16 * SCALE}}, game->exit_pos))
+		&& game->collectibles == game->collectibles_count)
+	{
+		game->end_reached = true;
+		game->end_time = getms();
+		printf("Hello world!\n");
 	}
 }
 
@@ -70,15 +84,18 @@ int	update_hook(t_game *game)
 	map2_draw(game, game->map2, game->rdr);
 	if (game->menu_opened)
 		draw_menu(game, game->menu);
-	else
+	else if (!game->end_reached)
 	{
-		_update_entities(game, !game->editor_mode);
 		if (game->editor_mode)
 			edit_update(game);
 		else
 			draw_hud(game);
+		_update_entities(game, !game->editor_mode);
 		_collect_entities(&game->entities);
+		_check_victory(game, game->player);
 	}
+	else
+		draw_end(game);
 	rdr_draw(game->rdr, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->canvas, 0, 0);
 	rdr_clear(game->rdr);

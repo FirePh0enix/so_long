@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:33:41 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 14:31:01 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:20:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,22 @@ static void	_stair_collision(t_entity *entity)
 	}
 }
 
+static int	_keycode(t_game *g, t_entity *e, int keycode)
+{
+	if (e == g->player2)
+	{
+		if (keycode == XK_Right)
+			return (XK_d);
+		else if (keycode == XK_Left)
+			return (XK_a);
+		else if (keycode == XK_Up)
+			return (XK_w);
+		else if (keycode == XK_Down)
+			return (XK_s);
+	}
+	return (keycode);
+}
+
 static void	_handle_keys(t_game *game, t_entity *entity, t_player *ext)
 {
 	if (game->keys[' '] && !_is_attacking(ext))
@@ -82,22 +98,25 @@ static void	_handle_keys(t_game *game, t_entity *entity, t_player *ext)
 		ext->current_anim->last_frame = 0;
 		ext->current_anim = ext->atk_side;
 	}
-	if (game->keys[XK_Right])
+	if (game->keys[_keycode(game, entity, XK_Right)])
 		entity->vel.x += PLAYER_SPEED;
-	if (game->keys[XK_Left])
+	if (game->keys[_keycode(game, entity, XK_Left)])
 		entity->vel.x -= PLAYER_SPEED;
-	if (game->keys[XK_Up])
+	if (game->keys[_keycode(game, entity, XK_Up)])
 		entity->vel.y -= PLAYER_SPEED;
-	if (game->keys[XK_Down])
+	if (game->keys[_keycode(game, entity, XK_Down)])
 		entity->vel.y += PLAYER_SPEED;
-	if ((game->keys[XK_Right] || game->keys[XK_Left] || game->keys[XK_Up]
-			|| game->keys[XK_Down]) && !_is_attacking(ext))
+	if ((game->keys[_keycode(game, entity, XK_Right)]
+			|| game->keys[_keycode(game, entity, XK_Left)]
+			|| game->keys[_keycode(game, entity, XK_Up)]
+			|| game->keys[_keycode(game, entity, XK_Down)])
+		&& !_is_attacking(ext))
 		ext->current_anim = ext->walk;
 	else if (!_is_attacking(ext))
 		ext->current_anim = ext->idle;
-	if (game->keys[XK_Right])
+	if (game->keys[_keycode(game, entity, XK_Right)])
 		entity->flipped = false;
-	else if (game->keys[XK_Left])
+	else if (game->keys[_keycode(game, entity, XK_Left)])
 		entity->flipped = true;
 }
 
@@ -118,13 +137,5 @@ void	player_update(t_game *game, t_entity *entity)
 	_move(game, entity);
 	entity->vel.x = 0;
 	entity->vel.y = 0;
-	if (box_collide_with_box(box_for_position(entity->box, entity->pos),
-			box_for_position((t_box){{0, 0},
-				{16 * SCALE, 16 * SCALE}}, game->exit_pos))
-		&& game->collectibles == game->collectibles_count)
-	{
-		map2_reload(game, game->map2);
-		game->menu_opened = true;
-	}
 	_stair_collision(entity);
 }

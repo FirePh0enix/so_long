@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 11:19:16 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:04:14 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	_init_anims(t_game *g)
 	g->money_spawn = _load_frames(g, "textures/gen/Gold_Spawn/%d.xpm", 7);
 	g->foam = _load_frames(g, "textures/gen/Foam/%d.xpm", 8);
 	g->foam_anim = anim_new(g->foam, 8, 100, true);
+	g->explosion = _load_frames(g, "textures/gen/Explosion/%d.xpm", 9);
 }
 
 static int	_setup_game(t_game *g)
@@ -75,6 +76,7 @@ static int	_setup_game(t_game *g)
 	g->font = font_load(g, "textures/gen/regular");
 	g->small_font = font_load(g, "textures/gen/small");
 	_init_anims(g);
+	init_end(g);
 	return (1);
 }
 
@@ -89,7 +91,7 @@ int	main(int argc, char *argv[])
 		return (ft_printf("Error\nInvalid map\n"), 1);
 	game.menu = menu_new();
 	game.menu_opened = true;
-	game.filename = argv[1];
+	//game.end_reached = true;
 	srand(getms());
 	mlx_do_key_autorepeatoff(game.mlx);
 	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);

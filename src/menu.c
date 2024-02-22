@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:46:20 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 14:41:57 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:04:37 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,27 @@
 static void	play_click(t_game *game)
 {
 	if (game->map_valid)
+	{
 		game->menu_opened = false;
+		game->start_time = getms();
+	}
 }
 
 static void	edit_click(t_game *game)
 {
 	game->editor_mode = true;
 	game->menu_opened = false;
+}
+
+static void	coop_click(t_game *game)
+{
+	if (game->map_valid)
+	{
+		game->menu_opened = false;
+		game->player2 = add_entity(&game->entities,
+			player_new(game, game->player->pos, game->player->level));
+		game->start_time = getms();
+	}
 }
 
 t_gamemenu	*menu_new(void)
@@ -32,6 +46,8 @@ t_gamemenu	*menu_new(void)
 
 	menu = malloc(sizeof(t_gamemenu));
 	menu->play = btn_new_label((t_vec2i){x, 4 * 64}, 4, "Play", play_click);
-	menu->edit = btn_new_label((t_vec2i){x, 6 * 64}, 4, "Edit", edit_click);
+	menu->coop = btn_new_label((t_vec2i){x, 6 * 64}, 4, "2 Player mode",
+		coop_click);
+	menu->edit = btn_new_label((t_vec2i){x, 8 * 64}, 4, "Edit", edit_click);
 	return (menu);
 }

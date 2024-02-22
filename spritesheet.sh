@@ -148,6 +148,9 @@ new-tile-wh "textures/Resources/Gold Mine/GoldMine_Inactive.png" "GoldMineI" 0 0
 GOLD_SPAWN="textures/Resources/Resources/G_Spawn.png"
 new-anim $GOLD_SPAWN "Gold_Spawn" 0 0 7 128
 
+# Explosion !
+new-anim "textures/Effects/Explosion/Explosions.png" "Explosion" 0 0 9 192
+
 # GUI
 BTN_RED="textures/UI/Buttons/Button_Red_3Slides.png"
 new-tile $BTN_RED "Btn_Left" 0 0 $TILE_SIZE
@@ -234,7 +237,7 @@ letter()
 
 font()
 {
-	ALPHABET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789:=<>()!?.@'
+	ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789':=<>()!?.@"
 	for letter in $(echo "$ALPHABET" | sed -e 's/\(.\)/\1\n/g'); do
 		letter $letter $2 $1
 	done

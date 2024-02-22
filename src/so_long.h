@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 14:38:44 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:59:31 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,22 @@ enum e_sprite
 	SP_MAX,
 };
 
+typedef struct s_explosion
+{
+	t_anim	*anim;
+	t_vec2	pos;
+	bool	spawned;
+}	t_explosion;
+
+# define EXPLOSION_COUNT 12
+
+typedef struct s_end
+{
+	t_explosion	explosions[EXPLOSION_COUNT];
+	long		next_spawn;
+	t_btn		exit;
+}	t_end;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -161,8 +177,9 @@ typedef struct s_game
 	t_entity	**entities;
 	long		last_update;
 	t_renderer	*rdr;
+	
 	t_entity	*player;
-	char		*filename;
+	t_entity	*player2;
 
 	t_map2		*map2;
 	bool		map_valid;
@@ -173,6 +190,9 @@ typedef struct s_game
 	t_editor	editor;
 	bool		editor_mode;
 
+	t_end		end;
+	bool		end_reached;
+
 	t_vec2		start_pos;
 	int			start_level;
 
@@ -181,6 +201,9 @@ typedef struct s_game
 
 	t_vec2		exit_pos;
 	int			exit_level;
+
+	suseconds_t	start_time;
+	suseconds_t	end_time;
 
 	t_font		*font;
 	t_font		*small_font;
@@ -195,6 +218,7 @@ typedef struct s_game
 	t_img		**warrior_atk_side;
 	t_img		**money_spawn;
 	t_img		**foam;
+	t_img		**explosion;
 	t_img		*sprites[SP_MAX];
 }	t_game;
 
@@ -217,6 +241,10 @@ int			close_hook(t_game *game);
 int			mouse_hook(unsigned int btn, int x, int y, t_game *game);
 
 void		draw_hud(t_game *game);
+
+void		init_end(t_game *game);
+void		free_end(t_game *game);
+void		draw_end(t_game *game);
 
 // ----------------------------------------------
 // MAP

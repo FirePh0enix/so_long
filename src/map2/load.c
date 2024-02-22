@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 15:08:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:48:30 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	map2_reload(t_game *game, t_map2 *map)
 {
 	int	i;
 
-	vector_free_with(game->entities, (void *)entity_free);
+	vector_free_with(game->entities, (void *) entity_free);
 	game->entities = vector_new(sizeof(void *), 0);
 	game->player = NULL;
 	game->collectibles = 0;
