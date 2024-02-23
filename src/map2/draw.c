@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:18:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 11:13:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:20:09 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,19 @@ static void	_draw_empty(t_game *g, int index, int x, int y)
 		_draw_elevated_tile(g, index, x, y);
 }
 
+static void	_draw_door(t_game *g, int index, int x, int y)
+{
+	_draw_empty(g, index, x, y);
+	if (g->collectibles != g->collectibles_count)
+		rdr_add_sprite(g->rdr, sp(g)[SP_GOLDMINEI],
+			(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){14,
+			index, false});
+	else
+		rdr_add_sprite(g->rdr, sp(g)[SP_GOLDMINEA],
+			(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){14,
+			index, false});
+}
+
 static void	_draw_level(t_game *g, t_renderer *rdr, t_level *level, int index)
 {
 	int		x;
@@ -64,12 +77,13 @@ static void	_draw_level(t_game *g, t_renderer *rdr, t_level *level, int index)
 				rdr_add_sprite(rdr, sp(g)[SP_WATER], (t_vec2){x * 64, y * 64},
 					(t_add_sprite){-3, index, false});
 			else if (tile == TILE_STAIR)
+			{
 				rdr_add_sprite(rdr, sp(g)[SP_STAIR_ALL],
 					(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false});
+				_draw_empty(g, index, x, y);
+			}
 			else if (tile == TILE_DOOR)
-				rdr_add_sprite(rdr, sp(g)[SP_GOLDMINEI],
-					(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){14,
-					index, false});
+				_draw_door(g, index, x, y);
 			else if (tile == TILE_EMPTY)
 				_draw_empty(g, index, x, y);
 		}

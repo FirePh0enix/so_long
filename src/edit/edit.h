@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:55 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:21:57 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:24:40 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum item
 	ITEM_COLLECT,
 	ITEM_PLAYER,
 	ITEM_ENEMY,
+	ITEM_STAIR,
 }	t_item;
 
 typedef struct s_editor

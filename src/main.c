@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 16:04:14 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:39:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,16 @@ static t_img	**_load_frames(t_game *game, char *name, int size)
 	return (sprites);
 }
 
-t_img	**sp(t_game *game)
-{
-	return (game->sprites);
-}
-
 static void	_init_anims(t_game *g)
 {
 	g->goblin_idle = _load_frames(g, "textures/gen/Goblin_Idle/%d.xpm", 6);
 	g->goblin_walk = _load_frames(g, "textures/gen/Goblin_Walk/%d.xpm", 6);
 	g->goblin_atk_side = _load_frames(g,
 			"textures/gen/Goblin_Atk_Side/%d.xpm", 6);
+	g->goblin2_idle = _load_frames(g, "textures/gen/Goblin2_Idle/%d.xpm", 6);
+	g->goblin2_walk = _load_frames(g, "textures/gen/Goblin2_Walk/%d.xpm", 6);
+	g->goblin2_atk_side = _load_frames(g,
+			"textures/gen/Goblin2_Atk_Side/%d.xpm", 6);
 	g->warrior_idle = _load_frames(g, "textures/gen/Warrior_Idle/%d.xpm", 6);
 	g->warrior_walk = _load_frames(g, "textures/gen/Warrior_Walk/%d.xpm", 6);
 	g->warrior_atk_side = _load_frames(g,
@@ -80,6 +79,15 @@ static int	_setup_game(t_game *g)
 	return (1);
 }
 
+static void	_clean(t_game *game)
+{
+	game_free(game);
+	mlx_do_key_autorepeaton(game->mlx);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_game	game;
@@ -88,10 +96,9 @@ int	main(int argc, char *argv[])
 		return (0);
 	game.map2 = map2_load(&game, argv + 1, argc - 1);
 	if (!game.map2)
-		return (ft_printf("Error\nInvalid map\n"), 1);
+		return (ft_printf("Error\nInvalid map\n"), _clean(&game), 1);
 	game.menu = menu_new();
 	game.menu_opened = true;
-	//game.end_reached = true;
 	srand(getms());
 	mlx_do_key_autorepeatoff(game.mlx);
 	mlx_hook(game.win, KeyPress, KeyPressMask, key_pressed_hook, &game);
@@ -100,9 +107,5 @@ int	main(int argc, char *argv[])
 	mlx_mouse_hook(game.win, mouse_hook, &game);
 	mlx_loop_hook(game.mlx, update_hook, &game);
 	mlx_loop(game.mlx);
-	game_free(&game);
-	mlx_do_key_autorepeaton(game.mlx);
-	mlx_destroy_window(game.mlx, game.win);
-	mlx_destroy_display(game.mlx);
-	free(game.mlx);
+	_clean(&game);
 }

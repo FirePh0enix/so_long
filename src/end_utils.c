@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.c                                           :+:      :+:    :+:   */
+/*   end_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 19:23:35 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:39:02 by ledelbec         ###   ########.fr       */
+/*   Created: 2024/02/23 12:39:23 by ledelbec          #+#    #+#             */
+/*   Updated: 2024/02/23 12:39:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_img	*sprite(t_game *game, char *filename)
+void	free_end(t_game *game)
 {
-	int	width;
-	int	height;
+	int	i;
 
-	return (mlx_xpm_file_to_image(game->mlx, filename, &width, &height));
-}
-
-t_img	**sp(t_game *game)
-{
-	return (game->sprites);
+	i = -1;
+	while (++i < EXPLOSION_COUNT)
+		free(game->end.explosions[i].anim);
 }

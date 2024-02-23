@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:47:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 10:48:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:35:03 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static void	_place_collectible(t_game *game, t_level *level, int x, int y)
 	game->collectibles_count++;
 }
 
+static void	_place_player(t_game *game, t_level *level, int x, int y)
+{
+	const int	tile_x = x / SCALED_SIZE;
+	const int	tile_y = y / SCALED_SIZE;
+
+	level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
+	add_entity(&game->entities, player_new(game,
+			(t_vec2){tile_x * 64, tile_y * 64}, game->editor.level, false));
+}
+
 static void	_place_item(int x, int y, t_item item, t_game *game)
 {
 	const int	tile_x = x / SCALED_SIZE;
@@ -39,14 +49,12 @@ static void	_place_item(int x, int y, t_item item, t_game *game)
 		level->data[tile_x + tile_y * level->width] = TILE_SOLID;
 	else if (item == ITEM_DOOR)
 		level->data[tile_x + tile_y * level->width] = TILE_DOOR;
+	else if (item == ITEM_STAIR)
+		level->data[tile_x + tile_y * level->width] = TILE_STAIR;
 	else if (item == ITEM_COLLECT)
 		_place_collectible(game, level, x, y);
 	else if (item == ITEM_PLAYER)
-	{
-		level->data[tile_x + tile_y * level->width] = TILE_EMPTY;
-		add_entity(&game->entities, player_new(game,
-				(t_vec2){tile_x * 64, tile_y * 64}, game->editor.level));
-	}
+		_place_player(game, level, x, y);
 	else if (item == ITEM_ENEMY)
 	{
 		level->data[tile_x + tile_y * level->width] = TILE_EMPTY;

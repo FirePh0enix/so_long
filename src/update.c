@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 15:18:26 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:37:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,29 @@ static void	_check_victory(t_game *game, t_entity *player)
 {
 	if (game->editor_mode)
 		return ;
-	if (box_collide_with_box(box_for_position(player->box, player->pos),
-			box_for_position((t_box){{0, 0},
-				{16 * SCALE, 16 * SCALE}}, game->exit_pos))
+	if ((box_collide_with_box(box_for_position(player->box, player->pos),
+				box_for_position((t_box){{0, 0},
+					{16 * SCALE, 16 * SCALE}}, game->exit_pos))
+		|| (game->player2 != NULL && box_collide_with_box(
+				box_for_position(game->player2->box, game->player2->pos),
+				box_for_position((t_box){{0, 0},
+					{16 * SCALE, 16 * SCALE}}, game->exit_pos))))
 		&& game->collectibles == game->collectibles_count)
 	{
 		game->end_reached = true;
 		game->end_time = getms();
-		printf("Hello world!\n");
 	}
+}
+
+static void	_update_game(t_game *game)
+{		
+	if (game->editor_mode)
+		edit_update(game);
+	else
+		draw_hud(game);
+	_update_entities(game, !game->editor_mode);
+	_collect_entities(&game->entities);
+	_check_victory(game, game->player);
 }
 
 int	update_hook(t_game *game)
@@ -85,15 +99,7 @@ int	update_hook(t_game *game)
 	if (game->menu_opened)
 		draw_menu(game, game->menu);
 	else if (!game->end_reached)
-	{
-		if (game->editor_mode)
-			edit_update(game);
-		else
-			draw_hud(game);
-		_update_entities(game, !game->editor_mode);
-		_collect_entities(&game->entities);
-		_check_victory(game, game->player);
-	}
+		_update_game(game);
 	else
 		draw_end(game);
 	rdr_draw(game->rdr, game);

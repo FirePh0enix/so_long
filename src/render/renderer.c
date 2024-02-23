@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:49:57 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:13:46 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:42:59 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,21 @@ t_renderer	*rdr_new(void)
 	rdr = malloc(sizeof(t_renderer));
 	rdr->root = NULL;
 	rdr->pixels = malloc(sizeof(t_trgb) * WIN_WIDTH * WIN_HEIGHT);
+	arena_init(&rdr->allocator, sizeof(t_node), 1000000);
 	return (rdr);
 }
 
 void	rdr_free(t_renderer *rdr)
 {
 	rdr_clear(rdr);
+	arena_free(&rdr->allocator);
 	free(rdr->pixels);
 	free(rdr);
 }
 
 void	rdr_clear(t_renderer *rdr)
 {
-	t_node	*node;
-	t_node	*next;
-
-	node = rdr->root;
-	while (node)
-	{
-		next = node->next;
-		free(node);
-		node = next;
-	}
+	arena_release(&rdr->allocator);
 	rdr->root = NULL;
 }
 

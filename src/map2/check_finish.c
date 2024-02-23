@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:35:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 14:59:35 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:52:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ bool	check_finish(t_game *game, t_map2 *map)
 	while (++i < c.level_count)
 		free(c.levels[i]);
 	free(c.levels);
-	printf("Collectibles: %d\n", game->collectibles_count);
 	return (c.collectibles == game->collectibles_count
 		&& c.collectibles > 0 && c.has_exit);
 }

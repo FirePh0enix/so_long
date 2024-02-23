@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/15 14:45:22 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:15:58 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,34 @@ bool	check_files(char **filenames, int count)
 	return (true);
 }
 
+static t_tile	_get_tile(t_level *level, int x, int y)
+{
+	return (level->data[x + y * level->width]);
+}
+
+static bool	_check_bounds(t_level *level)
+{
+	int	i;
+
+	i = 0;
+	while (i < level->width)
+	{
+		if (_get_tile(level, i, 0) != TILE_SOLID
+			|| _get_tile(level, i, level->height - 1) != TILE_SOLID)
+			return (0);
+		i++;
+	}
+	i = 0;
+	while (i < level->height)
+	{
+		if (_get_tile(level, 0, i) != TILE_SOLID
+			|| _get_tile(level, level->width - 1, i) != TILE_SOLID)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 bool	check_errors(t_map2 *map)
 {
 	int	i;
@@ -46,7 +74,8 @@ bool	check_errors(t_map2 *map)
 	width = map->width;
 	height = map->height;
 	while (++i < map->level_count)
-		if (map->levels[i].width != width || map->levels[i].height != height)
+		if (map->levels[i].width != width || map->levels[i].height != height
+			|| !_check_bounds(&map->levels[i]))
 			return (false);
 	return (true);
 }

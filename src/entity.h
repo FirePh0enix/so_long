@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 14:10:05 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:41:55 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ typedef struct s_player
 	t_anim		*atk_side;
 }	t_player;
 
-t_entity	*player_new(t_game *game, t_vec2 pos, int level);
+t_entity	*player_new(t_game *game, t_vec2 pos, int level, bool is_player2);
 void		player_update(t_game *game, t_entity *entity);
+
+int			_keycode(t_game *g, t_entity *e, int keycode);
 
 // ----------------------------------------------
 // GEM

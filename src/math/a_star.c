@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:18:04 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 15:59:06 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:32:42 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	_find_current_node(
 	i = -1;
 	while (++i < (int)vector_size(*open_list))
 	{
-	if ((*open_list)[i]->f < (*current_node)->f)
+		if ((*open_list)[i]->f < (*current_node)->f)
 		{
 			*current_node = (*open_list)[i];
 			*current_index = i;

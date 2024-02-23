@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 13:48:30 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:06:50 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_tile	_put_player(t_game *game, t_vec2i pos, int level)
 	game->start_pos.y = pos.y;
 	game->start_level = level;
 	game->player = add_entity(&game->entities,
-			player_new(game, (t_vec2){pos.x * 64, pos.y * 64 - 16}, level));
+			player_new(game, (t_vec2){pos.x * 64, pos.y * 64 - 16}, level, 0));
 	return (TILE_EMPTY);
 }
 
@@ -35,7 +35,7 @@ static t_tile	_put_tile(t_game *game, char c, t_vec2i pos, int level)
 	else if (c == 'E')
 		return (game->exit_pos = (t_vec2){pos.x * 64, pos.y * 64},
 			game->exit_level = level, TILE_DOOR);
-	else if (c == 'S')
+	else if (BONUS && c == 'S')
 		return (TILE_STAIR);
 	else if (c == 'C')
 	{
@@ -44,7 +44,7 @@ static t_tile	_put_tile(t_game *game, char c, t_vec2i pos, int level)
 		game->collectibles_count++;
 		return (TILE_EMPTY);
 	}
-	else if (c == 'F')
+	else if (BONUS && c == 'F')
 	{
 		add_entity(&game->entities, knight_new(game, (t_vec2){pos.x * 64,
 				pos.y * 64}, level));
@@ -67,6 +67,7 @@ static int	_load_level(t_game *game, t_level *level, int index, char *filename)
 	level->height = line_count(level->string);
 	level->data = malloc(sizeof(t_tile) * level->width * level->height);
 	level->filename = filename;
+	level->index = index;
 	x = -1;
 	while (++x < level->width)
 	{

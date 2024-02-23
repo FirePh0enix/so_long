@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:46:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 14:16:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:04:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,5 @@ void	load_sprites(t_game *game)
 	_load_sprites4(game, game->sprites);
 	game->sprites[SP_GOLDMINEI] = sprite(game, "textures/gen/GoldMineI.xpm");
 	game->sprites[SP_GOLDMINEA] = sprite(game, "textures/gen/GoldMineA.xpm");
+	load_sprites_pt2(game, game->sprites);
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 15:51:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:24:03 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:28:01 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ static void	_draw_icons(t_game *game, t_renderer *rdr)
 		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, sp(game)[SP_DOOR], (t_vec2){x + 2 * SCALED_SIZE, y},
 		(t_add_sprite){9100, 5, false});
+	rdr_add_sprite(rdr, sp(game)[SP_STAIR_ALL], (t_vec2){x + 3 * 64, y},
+		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, game->money_spawn[6],
-		(t_vec2){x + 3 * SCALED_SIZE - 32, y - 32},
+		(t_vec2){x + 4 * SCALED_SIZE - 32, y - 32},
 		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, game->goblin_idle[0],
-		(t_vec2){x + 4 * SCALED_SIZE - 64, y - 64},
+		(t_vec2){x + 5 * SCALED_SIZE - 64, y - 64},
 		(t_add_sprite){9100, 5, false});
 	rdr_add_sprite(rdr, game->warrior_idle[0],
-		(t_vec2){x + 5 * SCALED_SIZE - 64, y - 64},
+		(t_vec2){x + 6 * SCALED_SIZE - 64, y - 64},
 		(t_add_sprite){9100, 5, false});
 }
 
@@ -67,12 +69,14 @@ static void	_draw_hl(t_game *game, t_editor *editor)
 		x = 1 * SCALED_SIZE;
 	else if (editor->item == ITEM_DOOR)
 		x = 2 * SCALED_SIZE;
-	else if (editor->item == ITEM_COLLECT)
+	else if (editor->item == ITEM_STAIR)
 		x = 3 * SCALED_SIZE;
-	else if (editor->item == ITEM_PLAYER)
+	else if (editor->item == ITEM_COLLECT)
 		x = 4 * SCALED_SIZE;
-	else if (editor->item == ITEM_ENEMY)
+	else if (editor->item == ITEM_PLAYER)
 		x = 5 * SCALED_SIZE;
+	else if (editor->item == ITEM_ENEMY)
+		x = 6 * SCALED_SIZE;
 	draw_hl(game, ox + x, oy, 1);
 }
 

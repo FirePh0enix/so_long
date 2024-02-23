@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:33:41 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 16:20:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:42:40 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../so_long.h"
 #include "../anim/anim.h"
 
-// FIXME Still one pixel off when colliding with a wall
 static void	_move(t_game *game, t_entity *ent)
 {
 	while (ent->vel.x != 0)
@@ -72,22 +71,6 @@ static void	_stair_collision(t_entity *entity)
 		if (((int)entity->pos.y + 63) % 64 > 56)
 			entity->level--;
 	}
-}
-
-static int	_keycode(t_game *g, t_entity *e, int keycode)
-{
-	if (e == g->player2)
-	{
-		if (keycode == XK_Right)
-			return (XK_d);
-		else if (keycode == XK_Left)
-			return (XK_a);
-		else if (keycode == XK_Up)
-			return (XK_w);
-		else if (keycode == XK_Down)
-			return (XK_s);
-	}
-	return (keycode);
 }
 
 static void	_handle_keys(t_game *game, t_entity *entity, t_player *ext)

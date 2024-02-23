@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:23:05 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:23:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:27:19 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ static void	_select(t_game *game, int mx, int my)
 	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 2 * SCALED_SIZE, y}, s))
 		game->editor.item = ITEM_DOOR;
 	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 3 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_COLLECT;
+		game->editor.item = ITEM_STAIR;
 	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 4 * SCALED_SIZE, y}, s))
-		game->editor.item = ITEM_PLAYER;
+		game->editor.item = ITEM_COLLECT;
 	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 5 * SCALED_SIZE, y}, s))
+		game->editor.item = ITEM_PLAYER;
+	if (_is_hover((t_vec2i){mx, my}, (t_vec2i){x + 6 * SCALED_SIZE, y}, s))
 		game->editor.item = ITEM_ENEMY;
 }
 

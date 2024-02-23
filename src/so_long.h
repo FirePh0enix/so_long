@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/22 15:59:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:06:28 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 # include "edit/edit.h"
 # include "entity.h"
 
-// 720x480
-// 1440x960
 # define WIN_WIDTH 1440
 # define WIN_HEIGHT 960
+
+# ifndef BONUS
+#  define BONUS 1
+# endif
 
 typedef struct s_game			t_game;
 typedef struct s_entity			t_entity;
@@ -66,6 +68,22 @@ enum e_sprite
 	SP_GROUND_BT,
 	SP_GROUND_RBT,
 	SP_GROUND_ALL,
+	SP_SAND_M,
+	SP_SAND_T,
+	SP_SAND_TL,
+	SP_SAND_TR,
+	SP_SAND_L,
+	SP_SAND_R,
+	SP_SAND_B,
+	SP_SAND_BL,
+	SP_SAND_BR,
+	SP_SAND_TLR,
+	SP_SAND_LR,
+	SP_SAND_BLR,
+	SP_SAND_LBT,
+	SP_SAND_BT,
+	SP_SAND_RBT,
+	SP_SAND_ALL,
 	SP_CLIFF_TL,
 	SP_CLIFF_T,
 	SP_CLIFF_TR,
@@ -177,7 +195,7 @@ typedef struct s_game
 	t_entity	**entities;
 	long		last_update;
 	t_renderer	*rdr;
-	
+
 	t_entity	*player;
 	t_entity	*player2;
 
@@ -213,6 +231,9 @@ typedef struct s_game
 	t_img		**goblin_walk;
 	t_img		**goblin_idle;
 	t_img		**goblin_atk_side;
+	t_img		**goblin2_walk;
+	t_img		**goblin2_idle;
+	t_img		**goblin2_atk_side;
 	t_img		**warrior_walk;
 	t_img		**warrior_idle;
 	t_img		**warrior_atk_side;
@@ -227,6 +248,8 @@ typedef struct s_game
 t_img		**sp(t_game *g);
 
 void		load_sprites(t_game *game);
+void		load_sprites2(t_game *game, t_img **sp);
+
 suseconds_t	getms(void);
 t_entity	*add_entity(t_entity ***entities, t_entity *entity);
 void		remove_entity(t_game *game, int x, int y);
@@ -271,6 +294,7 @@ typedef struct s_level
 	char	*filename;
 	int		width;
 	int		height;
+	int		index;
 }	t_level;
 
 typedef struct s_map2

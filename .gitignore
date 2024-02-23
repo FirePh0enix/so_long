@@ -5,6 +5,7 @@ so_long
 *.xpm
 libft/*.o
 compile_flags.txt
+dist/
 
 textures/gen
 .DS_Store

@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/22 14:30:16 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/23 16:43:43 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SOURCES = \
 	src/main.c \
 	src/game_free.c \
 	src/load_sprites.c \
+	src/load_sprites2.c \
 	src/hooks.c \
 	src/sprite.c \
 	src/update.c \
@@ -29,7 +30,10 @@ SOURCES = \
 	src/utils.c \
 	src/entity.c \
 	src/end.c \
+	src/end_utils.c \
 	src/anim/anim.c \
+	\
+	src/arena_alloc.c \
 	\
 	src/edit/edit.c \
 	src/edit/place.c \
@@ -88,6 +92,9 @@ libft/libft.a:
 
 $(NAME): mlx/libmlx.a libft/libft.a textures/gen $(TEXTURES_XPM) $(OBJECTS)
 	$(CC) -o $(NAME) $(OBJECTS) mlx/libmlx.a libft/libft.a $(LDFLAGS)
+
+bonus: CFLAGS+=-DBONUS
+bonus: $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<

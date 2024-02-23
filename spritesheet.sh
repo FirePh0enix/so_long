@@ -80,6 +80,23 @@ new-tile $GROUND_SHEET "BT" 1 3 $TILE_SIZE
 new-tile $GROUND_SHEET "RightBT" 2 3 $TILE_SIZE
 new-tile $GROUND_SHEET "All" 3 3 $TILE_SIZE
 
+new-tile $GROUND_SHEET "TopLeftS" 5 0 $TILE_SIZE
+new-tile $GROUND_SHEET "TopS" 6 0 $TILE_SIZE
+new-tile $GROUND_SHEET "TopRightS" 7 0 $TILE_SIZE
+new-tile $GROUND_SHEET "LeftS" 5 1 $TILE_SIZE
+new-tile $GROUND_SHEET "MidS" 6 1 $TILE_SIZE
+new-tile $GROUND_SHEET "RightS" 7 1 $TILE_SIZE
+new-tile $GROUND_SHEET "BotLeftS" 5 2 $TILE_SIZE
+new-tile $GROUND_SHEET "BotS" 6 2 $TILE_SIZE
+new-tile $GROUND_SHEET "BotRightS" 7 2 $TILE_SIZE
+new-tile $GROUND_SHEET "TopLRS" 8 0 $TILE_SIZE
+new-tile $GROUND_SHEET "LRS" 8 1 $TILE_SIZE
+new-tile $GROUND_SHEET "BotLRS" 8 2 $TILE_SIZE
+new-tile $GROUND_SHEET "LeftBTS" 5 3 $TILE_SIZE
+new-tile $GROUND_SHEET "BTS" 6 3 $TILE_SIZE
+new-tile $GROUND_SHEET "RightBTS" 7 3 $TILE_SIZE
+new-tile $GROUND_SHEET "AllS" 8 3 $TILE_SIZE
+
 # Cliff tiles
 CLIFF="textures/Terrain/Ground/Tilemap_Elevation.png"
 new-tile $CLIFF "Cliff_TopLeft" 0 0 $TILE_SIZE
@@ -139,6 +156,14 @@ new-anim $GOBLIN_SHEET "Goblin_Walk" 0 1 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Atk_Side" 0 2 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Atk_Down" 0 3 6 $ENTITY_SIZE
 new-anim $GOBLIN_SHEET "Goblin_Atk_Up" 0 4 6 $ENTITY_SIZE
+
+GOBLIN2_SHEET="textures/Factions/Goblins/Troops/Torch/Purple/Torch_Purple.png"
+new-anim $GOBLIN2_SHEET "Goblin2_Idle" 0 0 6 $ENTITY_SIZE
+new-anim $GOBLIN2_SHEET "Goblin2_Walk" 0 1 6 $ENTITY_SIZE
+
+new-anim $GOBLIN2_SHEET "Goblin2_Atk_Side" 0 2 6 $ENTITY_SIZE
+new-anim $GOBLIN2_SHEET "Goblin2_Atk_Down" 0 3 6 $ENTITY_SIZE
+new-anim $GOBLIN2_SHEET "Goblin2_Atk_Up" 0 4 6 $ENTITY_SIZE
 
 # Buildings
 new-tile-wh "textures/Resources/Gold Mine/GoldMine_Active.png" "GoldMineA" 0 0 192 128
@@ -231,15 +256,15 @@ new-tile "textures/UI/Icons/Regular_10.png" "Lock" 0 0 $TILE_SIZE
 
 letter()
 {
-	FONT="Merchant Copy.ttf"
+	FONT="textures/Merchant Copy.ttf"
 	convert -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3/$1.xpm
 }
 
 font()
 {
-	ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789':=<>()!?.@"
+	ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789'=<>()!?.@"
 	for letter in $(echo "$ALPHABET" | sed -e 's/\(.\)/\1\n/g'); do
-		letter $letter $2 $1
+		letter "$letter" $2 $1
 	done
 }
 

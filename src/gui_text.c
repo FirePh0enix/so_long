@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:16:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 11:17:08 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:43:45 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	_font_height(t_font *font)
 int	text_center_x(t_font *font, char *s, int px, int pwidth)
 {
 	const int	width = _font_width(font) * ft_strlen(s);
-	const int	fx = px + pwidth / 2 - width;
+	const int	fx = px + pwidth / 2 - width / 2;
 
 	return (fx);
 }

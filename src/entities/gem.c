@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 11:00:33 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:32:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	gem_update(t_game *game, t_entity *entity)
 	entity->sprite = anim_get_sprite(money->anim);
 	anim_update(money->anim);
 	if (box_collide_with_box(box_for_position(entity->box, entity->pos),
-			box_for_position(pbox, game->player->pos)))
+			box_for_position(pbox, game->player->pos))
+		|| (game->player2 != NULL && box_collide_with_box(
+				box_for_position(entity->box, entity->pos),
+				box_for_position(pbox, game->player2->pos))))
 	{
 		entity->state = STATE_DEAD;
 		game->collectibles++;

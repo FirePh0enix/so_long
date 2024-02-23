@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:00 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 13:51:05 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:51:06 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	_save_entities(t_level *level, int index, t_entity **entities)
 		entity = entities[i];
 		if (entity->level == index)
 			level->data[((int)entity->pos.x / SCALED_SIZE)
-				+ ((int)entity->pos.y / SCALED_SIZE) * level->width]
+				+ ((int)(entity->pos.y + 32) / SCALED_SIZE) * level->width]
 				= etype_to_tile(entity->type);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:37:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:16:57 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:24:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,15 @@ static void	_free_images(t_game *game)
 	_free_anim(game, game->goblin_idle, 6);
 	_free_anim(game, game->goblin_walk, 6);
 	_free_anim(game, game->goblin_atk_side, 6);
+	_free_anim(game, game->goblin2_idle, 6);
+	_free_anim(game, game->goblin2_walk, 6);
+	_free_anim(game, game->goblin2_atk_side, 6);
 	_free_anim(game, game->warrior_idle, 6);
 	_free_anim(game, game->warrior_walk, 6);
 	_free_anim(game, game->warrior_atk_side, 6);
 	_free_anim(game, game->money_spawn, 7);
 	_free_anim(game, game->foam, 8);
+	_free_anim(game, game->explosion, 9);
 	free(game->foam_anim);
 	i = -1;
 	while (++i < SP_MAX)
@@ -53,7 +57,8 @@ void	game_free(t_game *game)
 {
 	unsigned int	i;
 
-	rdr_free(game->rdr);
+	if (game->rdr)
+		rdr_free(game->rdr);
 	_free_images(game);
 	free(game->keys);
 	i = 0;
@@ -64,8 +69,11 @@ void	game_free(t_game *game)
 		free(game->entities[i]);
 		i++;
 	}
-	vector_free(game->entities);
-	map2_free(game->map2);
+	if (game->entities)
+		vector_free(game->entities);
+	free_end(game);
+	if (game->map2)
+		map2_free(game->map2);
 	font_free(game, game->font);
 	font_free(game, game->small_font);
 	free(game->menu);

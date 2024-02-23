@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:15:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 14:07:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:54:36 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	_draw_button(t_game *game, t_btn *btn)
 	}
 	if (btn->label)
 		rdr_add_text(game->rdr, btn->label, (t_vec2){
-			text_center_x(game->font, btn->label, btn->x, btn->size * 64),
+			text_center_x(game->font, btn->label, btn->x, btn->size * 64) - 14,
 			text_center_y(game->font, btn->label, btn->y, 64) - 8},
 			(t_add_text){3, 5, game->font, 0x0});
 	else if (btn->img)

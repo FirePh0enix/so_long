@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:07:31 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:30:23 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RENDER_H
 
 # include "../math/vec2.h"
+# include "../arena_alloc.h"
 # include <stdbool.h>
 # include "mlx_int.h"
 
@@ -54,6 +55,7 @@ typedef struct s_node
 	t_node_type				type;
 	struct s_node			*next;
 	int						order;
+	bool					freed;
 	union
 	{
 		struct s_node_sprite
@@ -80,6 +82,7 @@ typedef struct s_renderer
 {
 	t_node			*root;
 	unsigned int	*pixels;
+	t_arena			allocator;
 }	t_renderer;
 
 t_renderer	*rdr_new(void);
