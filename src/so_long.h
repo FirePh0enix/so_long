@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 16:06:28 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:17:21 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ typedef struct s_game
 	long		last_update;
 	t_renderer	*rdr;
 
+	char		*buffer;
+
 	t_entity	*player;
 	t_entity	*player2;
 
@@ -216,6 +218,7 @@ typedef struct s_game
 
 	int			collectibles_count;
 	int			collectibles;
+	int			moves;
 
 	t_vec2		exit_pos;
 	int			exit_level;

@@ -6,13 +6,30 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:25:32 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 16:38:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:32:36 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gui.h"
 #include "so_long.h"
 #include "render/render.h"
+
+static void	_draw_movements(t_game *game)
+{
+	sprintf(game->buffer, "Moves %d", game->moves);
+	rdr_add_text(game->rdr, game->buffer, (t_vec2){10, 10},
+		(t_add_text){992000, 5, game->small_font, 0x0});
+}
+
+static void	_draw_collects(t_game *game)
+{
+	rdr_add_sprite(game->rdr, game->money_spawn[6], (t_vec2){-40, -15},
+		(t_add_sprite){99200, 5, false});
+	sprintf(game->buffer, "%d out of %d", game->collectibles,
+		game->collectibles_count);
+	rdr_add_text(game->rdr, game->buffer, (t_vec2){50, 50},
+		(t_add_text){992000, 5, game->small_font, 0x0});
+}
 
 void	draw_hud(t_game *game)
 {
@@ -28,8 +45,11 @@ void	draw_hud(t_game *game)
 		msg = (char *) msg1;
 	draw_ribbon(game, (t_vec2i){WIN_WIDTH / 2 - SCALED_SIZE * (size / 2), 0},
 		size);
+	draw_banner_h(game, (t_vec2i){-64, -48}, (t_vec2i){5, 3});
 	rdr_add_text(game->rdr, (void *)msg, (t_vec2){
 		text_center_x(game->font, (void *)msg, x - 150, size * SCALED_SIZE),
 		text_center_y(game->font, (void *)msg, 0, SCALED_SIZE) - 8},
 		(t_add_text){992000, 5, game->font, 0x0});
+	_draw_movements(game);
+	_draw_collects(game);
 }

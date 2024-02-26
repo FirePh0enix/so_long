@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:18:04 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:32:42 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:21:54 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 static void	_add_children(
 	t_level *map,
 	t_anode ***children,
-	t_anode *current_node)
+	t_anode *current_node,
+	t_arena *arena)
 {
 	int			i;
 	t_vec2i		node_pos;
@@ -33,7 +34,7 @@ static void	_add_children(
 			|| node_pos.y >= map->height || node_pos.y < 0
 			|| map->data[node_pos.x + node_pos.y * map->width] == TILE_SOLID)
 			continue ;
-		add_node(children, new_node(current_node, node_pos));
+		add_node(children, new_node(arena, current_node, node_pos));
 	}
 }
 
@@ -43,7 +44,7 @@ static void	_find_current_node(
 		t_anode ***open_list,
 		t_anode ***close_list)
 {
-	int	i;
+	int		i;
 
 	*current_node = (*open_list)[0];
 	*current_index = 0;
@@ -64,9 +65,10 @@ typedef struct s_lists
 {
 	t_anode	***open_list;
 	t_anode	***close_list;
+	t_arena	*arena;
 }	t_lists;
 
-static void	_idk_something_about_children(
+static void	_generate_children(
 		t_level *map,
 		t_anode *current_node,
 		t_anode *end_node,
@@ -76,7 +78,7 @@ static void	_idk_something_about_children(
 	t_anode	**children;
 
 	children = vector_new(sizeof(t_anode *), 0);
-	_add_children(map, &children, current_node);
+	_add_children(map, &children, current_node, l.arena);
 	i = -1;
 	while (++i < (int)vector_size(children))
 	{
@@ -89,12 +91,14 @@ static void	_idk_something_about_children(
 			continue ;
 		add_node(l.open_list, children[i]);
 	}
+	vector_free(children);
 }
 
 static t_vec2i	*_astar_search_int(
 	t_level *map,
 	t_anode *start_node,
-	t_anode *end_node)
+	t_anode *end_node,
+	t_arena *arena)
 {
 	t_anode		*current_node;
 	t_anode		**open_list;
@@ -109,10 +113,13 @@ static t_vec2i	*_astar_search_int(
 		_find_current_node(&current_node, &current_index,
 			&open_list, &close_list);
 		if (node_equals(current_node, end_node))
-			return (construct_path(current_node, open_list, close_list));
-		_idk_something_about_children(map, start_node, end_node,
-			(t_lists){&open_list, &close_list});
+			return (construct_path(current_node, open_list, close_list, arena));
+		_generate_children(map, start_node, end_node,
+			(t_lists){&open_list, &close_list, arena});
 	}
+	vector_free(open_list);
+	vector_free(close_list);
+	arena_free(arena);
 	return (NULL);
 }
 
@@ -123,8 +130,10 @@ t_vec2i	*astar_search(t_level *map, t_vec2i start, t_vec2i end)
 {
 	t_anode	*start_node;
 	t_anode	*end_node;
+	t_arena	arena;
 
-	start_node = new_node(NULL, start);
-	end_node = new_node(NULL, end);
-	return (_astar_search_int(map, start_node, end_node));
+	arena_init(&arena, sizeof(t_anode), 1000000);
+	start_node = new_node(&arena, NULL, start);
+	end_node = new_node(&arena, NULL, end);
+	return (_astar_search_int(map, start_node, end_node, &arena));
 }

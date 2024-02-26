@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:39:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:22:30 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	_setup_game(t_game *g)
 	g->canvas = mlx_new_image(g->mlx, WIN_WIDTH, WIN_HEIGHT);
 	g->entities = vector_new(sizeof(t_entity *), 0);
 	g->rdr = rdr_new();
+	g->buffer = ft_calloc(128, 1);
 	load_sprites(g);
 	edit_init(&g->editor, g);
 	g->font = font_load(g, "textures/gen/regular");

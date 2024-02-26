@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:36:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 15:29:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:28:52 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ t_vec2i	*construct_path(t_anode *current_node, t_anode **open_list,
 	vector_free(open_list);
 	vector_free(close_list);
 	arena_free(arena);
-	printf("%d\n", vector_size(path));
+	printf("%d\n", vector_size());
 	return (path);
 }

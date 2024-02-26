@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:33:41 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:42:40 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:09:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,34 @@ static void	_stair_collision(t_entity *entity)
 	}
 }
 
+static void	_handle_move_keys(t_game *game, t_entity *entity, t_player *ext)
+{
+	(void) ext;
+	if (game->keys[_keycode(game, entity, XK_Right)])
+	{
+		entity->vel.x += 1;
+		game->moves += 1;
+	}
+	if (game->keys[_keycode(game, entity, XK_Left)])
+	{
+		entity->vel.x -= 1;
+		game->moves += 1;
+	}
+	if (game->keys[_keycode(game, entity, XK_Up)])
+	{
+		entity->vel.y -= 1;
+		game->moves += 1;
+	}
+	if (game->keys[_keycode(game, entity, XK_Down)])
+	{
+		entity->vel.y += 1;
+		game->moves += 1;
+	}
+	if (entity->vel.x != 0 || entity->vel.y != 0)
+		entity->vel = vec2_normalized(entity->vel);
+	entity->vel = vec2_mul(entity->vel, PLAYER_SPEED);
+}
+
 static void	_handle_keys(t_game *game, t_entity *entity, t_player *ext)
 {
 	if (game->keys[' '] && !_is_attacking(ext))
@@ -81,14 +109,7 @@ static void	_handle_keys(t_game *game, t_entity *entity, t_player *ext)
 		ext->current_anim->last_frame = 0;
 		ext->current_anim = ext->atk_side;
 	}
-	if (game->keys[_keycode(game, entity, XK_Right)])
-		entity->vel.x += PLAYER_SPEED;
-	if (game->keys[_keycode(game, entity, XK_Left)])
-		entity->vel.x -= PLAYER_SPEED;
-	if (game->keys[_keycode(game, entity, XK_Up)])
-		entity->vel.y -= PLAYER_SPEED;
-	if (game->keys[_keycode(game, entity, XK_Down)])
-		entity->vel.y += PLAYER_SPEED;
+	_handle_move_keys(game, entity, ext);
 	if ((game->keys[_keycode(game, entity, XK_Right)]
 			|| game->keys[_keycode(game, entity, XK_Left)]
 			|| game->keys[_keycode(game, entity, XK_Up)]

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 16:30:23 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:33:45 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct s_draw
 }	t_draw;
 
 /*
- * Add a Gaussian blur filter to the whole screen.
+ * Add a Box blur filter to the whole screen.
  */
 void		rdr_add_blur(t_renderer *rdr, int px, int z_index);
 

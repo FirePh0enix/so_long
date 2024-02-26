@@ -6,12 +6,13 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:48:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 15:15:47 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:09:19 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include <stdlib.h>
+#include "libft.h"
 
 static void	_add_node(t_renderer *rdr, t_node *node)
 {
@@ -75,7 +76,7 @@ void	rdr_add_text(
 	node->next = NULL;
 	node->freed = false;
 	node->order = _calc_order_with_depth_testing(pos, param.level, param.level);
-	node->text.str = str;
+	node->text.str = ft_strdup(str);
 	node->text.pos = pos;
 	node->text.color = param.color;
 	node->text.font = param.font;

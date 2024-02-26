@@ -262,7 +262,7 @@ letter()
 
 font()
 {
-	ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789'=<>()!?.@"
+	ALPHABET="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrtsuvwxyz0123456789/'=<>()!?.@"
 	for letter in $(echo "$ALPHABET" | sed -e 's/\(.\)/\1\n/g'); do
 		letter "$letter" $2 $1
 	done

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:49:57 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 16:42:59 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:17:36 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ void	rdr_free(t_renderer *rdr)
 
 void	rdr_clear(t_renderer *rdr)
 {
+	t_node	*node;
+
+	node = rdr->root;
+	while (node)
+	{
+		if (node->type == NODE_TEXT)
+			free(node->text.str);
+		node = node->next;
+	}
 	arena_release(&rdr->allocator);
 	rdr->root = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:37:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:42:19 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	_collect_entities(t_entity ***entities)
 {
 	unsigned int	i;
 
-	i = 0;
 	while (1)
 	{
 		i = 0;
@@ -33,9 +32,9 @@ static void	_collect_entities(t_entity ***entities)
 				break ;
 			i++;
 		}
-		if (i == vector_size(*entities))
+		if (i >= vector_size(*entities))
 			break ;
-		ft_printf("Entity collected!\n");
+		entity_free((*entities)[i]);
 		vector_remove((void **)entities, i);
 	}
 }
