@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:31:32 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:32:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:50:56 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ static void	_draw_elevated_tile(t_game *g, int index, int x, int y)
 	level1 = &g->map2->levels[index - 1];
 	rdr_add_sprite(g->rdr, sp(g)[SP_CLIFF_TLR],
 		(t_vec2){x * 64, y * 64}, (t_add_sprite){9, index,
-		false});
+		false, true});
 	if (level1->data[x + (y + 1) * level1->width] != TILE_STAIR)
 		rdr_add_sprite(g->rdr, sp(g)[SP_CLIFF_SIDE_ALL],
 			(t_vec2){x * 64, (y + 1) * 64}, (t_add_sprite){11,
-			index - 1, false});
+			index - 1, false, true});
 	rdr_add_sprite(g->rdr, get_ground_tile(g, level, x, y),
-		(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false});
+		(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false, true});
 }
 
 static void	_draw_floor_tile(t_game *g, int x, int y)
 {
 	rdr_add_sprite(g->rdr, anim_get_sprite(g->foam_anim),
-		(t_vec2){x * 64 - 64, y * 64 - 64}, (t_add_sprite){-2, 0, false});
+		(t_vec2){x * 64 - 64, y * 64 - 64}, (t_add_sprite){-2, 0, false, true});
 	rdr_add_sprite(g->rdr, get_ground_tile(g, &g->map2->levels[0], x, y),
-		(t_vec2){x * 64, y * 64}, (t_add_sprite){-1, 0, false});
+		(t_vec2){x * 64, y * 64}, (t_add_sprite){-1, 0, false, true});
 }
 
 void	draw_empty(t_game *g, int index, int x, int y)
@@ -53,16 +53,16 @@ void	draw_door(t_game *g, int index, int x, int y)
 	if (g->collectibles != g->collectibles_count)
 		rdr_add_sprite(g->rdr, sp(g)[SP_GOLDMINEI],
 			(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){14,
-			index, false});
+			index, false, true});
 	else
 		rdr_add_sprite(g->rdr, sp(g)[SP_GOLDMINEA],
 			(t_vec2){x * 64 - 64, y * 64 - 32}, (t_add_sprite){14,
-			index, false});
+			index, false, true});
 }
 
 void	draw_stair(t_game *g, int index, int x, int y)
 {
 	rdr_add_sprite(g->rdr, sp(g)[SP_STAIR_ALL],
-		(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false});
+		(t_vec2){x * 64, y * 64}, (t_add_sprite){10, index, false, true});
 	draw_empty(g, index, x, y);
 }

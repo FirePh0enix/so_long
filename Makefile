@@ -6,7 +6,7 @@
 #    By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/02 00:44:50 by ledelbec          #+#    #+#              #
-#    Updated: 2024/02/27 13:33:57 by ledelbec         ###   ########.fr        #
+#    Updated: 2024/02/27 14:03:40 by ledelbec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SOURCES = \
 	src/entity.c \
 	src/end.c \
 	src/end_utils.c \
+	src/camera.c \
 	src/anim/anim.c \
 	\
 	src/arena_alloc.c \

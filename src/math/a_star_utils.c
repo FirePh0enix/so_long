@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:36:28 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:16:32 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:51:32 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,16 @@ bool	contains_node(t_anode **nodes, t_anode *n)
 		i++;
 	}
 	return (false);
+}
+
+bool	astar_is_tile_solid(t_level *m, t_vec2i pos)
+{
+	t_level	*up;
+
+	up = &m->map->levels[m->index + 1];
+	return (m->data[pos.x + pos.y * m->width] == TILE_SOLID
+		|| m->data[pos.x + pos.y * m->width] == TILE_STAIR
+		|| m->data[pos.x + pos.y * m->width] == TILE_DOOR
+		|| (m->index + 1 < m->map->level_count && pos.y - 1 >= 0
+			&& up->data[pos.x + (pos.y - 1) * m->width] == TILE_EMPTY));
 }

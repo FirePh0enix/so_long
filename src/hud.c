@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:25:32 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 14:32:36 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:51:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	_draw_movements(t_game *game)
 static void	_draw_collects(t_game *game)
 {
 	rdr_add_sprite(game->rdr, game->money_spawn[6], (t_vec2){-40, -15},
-		(t_add_sprite){99200, 5, false});
+		(t_add_sprite){99200, 5, false, false});
 	sprintf(game->buffer, "%d out of %d", game->collectibles,
 		game->collectibles_count);
 	rdr_add_text(game->rdr, game->buffer, (t_vec2){50, 50},

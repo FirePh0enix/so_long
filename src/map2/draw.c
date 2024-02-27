@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 16:18:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:32:10 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:50:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	_draw_level(t_game *g, t_renderer *rdr, t_level *level, int index)
 			tile = level->data[x + y * level->width];
 			if (tile == TILE_SOLID && index == 0)
 				rdr_add_sprite(rdr, sp(g)[SP_WATER], (t_vec2){x * 64, y * 64},
-					(t_add_sprite){-3, index, false});
+					(t_add_sprite){-3, index, false, true});
 			else if (tile == TILE_STAIR)
 				draw_stair(g, index, x, y);
 			else if (tile == TILE_DOOR)

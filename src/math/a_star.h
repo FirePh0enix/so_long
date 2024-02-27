@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:16:51 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 12:37:39 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:05:16 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ bool	contains_node(t_anode **nodes, t_anode *n);
 void	add_node(t_anode ***list, t_anode *anode);
 t_vec2i	*construct_path(t_anode *current_node, t_anode **open_list,
 			t_anode **close_list, t_arena *arena);
+
+bool	astar_is_tile_solid(t_level *m, t_vec2i pos);
 
 #endif

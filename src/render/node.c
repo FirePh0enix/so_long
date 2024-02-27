@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:48:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 14:09:19 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:59:14 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	rdr_add_sprite(
 	node->sprite.ptr = sp;
 	node->sprite.pos = pos;
 	node->sprite.flipped = param.flipped;
+	node->sprite.camera = param.camera;
 	_add_node(rdr, node);
 }
 

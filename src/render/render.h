@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:17:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 14:33:45 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:48:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_node
 			t_img			*ptr;
 			t_vec2			pos;
 			bool			flipped;
+			bool			camera;
 		}	sprite;
 		struct s_node_text
 		{
@@ -95,6 +96,7 @@ typedef struct s_add_sprite
 	int		order;
 	int		level;
 	bool	flipped;
+	bool	camera;
 }	t_add_sprite;
 
 /*
@@ -117,6 +119,7 @@ typedef struct s_draw
 {
 	int		scale;
 	bool	flipped;
+	bool	camera;
 }	t_draw;
 
 /*

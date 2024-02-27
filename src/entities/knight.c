@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 12:41:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:46:37 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,23 @@ static void	knight_free(t_entity *entity)
 	}
 }*/
 
-static void	_attack(t_knight *ext, t_entity *player)
+static void	_attack(t_entity *entity, t_knight *ext)
 {
+	t_entity	*player;
+
+	if (entity->game->player2
+		&& vec2_length(vec2_sub(entity->pos, entity->game->player->pos)) >
+			vec2_length(vec2_sub(entity->pos, entity->game->player2->pos)))
+		player = entity->game->player2;
+	else
+		player = entity->game->player;
 	if (ext->current_anim->current_frame == 2
 		&& getms() - ext->last_attacked >= 150)
 	{
 		player->health -= 1;
 		ext->last_attacked = getms();
+		if (player->health <= 0)
+			ext->state = STATE_IDLE;
 	}
 }
 
@@ -119,7 +129,7 @@ void	knight_update(t_game *game, t_entity *entity)
 	else if (ext->state == STATE_ATTACKING)
 	{
 		ext->current_anim = ext->atk_side;
-		_attack(ext, game->player);
+		_attack(entity, ext);
 	}
 	else if (ext->state == STATE_PATROLING || ext->state == STATE_CHASING)
 		_patrol(entity, ext);

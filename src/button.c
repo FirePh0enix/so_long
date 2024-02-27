@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:15:13 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 10:54:36 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:51:57 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ static void	_draw_multi_button(t_game *game, t_btn *btn)
 
 	rdr_add_sprite(game->rdr, sp(game)[SP_BTN_LEFT],
 		(t_vec2){btn->x, btn->y},
-		(t_add_sprite){2, 5, false});
+		(t_add_sprite){2, 5, false, false});
 	i = -1;
 	while (++i < btn->size - 2)
 		rdr_add_sprite(game->rdr, sp(game)[SP_BTN_MID],
 			(t_vec2){btn->x + (1 + i) * SCALED_SIZE, btn->y},
-			(t_add_sprite){2, 5, false});
+			(t_add_sprite){2, 5, false, false});
 	rdr_add_sprite(game->rdr, sp(game)[SP_BTN_RIGHT],
 		(t_vec2){btn->x + (btn->size - 1) * SCALED_SIZE, btn->y},
-		(t_add_sprite){2, 5, false});
+		(t_add_sprite){2, 5, false, false});
 }
 
 static void	_draw_button(t_game *game, t_btn *btn)
@@ -59,7 +59,7 @@ static void	_draw_button(t_game *game, t_btn *btn)
 	else
 	{
 		rdr_add_sprite(game->rdr, _get_tile(game, 0, btn->pressed),
-			(t_vec2){btn->x, btn->y}, (t_add_sprite){2, 5, false});
+			(t_vec2){btn->x, btn->y}, (t_add_sprite){2, 5, false, false});
 	}
 	if (btn->label)
 		rdr_add_text(game->rdr, btn->label, (t_vec2){
@@ -68,7 +68,7 @@ static void	_draw_button(t_game *game, t_btn *btn)
 			(t_add_text){3, 5, game->font, 0x0});
 	else if (btn->img)
 		rdr_add_sprite(game->rdr, btn->img, (t_vec2){btn->x, btn->y},
-			(t_add_sprite){3, 5, false});
+			(t_add_sprite){3, 5, false, false});
 }
 
 void	btn_update(t_game *game, t_btn *btn)

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:33:26 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:31:13 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,9 @@ typedef struct s_end
 	t_explosion	explosions[EXPLOSION_COUNT];
 	long		next_spawn;
 	t_btn		exit;
+	t_vec2i		camera_pos;
+	bool		camera_pos_cached;
+	char		*title;
 }	t_end;
 
 typedef struct s_game
@@ -209,6 +212,8 @@ typedef struct s_game
 
 	t_editor	editor;
 	bool		editor_mode;
+
+	t_vec2i		camera_pos;
 
 	t_end		end;
 	bool		end_reached;
@@ -272,6 +277,8 @@ void		init_end(t_game *game);
 void		free_end(t_game *game);
 void		draw_end(t_game *game);
 
+t_vec2		camera_off(t_game *game, t_vec2 pos);
+
 // ----------------------------------------------
 // MAP
 
@@ -292,6 +299,7 @@ typedef enum tile
 
 typedef struct s_level
 {
+	t_map2	*map;
 	t_tile	*data;
 	char	*string;
 	char	*filename;

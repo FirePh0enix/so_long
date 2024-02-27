@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:41:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 12:42:05 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:45:21 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ static void	_invalidate_path(t_knight *ext)
 	}
 }
 
-static void	_pick_chase(t_entity *entity, t_knight *ext, t_level *map)
+static void	_pick_chase(t_entity *entity, t_knight *ext, t_level *map,
+	t_entity *player)
 {
-	const t_entity	*player = entity->game->player;
-
 	_invalidate_path(ext);
 	ext->path = astar_search(&ext->arena, map, (t_vec2i){entity->pos.x / 64,
 			entity->pos.y / 64},
-			(t_vec2i){player->pos.x / 64, player->pos.y / 64});
+			(t_vec2i){(player->pos.x + 32) / 64, (player->pos.y + 56) / 64});
 	if (!ext->path)
 	{
 		ext->state = STATE_IDLE;
@@ -74,18 +73,28 @@ static void	_pick_patrol(t_entity *entity, t_knight *ext, t_level *map)
 
 void	knight_pick_action(t_entity *entity, t_knight *ext, t_level *map)
 {
-	const t_entity	*player = entity->game->player;
+	t_entity	*player;
 
-	if (vec2_length(vec2_sub(entity->pos, player->pos)) < 1.0 * TILE_SIZE)
+	if (entity->game->player2
+		&& vec2_length(vec2_sub(entity->pos, entity->game->player->pos)) >
+			vec2_length(vec2_sub(entity->pos, entity->game->player2->pos)))
+		player = entity->game->player2;
+	else
+		player = entity->game->player;
+	if (!player)
+		return ;
+	if (vec2_length(vec2_sub(entity->pos, player->pos)) < 1.0 * TILE_SIZE
+		&& player->level == entity->level)
 	{
 		ext->path = NULL;
 		ext->state = STATE_ATTACKING;
 	}
-	else if (vec2_length(vec2_sub(entity->pos, player->pos)) < 3.5 * TILE_SIZE)
-		_pick_chase(entity, ext, map);
+	else if (vec2_length(vec2_sub(entity->pos, player->pos)) < 3.5 * TILE_SIZE
+		&& player->level == entity->level)
+		_pick_chase(entity, ext, map, player);
 	else if (ext->state == STATE_IDLE && getms() >= ext->action_end)
 		_pick_patrol(entity, ext, map);
-	else if (ext->state == STATE_PATROLING
+	else if (ext->state != STATE_IDLE
 		&& vec2_equals(entity->pos, ext->target_pos, 16))
 	{
 		ext->state = STATE_IDLE;

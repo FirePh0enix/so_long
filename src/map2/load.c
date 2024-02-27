@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 16:06:50 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:58:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,15 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 	if (!check_files(filenames, count))
 		return (NULL);
 	map = malloc(sizeof(t_map2));
-	map->levels = malloc(sizeof(t_level) * count);
+	map->levels = malloc(sizeof(t_level) * (count + 1));
 	map->level_count = count;
 	i = -1;
 	while (++i < count)
+	{
+		map->levels[i].map = map;
 		if (_load_level(game, map->levels + i, i, filenames[i]) == -1)
 			return (NULL);
+	}
 	map->width = map->levels[0].width;
 	map->height = map->levels[0].height;
 	if (!check_errors(map) || !check_finish(game, map))
@@ -113,7 +116,10 @@ void	map2_reload(t_game *game, t_map2 *map)
 	game->collectibles_count = 0;
 	i = -1;
 	while (++i < map->level_count)
+	{
+		map->levels[i].map = map;
 		_load_level(game, map->levels + i, i, map->levels[i].filename);
+	}
 	if (check_errors(map) && check_finish(game, map))
 		game->map_valid = true;
 	else

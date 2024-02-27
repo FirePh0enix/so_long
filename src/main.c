@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 13:22:30 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:07:59 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	main(int argc, char *argv[])
 	game.map2 = map2_load(&game, argv + 1, argc - 1);
 	if (!game.map2)
 		return (ft_printf("Error\nInvalid map\n"), _clean(&game), 1);
+	game.camera_pos.x = game.map2->width * 64 / 2;
+	game.camera_pos.y = game.map2->height * 64 / 2;
 	game.menu = menu_new();
 	game.menu_opened = true;
 	srand(getms());

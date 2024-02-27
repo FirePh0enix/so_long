@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:28:41 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:36:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ typedef struct s_player
 	t_anim		*walk;
 	t_anim		*idle;
 	t_anim		*atk_side;
+	bool		is_p2;
 }	t_player;
 
 t_entity	*player_new(t_game *game, t_vec2 pos, int level, bool is_player2);
 void		player_update(t_game *game, t_entity *entity);
 
-int			_keycode(t_game *g, t_entity *e, int keycode);
+int			_keycode(t_game *g, t_entity *e, int keycode, bool is_p2);
 void		move_player(t_game *game, t_entity *entity);
 
 // ----------------------------------------------

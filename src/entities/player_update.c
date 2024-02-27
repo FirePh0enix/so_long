@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:33:41 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:27:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:36:47 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,22 @@ static void	_stair_collision(t_entity *entity)
 
 static void	_handle_move_keys(t_game *game, t_entity *entity, t_player *ext)
 {
-	(void) ext;
-	if (game->keys[_keycode(game, entity, XK_Right)])
+	if (game->keys[_keycode(game, entity, XK_Right, ext->is_p2)])
 	{
 		entity->vel.x += 1;
 		game->moves += 1;
 	}
-	if (game->keys[_keycode(game, entity, XK_Left)])
+	if (game->keys[_keycode(game, entity, XK_Left, ext->is_p2)])
 	{
 		entity->vel.x -= 1;
 		game->moves += 1;
 	}
-	if (game->keys[_keycode(game, entity, XK_Up)])
+	if (game->keys[_keycode(game, entity, XK_Up, ext->is_p2)])
 	{
 		entity->vel.y -= 1;
 		game->moves += 1;
 	}
-	if (game->keys[_keycode(game, entity, XK_Down)])
+	if (game->keys[_keycode(game, entity, XK_Down, ext->is_p2)])
 	{
 		entity->vel.y += 1;
 		game->moves += 1;
@@ -75,24 +74,18 @@ static void	_handle_move_keys(t_game *game, t_entity *entity, t_player *ext)
 
 static void	_handle_keys(t_game *game, t_entity *entity, t_player *ext)
 {
-	if (game->keys[' '] && !_is_attacking(ext))
-	{
-		ext->current_anim->current_frame = 0;
-		ext->current_anim->last_frame = 0;
-		ext->current_anim = ext->atk_side;
-	}
 	_handle_move_keys(game, entity, ext);
-	if ((game->keys[_keycode(game, entity, XK_Right)]
-			|| game->keys[_keycode(game, entity, XK_Left)]
-			|| game->keys[_keycode(game, entity, XK_Up)]
-			|| game->keys[_keycode(game, entity, XK_Down)])
+	if ((game->keys[_keycode(game, entity, XK_Right, ext->is_p2)]
+			|| game->keys[_keycode(game, entity, XK_Left, ext->is_p2)]
+			|| game->keys[_keycode(game, entity, XK_Up, ext->is_p2)]
+			|| game->keys[_keycode(game, entity, XK_Down, ext->is_p2)])
 		&& !_is_attacking(ext))
 		ext->current_anim = ext->walk;
 	else if (!_is_attacking(ext))
 		ext->current_anim = ext->idle;
-	if (game->keys[_keycode(game, entity, XK_Right)])
+	if (game->keys[_keycode(game, entity, XK_Right, ext->is_p2)])
 		entity->flipped = false;
-	else if (game->keys[_keycode(game, entity, XK_Left)])
+	else if (game->keys[_keycode(game, entity, XK_Left, ext->is_p2)])
 		entity->flipped = true;
 }
 
@@ -103,8 +96,14 @@ void	player_update(t_game *game, t_entity *entity)
 	ext = entity->extension;
 	if (entity->health <= 0)
 	{
-		game->menu_opened = true;
-		map2_reload(game, game->map2);
+		entity->state = STATE_DEAD;
+		if (entity == entity->game->player)
+		{
+			entity->game->player = entity->game->player2;
+			entity->game->player2 = NULL;
+		}
+		else if (entity == entity->game->player2)
+			entity->game->player2 = NULL;
 		return ;
 	}
 	entity->sprite = anim_get_sprite(ext->current_anim);

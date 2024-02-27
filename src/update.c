@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 13:42:19 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:50:16 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	_update_entities(t_game *game, bool update)
 			entity->update(game, entity);
 		rdr_add_sprite(game->rdr, entity->sprite, vec2_add(entity->pos,
 				entity->sprite_offset),
-			(t_add_sprite){entity->z_index, entity->level, entity->flipped});
+			(t_add_sprite){entity->z_index, entity->level, entity->flipped,
+			true});
 	}
 }
 
@@ -75,14 +76,31 @@ static void	_check_victory(t_game *game, t_entity *player)
 }
 
 static void	_update_game(t_game *game)
-{		
+{
 	if (game->editor_mode)
 		edit_update(game);
 	else
 		draw_hud(game);
 	_update_entities(game, !game->editor_mode);
 	_collect_entities(&game->entities);
+	if (!game->player && !game->end_reached)
+	{
+		game->end_reached = true;
+		game->end.title = "Game over";
+		game->end_time = getms();
+		return ;
+	}
 	_check_victory(game, game->player);
+	if (game->player2 == NULL)
+	{
+		game->camera_pos.x = game->player->pos.x;
+		game->camera_pos.y = game->player->pos.y;
+	}
+	else
+	{
+		game->camera_pos.x = (game->player->pos.x + game->player2->pos.x) / 2;
+		game->camera_pos.y = (game->player->pos.y + game->player2->pos.y) / 2;
+	}
 }
 
 int	update_hook(t_game *game)

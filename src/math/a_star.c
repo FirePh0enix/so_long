@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:18:04 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 13:26:01 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:50:44 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_anode	**_generate_children(t_level *m, t_arena *arena, t_anode *c)
 	{
 		pos = (t_vec2i){c->pos.x + positions[i][0], c->pos.y + positions[i][1]};
 		if (pos.x >= m->width || pos.x < 0 || pos.y >= m->height || pos.y < 0
-			|| m->data[pos.x + pos.y * m->width] == TILE_SOLID)
+			|| astar_is_tile_solid(m, pos))
 			continue ;
 		node = new_node(arena, c, pos);
 		vector_add((void *)&children, &node);

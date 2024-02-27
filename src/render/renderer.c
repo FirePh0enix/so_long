@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 15:49:57 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 14:17:36 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:47:50 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	rdr_draw(t_renderer *rdr, t_game *game)
 	{
 		if (node->type == NODE_SPRITE)
 			rdr_draw_sprite(game, node->sprite.ptr, node->sprite.pos,
-				(t_draw){SCALE, node->sprite.flipped});
+				(t_draw){SCALE, node->sprite.flipped, node->sprite.camera});
 		else if (node->type == NODE_TEXT)
 			rdr_draw_text(game, node->text.str, node->text.pos,
 				(t_draw_text){node->text.font, node->text.color});

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:41:07 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:42:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ t_entity	*player_new(t_game *game, t_vec2 pos, int level, bool is_player2)
 	ext->idle = anim_new(_anim(game, 1, is_player2), 6, 100, true);
 	ext->atk_side = anim_new(_anim(game, 2, is_player2), 6, 100, true);
 	ext->current_anim = ext->walk;
+	ext->is_p2 = is_player2;
 	player->sprite = game->goblin_idle[0];
 	player->sprite_offset = (t_vec2){-64, -64};
 	player->z_index = 15;
-	player->vel = (t_vec2){};
 	player->max_health = 5;
 	player->health = player->max_health;
 	player->level = level;
@@ -75,9 +75,11 @@ static void	player_free(t_entity *entity)
 	free(entity->extension);
 }
 
-int	_keycode(t_game *g, t_entity *e, int keycode)
+int	_keycode(t_game *g, t_entity *e, int keycode, bool is_p2)
 {
-	if (e == g->player2)
+	(void) g;
+	(void) e;
+	if (is_p2)
 	{
 		if (keycode == XK_Right)
 			return (XK_d);
