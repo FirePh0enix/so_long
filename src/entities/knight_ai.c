@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:41:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:51:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:42:05 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	_pick_chase(t_entity *entity, t_knight *ext, t_level *map)
 	const t_entity	*player = entity->game->player;
 
 	_invalidate_path(ext);
-	ext->path = astar_search(map, (t_vec2i){entity->pos.x / 64,
+	ext->path = astar_search(&ext->arena, map, (t_vec2i){entity->pos.x / 64,
 			entity->pos.y / 64},
 			(t_vec2i){player->pos.x / 64, player->pos.y / 64});
 	if (!ext->path)
@@ -63,9 +63,8 @@ static void	_pick_chase(t_entity *entity, t_knight *ext, t_level *map)
 static void	_pick_patrol(t_entity *entity, t_knight *ext, t_level *map)
 {
 	_invalidate_path(ext);
-	ext->path = astar_search(map, (t_vec2i){entity->pos.x / 64,
-			entity->pos.y / 64},
-			_find_random_pos(map));
+	ext->path = astar_search(&ext->arena, map, (t_vec2i){entity->pos.x / 64,
+			entity->pos.y / 64}, _find_random_pos(map));
 	if (!ext->path)
 		return ;
 	ext->target_pos = (t_vec2){ext->path[0].x * 64, ext->path[0].y * 64};

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 10:47:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:41:00 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "../anim/anim.h"
 #include "../data/vector.h"
 #include "../render/render.h"
+#include "../math/a_star.h"
 #include <stdlib.h>
 #include <sys/select.h>
 
@@ -30,15 +31,15 @@ t_entity	*knight_new(t_game *game, t_vec2 pos, int level)
 	enemy->type = ETYPE_ENEMY;
 	enemy->state = STATE_ALIVE;
 	enemy->pos = pos;
-	ext = malloc(sizeof(t_knight));
-	enemy->extension = ext;
+	ext = ft_calloc(1, sizeof(t_knight));
 	ext->idle = anim_new(game->warrior_idle, 6, 100, true);
 	ext->walk = anim_new(game->warrior_walk, 6, 100, true);
 	ext->atk_side = anim_new(game->warrior_atk_side, 6, 100, true);
 	ext->current_anim = ext->idle;
 	ext->state = STATE_IDLE;
 	ext->action_end = getms() + 1100;
-	ext->path = NULL;
+	arena_init(&ext->arena, sizeof(t_anode), 100000);
+	enemy->extension = ext;
 	enemy->sprite = game->warrior_idle[0];
 	enemy->sprite_offset = (t_vec2){-64, -64};
 	enemy->box = (t_box){{0, 0}, {64 * SCALE, 64 * SCALE}};
@@ -59,6 +60,7 @@ static void	knight_free(t_entity *entity)
 	free(ext->atk_side);
 	if (ext->path)
 		vector_free(ext->path);
+	arena_free(&ext->arena);
 	free(entity->extension);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:41:55 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:28:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "math/box.h"
 # include "math/vec2.h"
+# include "arena_alloc.h"
 # include <sys/select.h>
 
 typedef struct s_entity	t_entity;
@@ -77,6 +78,7 @@ t_entity	*player_new(t_game *game, t_vec2 pos, int level, bool is_player2);
 void		player_update(t_game *game, t_entity *entity);
 
 int			_keycode(t_game *g, t_entity *e, int keycode);
+void		move_player(t_game *game, t_entity *entity);
 
 // ----------------------------------------------
 // GEM
@@ -110,6 +112,8 @@ typedef struct s_knight
 	t_vec2		target_pos;
 
 	suseconds_t	last_attacked;
+
+	t_arena		arena;
 }	t_knight;
 
 t_entity	*knight_new(t_game *game, t_vec2 pos, int level);

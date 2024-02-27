@@ -6,41 +6,13 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:33:41 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 12:09:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:27:58 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../entity.h"
 #include "../so_long.h"
 #include "../anim/anim.h"
-
-static void	_move(t_game *game, t_entity *ent)
-{
-	while (ent->vel.x != 0)
-	{
-		if (!box_collide_with_map2(game, box_for_position(
-					ent->box, vec2_add(ent->pos,
-						(t_vec2){ent->vel.x, 0})), ent->level, game->map2))
-			break ;
-		if (ent->vel.x > 0)
-			ent->vel.x--;
-		else
-			ent->vel.x++;
-	}
-	ent->pos.x += ent->vel.x;
-	while (ent->vel.y != 0)
-	{
-		if (!box_collide_with_map2(game, box_for_position(
-					ent->box, vec2_add(ent->pos,
-						(t_vec2){0, ent->vel.y})), ent->level, game->map2))
-			break ;
-		if (ent->vel.y > 0)
-			ent->vel.y--;
-		else
-			ent->vel.y++;
-	}
-	ent->pos.y += ent->vel.y;
-}
 
 static bool	_is_attacking(t_player *ext)
 {
@@ -138,7 +110,7 @@ void	player_update(t_game *game, t_entity *entity)
 	entity->sprite = anim_get_sprite(ext->current_anim);
 	_handle_keys(game, entity, ext);
 	anim_update(ext->current_anim);
-	_move(game, entity);
+	move_player(game, entity);
 	entity->vel.x = 0;
 	entity->vel.y = 0;
 	_stair_collision(entity);

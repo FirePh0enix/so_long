@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 13:17:21 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:33:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,10 @@ void		map2_draw(t_game *game, t_map2 *map, t_renderer *rdr);
 void		map2_save(t_map2 *map, t_game *game);
 void		map2_reload(t_game *game, t_map2 *map);
 void		map2_free(t_map2 *map);
+
+void		draw_empty(t_game *g, int index, int x, int y);
+void		draw_door(t_game *g, int index, int x, int y);
+void		draw_stair(t_game *g, int index, int x, int y);
 
 char		*read_to_string(char *filename);
 
