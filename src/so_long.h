@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 15:54:20 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:17:25 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,7 @@ void		draw_hud(t_game *game);
 void		init_end(t_game *game);
 void		free_end(t_game *game);
 void		draw_end(t_game *game);
-t_vec2		end_get_rand_pos();
+t_vec2		end_get_rand_pos(void);
 void		shake_screen(t_game *game);
 
 t_vec2		camera_off(t_game *game, t_vec2 pos);

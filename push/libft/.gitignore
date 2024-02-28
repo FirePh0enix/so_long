@@ -1,6 +1,0 @@
-*.o
-libft.a
-libft.so
-
-compile_flags.txt
-libft-unit-tester

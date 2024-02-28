@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:21:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 15:24:25 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:18:36 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void	_update_game(t_game *game)
 int	update_hook(t_game *game)
 {
 	suseconds_t		time;
-	
+
 	if (BONUS)
 	{
 		time = getms();

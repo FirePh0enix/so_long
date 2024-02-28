@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 15:12:49 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:20:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	_load_level(t_game *game, t_level *level, int index, char *filename)
 		return (-1);
 	level->height = line_count(level->string);
 	level->data = malloc(sizeof(t_tile) * level->width * level->height);
-	level->filename = filename;
 	level->index = index;
 	x = -1;
 	while (++x < level->width)
@@ -99,6 +98,7 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 	while (++i < count)
 	{
 		map->levels[i].map = map;
+		map->levels[i].filename = filenames[i];
 		if (_load_level(game, map->levels + i, i, filenames[i]) == -1)
 			return (NULL);
 	}
