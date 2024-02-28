@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:39:23 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 16:29:56 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:55:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static void	_draw_time(t_game *game)
 	ms = e % 1000;
 	secs = (e - ms) % 60000;
 	mins = (e - ms - secs);
-	sprintf(game->buffer, "in %d'%d.%d", mins / 1000000, secs / 1000, ms);
+	ft_sprintf(game->buffer, "in %d'%d.%d", mins / 1000000, secs / 1000, ms);
 	rdr_add_text(game->rdr, game->buffer, (t_vec2){
 		text_center_x(game->small_font, game->buffer, 0, WIN_WIDTH), 150},
 		(t_add_text){10, 5, game->small_font, 0x0});
-	sprintf(game->buffer, "with %d moves", game->moves);
+	ft_sprintf(game->buffer, "with %d moves", game->moves);
 	rdr_add_text(game->rdr, game->buffer, (t_vec2){
 		text_center_x(game->small_font, game->buffer, 0, WIN_WIDTH), 180},
 		(t_add_text){10, 5, game->small_font, 0x0});

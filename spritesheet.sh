@@ -254,6 +254,12 @@ new-tile "textures/UI/Icons/Regular_10.png" "Lock" 0 0 $TILE_SIZE
 
 # Font loading
 
+nerdfont-letter()
+{
+	FONT="textures/SymbolsNerdFontMono-Regular.ttf"
+	convert -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3.xpm
+}
+
 letter()
 {
 	FONT="textures/Merchant Copy.ttf"
@@ -272,3 +278,5 @@ mkdir -p textures/gen/regular
 font "regular" 55
 mkdir -p textures/gen/small
 font "small" 35
+
+nerdfont-letter "" 28 "heart"

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:37:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/26 13:23:20 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:37:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	game_free(t_game *game)
 		map2_free(game->map2);
 	font_free(game, game->font);
 	font_free(game, game->small_font);
+	font_free(game, game->symbols_font);
 	free(game->menu);
 	mlx_destroy_image(game->mlx, game->canvas);
 	free(game->buffer);

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:05:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/21 14:02:27 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:56:38 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_font	*font_load(t_game *game, char *path)
 	i = 32;
 	while (i < 127)
 	{
-		sprintf(buf, "%s/%c.xpm", path, i);
+		ft_sprintf(buf, "%s/%c.xpm", path, i);
 		font->chars[i] = sprite(game, buf);
 		i++;
 	}

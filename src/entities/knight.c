@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 16:46:37 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:55:46 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ static void	_attack(t_entity *entity, t_knight *ext)
 	t_entity	*player;
 
 	if (entity->game->player2
-		&& vec2_length(vec2_sub(entity->pos, entity->game->player->pos)) >
-			vec2_length(vec2_sub(entity->pos, entity->game->player2->pos)))
+		&& vec2_length(
+			vec2_sub(entity->pos, entity->game->player->pos)) > vec2_length(
+			vec2_sub(entity->pos, entity->game->player2->pos)))
 		player = entity->game->player2;
 	else
 		player = entity->game->player;

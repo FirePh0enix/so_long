@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:52:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 16:31:13 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:01:52 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,7 @@ typedef struct s_game
 
 	t_font		*font;
 	t_font		*small_font;
+	t_font		*symbols_font;
 
 	t_anim		*foam_anim;
 	t_img		*gem;

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:41:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 16:45:21 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:00:25 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,6 @@
 #include "../so_long.h"
 #include "../data/vector.h"
 #include "../math/a_star.h"
-
-/*
- * Find a random position in the map for the knight to go to.
- */
-static t_vec2i	_find_random_pos(t_level *map)
-{
-	int	x;
-	int	y;
-
-	while (1)
-	{
-		x = rand() % map->width;
-		y = rand() % map->height;
-		if (map->data[x + y * map->width] == TILE_EMPTY)
-			return ((t_vec2i){x, y});
-	}
-	return ((t_vec2i){});
-}
 
 static void	_invalidate_path(t_knight *ext)
 {
@@ -61,9 +43,19 @@ static void	_pick_chase(t_entity *entity, t_knight *ext, t_level *map,
 
 static void	_pick_patrol(t_entity *entity, t_knight *ext, t_level *map)
 {
+	int	x;
+	int	y;
+
+	while (1)
+	{
+		x = rand() % map->width;
+		y = rand() % map->height;
+		if (map->data[x + y * map->width] == TILE_EMPTY)
+			break ;
+	}
 	_invalidate_path(ext);
 	ext->path = astar_search(&ext->arena, map, (t_vec2i){entity->pos.x / 64,
-			entity->pos.y / 64}, _find_random_pos(map));
+			entity->pos.y / 64}, (t_vec2i){x, y});
 	if (!ext->path)
 		return ;
 	ext->target_pos = (t_vec2){ext->path[0].x * 64, ext->path[0].y * 64};
@@ -71,13 +63,23 @@ static void	_pick_patrol(t_entity *entity, t_knight *ext, t_level *map)
 	ext->state = STATE_PATROLING;
 }
 
+static void	_pick_idle(t_entity *entity, t_knight *ext, t_level *map)
+{
+	(void) entity;
+	(void) map;
+	ext->state = STATE_IDLE;
+	ext->action_end = getms() + 700;
+	_invalidate_path(ext);
+}
+
 void	knight_pick_action(t_entity *entity, t_knight *ext, t_level *map)
 {
 	t_entity	*player;
 
 	if (entity->game->player2
-		&& vec2_length(vec2_sub(entity->pos, entity->game->player->pos)) >
-			vec2_length(vec2_sub(entity->pos, entity->game->player2->pos)))
+		&& vec2_length(
+			vec2_sub(entity->pos, entity->game->player->pos)) > vec2_length(
+			vec2_sub(entity->pos, entity->game->player2->pos)))
 		player = entity->game->player2;
 	else
 		player = entity->game->player;
@@ -96,9 +98,5 @@ void	knight_pick_action(t_entity *entity, t_knight *ext, t_level *map)
 		_pick_patrol(entity, ext, map);
 	else if (ext->state != STATE_IDLE
 		&& vec2_equals(entity->pos, ext->target_pos, 16))
-	{
-		ext->state = STATE_IDLE;
-		ext->action_end = getms() + 700;
-		_invalidate_path(ext);
-	}
+		_pick_idle(entity, ext, map);
 }

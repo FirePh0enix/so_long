@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 17:47:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:35:03 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:54:12 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,18 @@ static void	_resize(t_level *map, int tile_x, int tile_y)
 	int		y;
 
 	if (tile_y >= map->height)
-		map->data = realloc(map->data,
+		map->data = ft_realloc(map->data,
+				sizeof(t_tile) * map->width * map->height,
 				sizeof(t_tile) * map->width * (++map->height));
 	else if (tile_x >= map->width)
 	{
 		tile = malloc(sizeof(t_tile) * (map->width + 1) * map->height);
-		y = 0;
-		while (y < map->height)
+		y = -1;
+		while (++y < map->height)
 		{
-			x = 0;
-			while (x < map->width)
-			{
+			x = -1;
+			while (++x < map->width)
 				tile[x + y * (map->width + 1)] = map->data[x + y * map->width];
-				x++;
-			}
-			y++;
 		}
 		map->width++;
 		free(map->data);

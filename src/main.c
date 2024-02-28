@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 14:07:59 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:56:15 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "libft.h"
 #include "mlx.h"
 #include "so_long.h"
-#include <stdio.h>
 #include <sys/time.h>
 #include "render/render.h"
 
@@ -30,7 +29,7 @@ static t_img	**_load_frames(t_game *game, char *name, int size)
 	sprites = malloc(sizeof(t_img) * size);
 	while (i < size)
 	{
-		sprintf(buf, name, i);
+		ft_sprintf(buf, name, i);
 		sprites[i] = sprite(game, buf);
 		i++;
 	}

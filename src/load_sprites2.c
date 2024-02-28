@@ -6,11 +6,17 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:02:03 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:03:26 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:55:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	_load_symbol_font(t_game *g)
+{
+	g->symbols_font = ft_calloc(1, sizeof(t_font));
+	g->symbols_font->chars[(int) 'A'] = sprite(g, "textures/gen/heart.xpm");
+}
 
 void	load_sprites_pt2(t_game *g, t_img **sp)
 {
@@ -30,4 +36,5 @@ void	load_sprites_pt2(t_game *g, t_img **sp)
 	sp[SP_SAND_BT] = sprite(g, "textures/gen/BTS.xpm");
 	sp[SP_SAND_RBT] = sprite(g, "textures/gen/RightBTS.xpm");
 	sp[SP_SAND_ALL] = sprite(g, "textures/gen/AllS.xpm");
+	_load_symbol_font(g);
 }
