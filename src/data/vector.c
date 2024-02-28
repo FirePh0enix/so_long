@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 20:03:45 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 13:52:51 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:43:50 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*vector_new(unsigned int el_size, unsigned int capacity)
 {
 	t_vec_data	*vec_data;
 
+	if (capacity == 0)
+		capacity = 1;
 	vec_data = malloc(sizeof(t_vec_data) + capacity * el_size);
 	vec_data->capacity = capacity;
 	vec_data->el_size = el_size;
@@ -32,8 +34,6 @@ void	vector_add(void **vec, void *elp)
 	vec_data = (void *)(*vec - sizeof(t_vec_data));
 	if (vec_data->size == vec_data->capacity)
 	{
-		if (vec_data->capacity == 0)
-			vec_data->capacity = 1;
 		vec_data = ft_realloc(vec_data, sizeof(t_vec_data)
 				+ vec_data->capacity * vec_data->el_size, sizeof(t_vec_data)
 				+ vec_data->capacity * 2 * vec_data->el_size);
