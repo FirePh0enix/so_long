@@ -6,6 +6,7 @@ so_long
 libft/*.o
 compile_flags.txt
 dist/
+push/
 
 textures/gen
 .DS_Store
