@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 15:19:06 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:50:37 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ static t_img	**_load_frames(t_game *game, char *name, int size)
 	t_img		**sprites;
 
 	i = 0;
-	sprites = malloc(sizeof(t_img) * size);
+	sprites = ft_calloc(1, sizeof(t_img) * size);
+	if (!sprites)
+		return (NULL);
 	while (i < size)
 	{
 		ft_sprintf(buf, name, i);
@@ -56,6 +58,19 @@ static void	_init_anims(t_game *g)
 	g->explosion = _load_frames(g, "textures/gen/Explosion/%d.xpm", 9);
 }
 
+static void	_clean(t_game *game)
+{
+	game_free(game);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_do_key_autorepeaton(game->mlx);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+}
+
 static int	_setup_game(t_game *g)
 {
 	ft_bzero(g, sizeof(t_game));
@@ -64,8 +79,10 @@ static int	_setup_game(t_game *g)
 		return (0);
 	g->win = mlx_new_window(g->mlx, WIN_WIDTH, WIN_HEIGHT, "so_long");
 	if (!g->win)
-		return (free(g->mlx), 0);
+		return (_clean(g), 0);
 	g->keys = ft_calloc(0xFFFF, sizeof(bool));
+	if (!g->keys)
+		return (_clean(g), 0);
 	g->canvas = mlx_new_image(g->mlx, WIN_WIDTH, WIN_HEIGHT);
 	g->entities = vector_new(sizeof(t_entity *), 0);
 	g->rdr = rdr_new();
@@ -74,18 +91,12 @@ static int	_setup_game(t_game *g)
 	edit_init(&g->editor, g);
 	g->font = font_load(g, "textures/gen/regular");
 	g->small_font = font_load(g, "textures/gen/small");
+	if (!g->canvas || !g->entities || !g->rdr || !g->font || !g->small_font
+		|| !g->buffer)
+		return (_clean(g), 0);
 	_init_anims(g);
 	init_end(g);
 	return (1);
-}
-
-static void	_clean(t_game *game)
-{
-	game_free(game);
-	mlx_do_key_autorepeaton(game->mlx);
-	mlx_destroy_window(game->mlx, game->win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
 }
 
 int	main(int argc, char *argv[])
@@ -100,6 +111,8 @@ int	main(int argc, char *argv[])
 	game.camera_pos.x = game.map2->width * 64 / 2;
 	game.camera_pos.y = game.map2->height * 64 / 2;
 	game.menu = menu_new();
+	if (!game.menu)
+		return (_clean(&game), 1);
 	game.menu_opened = true;
 	if (BONUS)
 		srand(getms());

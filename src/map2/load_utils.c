@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:24:56 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 13:02:49 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:43:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*read_to_string(char *filename)
 		if (n == -1)
 			return (NULL);
 		str = ft_realloc(str, str_size + 1, str_size + n + 1);
+		if (!str)
+			return (close(fd), NULL);
 		ft_memcpy(str + str_size, buffer, n);
 		str[str_size + n] = '\0';
 		str_size += n;

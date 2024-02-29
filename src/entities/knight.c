@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 10:43:37 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 16:12:34 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:33:07 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ t_entity	*knight_new(t_game *game, t_vec2 pos, int level)
 	t_knight	*ext;
 
 	enemy = ft_calloc(1, sizeof(t_entity));
+	if (!enemy)
+		return (NULL);
 	enemy->game = game;
 	enemy->type = ETYPE_ENEMY;
-	enemy->state = STATE_ALIVE;
 	enemy->pos = pos;
 	ext = ft_calloc(1, sizeof(t_knight));
+	if (!ext)
+		return (free(enemy), NULL);
 	ext->idle = anim_new(game->warrior_idle, 6, 100, true);
 	ext->walk = anim_new(game->warrior_walk, 6, 100, true);
 	ext->atk_side = anim_new(game->warrior_atk_side, 6, 100, true);
-	ext->current_anim = ext->idle;
 	ext->action_end = getms() + 1100;
 	arena_init(&ext->arena, sizeof(t_anode), 100000);
 	enemy->extension = ext;
-	enemy->sprite = game->warrior_idle[0];
 	enemy->sprite_offset = (t_vec2){-64, -64};
 	enemy->box = (t_box){{0, 0}, {64 * SCALE, 64 * SCALE}};
 	enemy->update = knight_update;

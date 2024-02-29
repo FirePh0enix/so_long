@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 16:20:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:47:34 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,19 @@ static t_tile	_put_tile(t_game *game, char c, t_vec2i pos, int level)
 	return (-1);
 }
 
-static int	_load_level(t_game *game, t_level *level, int index, char *filename)
+static int	_load_level(t_game *game, t_level *level, int index)
 {
 	int		x;
 	int		y;
 	t_tile	tile;
 
-	level->string = read_to_string(filename);
 	level->width = line_width_and_check(level->string);
 	if (level->width == -1)
 		return (-1);
 	level->height = line_count(level->string);
 	level->data = malloc(sizeof(t_tile) * level->width * level->height);
-	level->index = index;
+	if (!level->data)
+		return (free(level->string), -1);
 	x = -1;
 	while (++x < level->width)
 	{
@@ -99,7 +99,9 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 	{
 		map->levels[i].map = map;
 		map->levels[i].filename = filenames[i];
-		if (_load_level(game, map->levels + i, i, filenames[i]) == -1)
+		map->levels[i].string = read_to_string(filenames[i]);
+		map->levels[i].index = i;
+		if (_load_level(game, map->levels + i, i) == -1)
 			return (NULL);
 	}
 	map->width = map->levels[0].width;
@@ -123,7 +125,9 @@ void	map2_reload(t_game *game, t_map2 *map)
 	while (++i < map->level_count)
 	{
 		map->levels[i].map = map;
-		_load_level(game, map->levels + i, i, map->levels[i].filename);
+		map->levels[i].string = read_to_string(map->levels[i].filename);
+		map->levels[i].index = i;
+		_load_level(game, map->levels + i, i);
 	}
 	if (check_errors(map) && check_finish(game, map))
 		game->map_valid = true;

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 23:46:40 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 12:00:48 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:20:49 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,23 @@ t_entity	*gem_new(t_game *game, t_vec2 pos, int level)
 	t_money		*ext;
 
 	gem = ft_calloc(1, sizeof(t_entity));
+	if (!gem)
+		return (NULL);
 	gem->game = game;
 	gem->type = ETYPE_GEM;
 	gem->state = STATE_NOT_ALIVE;
 	gem->pos = pos;
 	ext = ft_calloc(1, sizeof(t_money));
+	if (!ext)
+		return (free(gem), NULL);
 	gem->extension = ext;
 	ext->anim = anim_new(game->money_spawn, 7, 100, false);
 	gem->box = (t_box){{16, 16}, {48 * SCALE, 48 * SCALE}};
 	gem->sprite_offset = (t_vec2){-32, -32};
 	gem->update = gem_update;
 	gem->free = gem_free;
-	gem->sprite = game->money_spawn[6];
+	if (game->money_spawn)
+		gem->sprite = game->money_spawn[6];
 	gem->z_index = 14;
 	gem->level = level;
 	return (gem);

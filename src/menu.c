@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:46:20 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 15:30:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:49:41 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_gamemenu	*menu_new(void)
 	t_gamemenu	*menu;
 
 	menu = malloc(sizeof(t_gamemenu));
+	if (!menu)
+		return (NULL);
 	menu->play = btn_new_label((t_vec2i){x, 4 * 64}, 4, "Play", play_click);
 	menu->coop = btn_new_label((t_vec2i){x, 6 * 64}, 4, "2 Player",
 			coop_click);

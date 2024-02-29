@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:13:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 12:58:01 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:45:11 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	line_width_and_check(char *str)
 	int	first_len;
 	int	len;
 
+	if (!str)
+		return (-1);
 	i = 0;
 	first_len = -1;
 	len = 0;

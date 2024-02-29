@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:05:31 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 13:56:38 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:36:06 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_font	*font_load(t_game *game, char *path)
 	unsigned char	i;
 
 	font = ft_calloc(1, sizeof(t_font));
+	if (!font)
+		return (NULL);
 	i = 32;
 	while (i < 127)
 	{

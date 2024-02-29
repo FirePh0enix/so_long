@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 14:15:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 16:42:00 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:31:22 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,25 @@ t_entity	*player_new(t_game *game, t_vec2 pos, int level, bool is_player2)
 	t_player	*ext;
 
 	player = ft_calloc(1, sizeof(t_entity));
+	if (!player)
+		return (NULL);
 	player->game = game;
 	player->type = ETYPE_PLAYER;
-	player->state = STATE_ALIVE;
 	player->pos = pos;
 	player->box = (t_box){{5, 43}, {59, 69}};
 	player->update = player_update;
 	player->free = player_free;
 	ext = ft_calloc(1, sizeof(t_player));
+	if (!ext)
+		return (free(player), NULL);
 	player->extension = ext;
 	ext->walk = anim_new(_anim(game, 0, is_player2), 6, 100, true);
 	ext->idle = anim_new(_anim(game, 1, is_player2), 6, 100, true);
 	ext->atk_side = anim_new(_anim(game, 2, is_player2), 6, 100, true);
-	ext->current_anim = ext->walk;
 	ext->is_p2 = is_player2;
-	player->sprite = game->goblin_idle[0];
 	player->sprite_offset = (t_vec2){-64, -64};
 	player->z_index = 15;
-	player->max_health = 5;
-	player->health = player->max_health;
+	player->health = 5;
 	player->level = level;
 	return (player);
 }

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 12:17:29 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/27 16:36:05 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:28:26 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef enum etype
 
 typedef enum state
 {
-	STATE_ALIVE,
+	STATE_ALIVE = 0,
 	STATE_DEAD,
 	STATE_NOT_ALIVE
 }	t_state;

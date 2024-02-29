@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:35:26 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 11:52:43 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:35:18 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ bool	check_finish(t_game *game, t_map2 *map)
 	int			i;
 
 	c.levels = ft_calloc(1, sizeof(char *) * (map->level_count + 1));
+	if (!c.levels)
+		return (false);
 	c.level_count = map->level_count;
 	c.width = map->width;
 	c.height = map->height;
