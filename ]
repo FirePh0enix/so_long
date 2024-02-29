@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:30:14 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/29 11:54:51 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:54:21 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	rdr_draw_glyph(t_game *game, char c, t_vec2 pos, t_draw_text d)
 	int				x;
 	int				y;
 
+	if (!glyph)
+		return (NULL);
 	x = 0;
 	while (x < width)
 	{
@@ -74,8 +76,6 @@ void	rdr_draw_text(t_game *game, char *str, t_vec2 pos, t_draw_text draw)
 	const int	offset = _font_width(draw.font);
 	int			i;
 
-	if (!draw.font || !str)
-		return ;
 	i = 0;
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:41:33 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 12:00:25 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:18:20 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	knight_pick_action(t_entity *entity, t_knight *ext, t_level *map)
 	if (vec2_length(vec2_sub(entity->pos, player->pos)) < 1.0 * TILE_SIZE
 		&& player->level == entity->level)
 	{
+		_invalidate_path(ext);
 		ext->path = NULL;
 		ext->state = STATE_ATTACKING;
 	}

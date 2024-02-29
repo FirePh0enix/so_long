@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:25:32 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 13:56:01 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:19:28 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	_draw_movements(t_game *game)
 	ft_sprintf(game->buffer, "Moves %d", game->moves);
 	rdr_add_text(game->rdr, game->buffer, (t_vec2){10, 10},
 		(t_add_text){992000, 5, game->small_font, 0x0});
+	ft_printf("%s\n", game->buffer);
 }
 
 static void	_draw_collects(t_game *game)
