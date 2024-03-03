@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:44:12 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:28:17 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/03/03 17:46:29 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,10 @@ void	draw_menu(t_game *g, t_gamemenu *menu)
 	draw_banner_v(g, (t_vec2i){WIN_WIDTH / 2 - 64 * 4, 0}, (t_vec2i){8, 10});
 	btn_update(g, &menu->play);
 	btn_update(g, &menu->coop);
-	btn_update(g, &menu->edit);
 }
 
 void	menu_mouse_click(t_game *game, t_gamemenu *menu, int x, int y)
 {
 	btn_click(game, &menu->play, x, y);
 	btn_click(game, &menu->coop, x, y);
-	btn_click(game, &menu->edit, x, y);
 }

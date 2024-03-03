@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:17:07 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/16 11:22:23 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/03/03 17:43:01 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	edit_l1(t_game *game)
 
 void	edit_l2(t_game *game)
 {
+	if (game->map2->level_count < 2)
+		return ;
 	game->editor.l1.pressed = false;
 	game->editor.l2.pressed = true;
 	game->editor.l3.pressed = false;
@@ -43,6 +45,8 @@ void	edit_l2(t_game *game)
 
 void	edit_l3(t_game *game)
 {
+	if (game->map2->level_count < 3)
+		return ;
 	game->editor.l1.pressed = false;
 	game->editor.l2.pressed = false;
 	game->editor.l3.pressed = true;
