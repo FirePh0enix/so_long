@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 00:50:52 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/29 11:50:37 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:25:48 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	_clean(t_game *game)
 
 static int	_setup_game(t_game *g)
 {
-	ft_bzero(g, sizeof(t_game));
 	g->mlx = mlx_init();
 	if (!g->mlx)
 		return (0);
@@ -103,6 +102,7 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
+	ft_bzero(&game, sizeof(t_game));
 	if (argc > 1 && argc <= 4 && !_setup_game(&game))
 		return (0);
 	game.map2 = map2_load(&game, argv + 1, argc - 1);

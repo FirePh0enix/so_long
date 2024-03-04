@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:16 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/23 12:15:58 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:31:43 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ bool	check_files(char **filenames, int count)
 	i = -1;
 	while (++i < count)
 	{
-		if (ft_strncmp(filenames[i] + ft_strlen(filenames[i]) - 4, ".ber", 4))
+		if (ft_strlen(filenames[i]) < 5 || ft_strncmp(filenames[i]
+				+ ft_strlen(filenames[i]) - 4, ".ber", 4))
 			return (false);
 		fd = open(filenames[i], O_RDONLY);
 		if (fd == -1)

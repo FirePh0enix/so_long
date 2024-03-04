@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 18:37:47 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/28 11:37:12 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:25:39 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	_free_anim(t_game *game, t_img **sprites, int size)
 {
 	int	i;
 
+	if (!sprites)
+		return ;
 	i = 0;
 	while (i < size)
 	{
@@ -53,6 +55,12 @@ static void	_free_images(t_game *game)
 			mlx_destroy_image(game->mlx, game->sprites[i]);
 }
 
+static void	_free_image(void *mlx, void *img)
+{
+	if (img)
+		mlx_destroy_image(mlx, img);
+}
+
 void	game_free(t_game *game)
 {
 	unsigned int	i;
@@ -77,7 +85,7 @@ void	game_free(t_game *game)
 	font_free(game, game->font);
 	font_free(game, game->small_font);
 	font_free(game, game->symbols_font);
+	_free_image(game->mlx, game->canvas);
 	free(game->menu);
-	mlx_destroy_image(game->mlx, game->canvas);
 	free(game->buffer);
 }

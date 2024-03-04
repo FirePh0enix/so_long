@@ -6,7 +6,7 @@
 /*   By: ledelbec <ledelbec@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 12:17:49 by ledelbec          #+#    #+#             */
-/*   Updated: 2024/02/29 11:47:34 by ledelbec         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:21:02 by ledelbec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_map2	*map2_load(t_game *game, char **filenames, int count)
 		map->levels[i].string = read_to_string(filenames[i]);
 		map->levels[i].index = i;
 		if (_load_level(game, map->levels + i, i) == -1)
-			return (NULL);
+			return (map2_free(map), NULL);
 	}
 	map->width = map->levels[0].width;
 	map->height = map->levels[0].height;
