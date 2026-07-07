@@ -9,7 +9,7 @@ new-tile-with-name()
 {
 	X=$(($3*$5))
 	Y=$(($4*$5))
-	convert -crop ${5}x${5}+$X+$Y "$1" $2
+	magick -crop ${5}x${5}+$X+$Y "$1" $2
 }
 
 # $1 -> Original file
@@ -34,7 +34,7 @@ new-tile-wh()
 	NAME="textures/gen/$2.xpm"
 	X=$(($3*$5))
 	Y=$(($4*$5))
-	convert -crop ${5}x${6}+$X+$Y "$1" $NAME
+	magick -crop ${5}x${6}+$X+$Y "$1" $NAME
 }
 
 # Extract an full animation.
@@ -257,13 +257,13 @@ new-tile "textures/UI/Icons/Regular_10.png" "Lock" 0 0 $TILE_SIZE
 nerdfont-letter()
 {
 	FONT="textures/SymbolsNerdFontMono-Regular.ttf"
-	convert -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3.xpm
+	magick -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3.xpm
 }
 
 letter()
 {
 	FONT="textures/Merchant Copy.ttf"
-	convert -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3/$1.xpm
+	magick -font "$FONT" -pointsize $2 -background "#00000000" label:$1 textures/gen/$3/$1.xpm
 }
 
 font()

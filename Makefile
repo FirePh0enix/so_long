@@ -151,7 +151,7 @@ NAME = so_long
 
 CC = clang
 CFLAGS += -Wall -Wextra -Imlx -Ilibft -MMD -g3 -fPIC -O2 -fno-builtin # -Werror
-LDFLAGS = -lm -lX11 -lXext
+LDFLAGS = -fPIC -lm -lX11 -lXext
 
 OBJECTS = $(SOURCES:.c=.o)
 BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)
